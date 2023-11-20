@@ -1,0 +1,21 @@
+hotel reservation and biling system
+=========================================================
+to do
+	- landing page/homepage
+	- registration page
+	- login page
+
+	- create documentation => goal of website, target audience, scope and limitations
+-------------------------
+in progress
+
+-------------------------
+testing
+
+-------------------------
+done
+
+============================================================
+Name: TEAL Residences
+
+https://outlook-ridge-residences-baguio-city.booked.net/

@@ -1,0 +1,85 @@
+/* * {
+  border: 1px solid red;
+} */
+
+.ul_width {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-brand {
+  width: 250px;
+  text-align: center;
+}
+
+.btn_reservation {
+  width: 150px;
+  background-color: #008080;
+  color: white;
+}
+
+.btn_reservation:hover {
+  background: #0e9c9c;
+  color: white;
+}
+
+.first {
+  margin-right: 5px;
+}
+
+/* -------------------------------------- */
+
+.btns {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 1rem;
+}
+
+.btns button {
+  font-size: 0.7rem;
+}
+
+/* ----------------------------------------- */
+
+.img_container {
+  width: 100%;
+  height: 500px;
+
+  object-fit: fill;
+}
+
+.carousel_container {
+  padding-right: 2rem;
+  padding-left: 2rem;
+  margin-top: 0.5rem;
+}
+
+/* -------------------------------------------- */
+
+.btn_login {
+  font-size: 0.8rem;
+}
+
+.title {
+  color: #008080;
+  font-weight: 900;
+}
+
+.btn_teal {
+  background-color: #008080;
+  color: white;
+}
+
+.btn_teal:hover {
+  background-color: #0e9c9c;
+  color: white;
+}
+
+/* -------------------------------------------- */

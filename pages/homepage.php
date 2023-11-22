@@ -33,9 +33,8 @@
         rel="stylesheet">
     <!--  -->
 
-    <!-- scripts -->
-    <script defer src="../public/js/image_swiper.js"></script>
-    <!--  -->
+
+
     <!-- Bootstrap JS and Popper.js -->
     <script defer src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
@@ -56,6 +55,15 @@
 
     <!-- tweenmax cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <!--  -->
+
+    <!-- aos -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!--  -->
+
+    <!-- scripts -->
+    <script defer src="../public/js/image_swiper.js"></script>
+    <script defer src="../public/js/index.js"></script>
     <!--  -->
 
     <style>
@@ -95,7 +103,7 @@
 
 <body>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
         <div class="container-fluid">
             <!-- title -->
             <a class="navbar-brand" href="homepage.php"><span class="title">TEAL</span> Residences</a>
@@ -239,7 +247,7 @@
         <!-- box_container start -->
         <div class="box_container mt-5">
 
-            <div class="box_1">
+            <div class="box_1" data-aos="fade-up">
                 <div class="card mb-3" style="max-width: 1500px;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -447,7 +455,7 @@
             </div>
             <!--  -->
 
-            <div class="box_2">
+            <div class="box_2" data-aos="fade-right">
                 <div class="card mb-3" style="max-width: 1500px;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -620,7 +628,7 @@
 
 
 
-            <div class="box_3">
+            <div class="box_3" data-aos="fade-left">
                 <div class="card mb-3" style="max-width: 1500px;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -826,7 +834,7 @@
             </div>
             <!--  -->
 
-            <div class="box_4">
+            <div class="box_4" data-aos="fade-right">
                 <div class="card mb-3" style="max-width: 1500px;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -1039,10 +1047,10 @@
 
     <!--  facilities -->
     <div class="container" id="facilities">
-        <h1 class="text-center mt-5 mb-5">Our Facilities</h1>
+        <h1 class="text-center mt-5 mb-5" data-aos="fade-up">Our Facilities</h1>
 
         <!-- Swiper -->
-        <div class="test">
+        <div class="test" data-aos="fade-up">
             <div class="swiperr mySwiper2">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide d-flex align-items-center flex-column gap-3">
@@ -1134,7 +1142,7 @@
     <!--  -->
 
     <!--  About -->
-    <div class="container" id="about">
+    <div class="container" id="about" data-aos="fade-down">
         <h1 class="text-center mt-5 mb-5">About</h1>
 
         <div class="about_us_center" style="margin-inline: 5%">
@@ -1150,7 +1158,7 @@
             <h5 class="mb-2">Why Choose Us</h5>
 
             <div class="row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-6 mb-3 mb-sm-0" data-aos="fade-right">
                     <div class="card mt-2" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border: none;">
                         <div class="card-body">
@@ -1170,7 +1178,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-6 mb-3 mb-sm-0" data-aos="fade-left">
                     <div class="card mt-2" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border: none;">
                         <div class="card-body">
@@ -1189,7 +1197,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-6 mb-3 mb-sm-0" data-aos="fade-right">
                     <div class="card mt-2" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border: none;">
                         <div class="card-body">
@@ -1209,7 +1217,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-6 mb-3 mb-sm-0" data-aos="fade-left">
                     <div class="card mt-2" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border: none;">
                         <div class="card-body">
@@ -1226,7 +1234,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-6 mb-3 mb-sm-0" data-aos="fade-right">
                     <div class="card mt-2" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border: none;">
                         <div class="card-body">
@@ -1245,7 +1253,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-6 mb-3 mb-sm-0" data-aos="fade-left">
                     <div class="card mt-2" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border: none;">
                         <div class="card-body">
@@ -1273,7 +1281,7 @@
 
 
     <!--  Location -->
-    <div class="location" id="location">
+    <div class="location" id="location" data-aos="fade-up">
         <h1 class="text-center mt-5 mb-5">Location</h1>
 
         <div class="map_container">
@@ -1286,7 +1294,7 @@
     <!--  -->
 
     <!-- FAQ -->
-    <div class="faq" id="faq">
+    <div class="faq" id="faq" data-aos="fade-up">
         <h1 class="text-center mt-5 mb-5">FAQ</h1>
 
         <div class="accordion container shadow-none" id="accordionExample">
@@ -1385,7 +1393,7 @@
     <!--  -->
 
     <!--  Contact Us -->
-    <div class="container" id="contact-us">
+    <div class="container" id="contact-us" data-aos="fade-up">
         <h1 class="text-center mt-5 mb-5">Contact Us</h1>
 
         <div class="contacts_container container">
@@ -1426,8 +1434,32 @@
         <p class="text-center">© 2023 <span style="color: #008080; font-weight: bold;">TEAL</span> Residences. All
             rights reserved</p>
     </footer>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
     <script>
+    TweenMax.from('.nav-link', 1.2, {
+        opacity: 0,
+        y: -20,
+        ease: Expo.easeIn,
+    })
+
+    TweenMax.from('.navbar-brand', 1.2, {
+        opacity: 0,
+        x: -20,
+        ease: Expo.easeInOut,
+    })
+
+    TweenMax.from('.btn_reservation', 1.2, {
+        opacity: 0,
+        x: 10,
+        ease: Expo.easeIn,
+    })
+    // ---------------------
+    TweenMax.from('.carousel', 1.5, {
+        opacity: 0,
+        y: -30,
+        ease: Expo.easeIn,
+    })
     var swiperr = new Swiper(".mySwiper2", {
         effect: "coverflow",
         grabCursor: true,
@@ -1444,7 +1476,15 @@
             el: ".swiper-pagination",
         },
     });
+
+    AOS.init({
+        offset: 200,
+        duration: 500
+    });
     </script>
+
+
+
 
 </body>
 

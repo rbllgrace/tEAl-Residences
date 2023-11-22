@@ -1,9 +1,15 @@
-.navbar {
+/* .navbar {
   position: sticky;
   top: 0;
 
   z-index: 10;
-}
+} */
+
+/* .navbar.sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+} */
 
 nav .ul_width {
   width: 100%;
@@ -55,4 +61,24 @@ nav .btn_reservation {
 
 nav .nav-link {
   font-size: 0.8rem;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  animation: fadeInDown 0.5s;
+  z-index: 1;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

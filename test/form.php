@@ -14,11 +14,11 @@
 <body>
 
     <form id="myForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
+        <label for="username">Email</label>
+        <input type="email" id="username" name="email"> <br>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
+        <label for="email">Password</label>
+        <input type="password" id="email" name="email">
 
         <button type="button" onclick="submitForm()">Submit</button>
     </form>

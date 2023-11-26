@@ -1,0 +1,79 @@
+.form_container {
+  border: 1px solid #008080;
+  width: 400px;
+
+  /* padding-inline: 20%; */
+  /* padding-top: 100px; */
+
+  margin-top: 100px;
+  padding: 25px;
+  border-radius: 5px;
+}
+
+.form-label {
+  color: #008080;
+  font-weight: 0;
+  font-size: 0.7rem;
+}
+
+.form-control {
+  font-size: 0.8rem;
+}
+
+.btn_login {
+  width: 100%;
+  background: #008080;
+  font-size: 0.9rem;
+}
+
+.btn_login:hover {
+  background: #0e9c9c;
+}
+
+.btn_register {
+  background: transparent;
+  width: 100%;
+  font-size: 0.9rem;
+  color: #008080;
+  border: 1px solid #008080;
+}
+
+.btn_register:hover {
+  background: #008080;
+}
+
+.btn_register:active {
+  background: #008080 !important;
+}
+
+.btn_register:focus {
+  background: #008080;
+}
+
+.btn_login:active {
+  background: #008080 !important;
+}
+
+.btn_login:focus {
+  background: #008080;
+}
+
+.dont_have {
+  font-size: 0.7rem;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.login_text {
+  font-weight: 600;
+  color: #008080;
+  font-size: 2rem;
+}
+
+.error {
+  color: red;
+  font-size: 0.6rem;
+  position: relative;
+  top: -3px;
+  left: 4px;
+}

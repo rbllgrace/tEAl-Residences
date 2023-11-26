@@ -1,0 +1,97 @@
+/* .navbar {
+  position: sticky;
+  top: 0;
+
+  z-index: 10;
+} */
+
+/* .navbar.sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+} */
+
+nav .ul_width {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* nav .navbar-brand {
+  width: auto;
+  text-align: center;
+} */
+
+nav .btn_reservation {
+  width: 150px;
+  background-color: #008080;
+  color: white;
+}
+
+nav .btn_reservation:hover {
+  background: #0e9c9c;
+  color: white;
+}
+
+nav .first {
+  margin-right: 5px;
+}
+
+nav .title {
+  color: #008080;
+  font-weight: 900;
+}
+
+nav .btn_teal {
+  background-color: #008080;
+  color: white;
+}
+
+nav .btn_teal:hover {
+  background-color: #0e9c9c;
+  color: white;
+}
+
+nav .btn_reservation {
+  padding: 0;
+  padding: 5px 5px;
+  font-size: 0.8rem;
+}
+
+nav .nav-link {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  animation: fadeInDown 0.5s;
+  z-index: 1;
+}
+
+nav .booking_logout_container .my_bookings {
+  width: auto;
+
+  width: 82px;
+}
+
+nav .booking_logout_container .my_bookings a {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: black;
+  font-weight: 300;
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

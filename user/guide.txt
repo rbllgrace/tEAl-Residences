@@ -1,0 +1,28 @@
+hotel reservation and biling system
+=========================================================
+to do
+	
+-------------------------
+in progress
+
+	- registration page
+	- login page
+
+-------------------------
+testing
+
+	- create documentation => goal of website, target audience, scope and limitations
+
+-------------------------
+done
+
+	- landing page/homepage
+
+============================================================
+Name: TEAL Residences
+
+https://outlook-ridge-residences-baguio-city.booked.net/
+https://www.w3schools.com/howto/howto_js_image_grid.asp
+https://www.cocotel.com/ph/kawayan-kiling-resort-by-cocotel
+
+https://www.youtube.com/watch?v=R6dQF5L1YXE&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=6

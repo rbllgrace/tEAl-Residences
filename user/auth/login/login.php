@@ -27,6 +27,40 @@
 
     <?php // login.php
 
+    function logFailedAttempt($email)
+    {
+        if (!isset($_SESSION['login_attempts'])) {
+            $_SESSION['login_attempts'] = 1;
+        } else {
+            $_SESSION['login_attempts']++;
+        }
+
+        $_SESSION['last_attempt_time'] = time();
+        $_SESSION['last_attempt_email'] = $email;
+    }
+
+    function isRateLimited()
+    {
+        $max_attempts = 4;
+        $lockout_duration = 60;
+
+        if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= $max_attempts) {
+            $elapsed_time = time() - $_SESSION['last_attempt_time'];
+            if ($elapsed_time < $lockout_duration) {
+                return true; // User is rate-limited
+            } else {
+                unset($_SESSION['login_attempts']);
+            }
+        }
+
+        return false; // User is not rate-limited
+    }
+
+    // Check if the user is rate-limited or locked out
+    if (isRateLimited()) {
+        echo "Too many consecutive failed login attempts. Please try again later.";
+        exit();
+    }
 
 
     // ... (Include necessary files and configurations)
@@ -63,6 +97,9 @@
 
                     $_SESSION['user_id'] = $row['user_id'];
                     $_SESSION['name'] = $name;
+
+                    unset($_SESSION['login_attempts']);
+
                     header('Location: http://localhost/teal-residences/user/pages/homepage.php'); // redirect to homepage
 
                 } elseif ($row["is_verified"] == 0) {
@@ -71,6 +108,7 @@
                 } else {
                     // Incorrect password
                     $passwordErr = "Incorrect email or password";
+                    logFailedAttempt($email);
                 }
             } else {
                 // User not found

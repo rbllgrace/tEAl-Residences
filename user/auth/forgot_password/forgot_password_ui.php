@@ -18,18 +18,25 @@
     <link rel="stylesheet" href="../login/login.css">
     <!--  -->
 
+    <!-- sweetalert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <!--  -->
+
     <style>
-    .forgot_password {
-        display: inline-block;
+        .forgot_password {
+            display: inline-block;
 
-        font-size: .7rem;
-        text-align: right;
-        text-decoration: none;
-    }
+            font-size: .7rem;
+            text-align: right;
+            text-decoration: none;
+        }
 
-    .forgot_password:hover {
-        text-decoration: underline;
-    }
+        .forgot_password:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -41,8 +48,54 @@
 
     $email = $emailErr = '';
 
+    // code starts here
 
-    
+    function generateUniqueToken()
+    {
+        return bin2hex(random_bytes(32));
+    }
+
+    function sendConfirmationEmail($userEmail)
+    {
+
+
+        require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\PHPMailer.php';
+        require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\SMTP.php';
+        require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\Exception.php';
+
+
+
+        $mail = new PHPMailer\PHPMailer\PHPMailer();
+
+        // Configure the email settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'noreply050623@gmail.com';
+        $mail->Password = 'xlqhaxnjiowsxuyr';
+        $mail->SMTPSecure = 'tls'; // Change to 'ssl' if necessary
+        $mail->Port = 587; // Change to 465 if using 'ssl'
+
+        // Sender and recipient
+        $mail->setFrom('noreply050623@gmail.com', 'TEAL Residences @noreply');
+        $mail->addAddress($userEmail);
+
+        // Email content
+        $mail->isHTML(true);
+        $mail->Subject = 'Password Reset';
+        $mail->Body = 'Click the following link to reset your password: <a href="http://localhost/teal-residences/user/auth/forgot_password/reset_password_ui.php">Reset Password</a>';
+
+        // Send the email
+        if (!$mail->send()) {
+            // echo 'Confirmation email sent successfully!';
+            echo 'Error: ' . $mail->ErrorInfo;
+        } else {
+            // echo 'Error: ' . $mail->ErrorInfo;
+        }
+    }
+
+
+
     // Function to sanitize input data
     function test_input($data)
     {
@@ -70,36 +123,19 @@
                 $row = $result->fetch_assoc();
                 $userId = $row['user_id'];
 
-                // $emailErr = "Email already exists"; 
                 // logic starts here
 
-                $checkCodeQuery = "SELECT * FROM user_table WHERE email = '$email' AND is_verified = 0";
-                $result = $conn->query($checkCodeQuery);
+                sendConfirmationEmail($email);
 
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $userId = $row['user_id'];
-
-                    $newConfirmationCode = generateConfirmationCode();
-
-                    // Update the user's status to 'verified'
-                    $updateQuery = "UPDATE user_table SET confirmation_code = '$newConfirmationCode' WHERE user_id = $userId";
-                    $conn->query($updateQuery);
-
-                    sendConfirmationEmail($email, $newConfirmationCode);
-
-                    // Show message to the user using SweetAlert2
-                    echo "<script>
+                // Show message to the user using SweetAlert2
+                echo "<script>
                 Swal.fire({
-                    title: 'Verification Sent',
-                    text: 'Please check your email for the verification link.',
+                    title: 'Password Reset Token Sent',
+                    text: 'Please check your email for the Password Reset.',
                     icon: 'success',
                     confirmButtonText: 'OK'
-                }).then(function() {
-                    window.location.href = 'http://localhost/teal-residences/user/auth/login/login.php'; // Redirect to your login page
                 });
                 </script>";
-                }
             } else {
                 $emailErr = "Email not registered";
             }
@@ -116,8 +152,7 @@
             <div class="mb-1">
 
                 <label for="exampleFormControlInput1" class="form-label mb-0">Email Address</label>
-                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email"
-                    value="<?php echo $email ?>">
+                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email" value="<?php echo $email ?>">
                 <span class="error"><?php echo $emailErr; ?></span>
             </div>
 

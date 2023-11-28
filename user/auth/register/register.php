@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="sweetalert2.min.css">
     <!--  -->
 
+
+
 </head>
 
 <body>
@@ -131,6 +133,26 @@
             $password = test_input($_POST["password"]);
             // Add additional password strength checks if needed
         }
+
+
+        $uppercase = preg_match('@[A-Z]@', $password);
+        $lowercase = preg_match('@[a-z]@', $password);
+        $number = preg_match('@[0-9]@', $password);
+        $specialChars = preg_match('@[^\w]@', $password);
+
+        if (!$uppercase) {
+            $pass_err = "Password should contain at least one uppercase letter.";
+        }
+        if (!$lowercase) {
+            $pass_err = "Password should contain at least one lowercase letter.";
+        }
+        if (!$number) {
+            $pass_err = "Password should contain at least one number.";
+        }
+        if (!$specialChars) {
+            $pass_err = "Password should contain at least one special character.";
+        }
+
 
         // Password validation for minimum length
         if (strlen($password) < 6) {

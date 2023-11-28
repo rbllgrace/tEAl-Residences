@@ -19,17 +19,17 @@
     <!--  -->
 
     <style>
-    .forgot_password {
-        display: inline-block;
+        .forgot_password {
+            display: inline-block;
 
-        font-size: .7rem;
-        text-align: right;
-        text-decoration: none;
-    }
+            font-size: .7rem;
+            text-align: right;
+            text-decoration: none;
+        }
 
-    .forgot_password:hover {
-        text-decoration: underline;
-    }
+        .forgot_password:hover {
+            text-decoration: underline;
+        }
     </style>
 
 </head>
@@ -140,22 +140,19 @@
         $logoutMessage = isset($_GET['logout']) && $_GET['logout'] == 'success' ? 'You have been successfully logged out.' : '';
 
         ?>
-        <span class="error"
-            style="color: green; font-size: .9rem; position: relative; left: 52px;"><?php echo $logoutMessage; ?></span>
+        <span class="error" style="color: green; font-size: .9rem; position: relative; left: 52px;"><?php echo $logoutMessage; ?></span>
         <h1 class="text-center login_text">LOGIN</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="mb-1">
 
                 <label for="exampleFormControlInput1" class="form-label mb-0">Email Address</label>
-                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email"
-                    value="<?php echo $email ?>">
+                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email" value="<?php echo $email ?>">
                 <span class="error"><?php echo $emailErr; ?></span>
             </div>
 
             <div class="mb-1">
                 <label for="exampleFormControlInput2" class="form-label mb-0">Password</label>
-                <input type="password" class="form-control shadow-none" id="exampleFormControlInput2" name="password"
-                    value="<?php echo $password ?>">
+                <input type="password" class="form-control shadow-none" id="exampleFormControlInput2" name="password" value="<?php echo $password ?>">
                 <span class="error"><?php echo $passwordErr; ?></span>
 
             </div>
@@ -163,12 +160,10 @@
             <button type="submit" class="btn btn-primary btn_login mt-2">Login</button>
         </form>
 
-        <a href="http://localhost/teal-residences/user/auth/forgot_password/forgot_password.php"
-            class="forgot_password">Forgot Password?</a>
+        <a href="http://localhost/teal-residences/user/auth/forgot_password/forgot_password_ui.php" class="forgot_password">Forgot Password?</a>
 
         <p class="dont_have">Don't have an account?</p>
-        <a href=http://localhost/teal-residences/user/auth/register/register.php
-            class="btn btn-primary btn_register">Register</a>
+        <a href=http://localhost/teal-residences/user/auth/register/register.php class="btn btn-primary btn_register">Register</a>
     </div>
 </body>
 

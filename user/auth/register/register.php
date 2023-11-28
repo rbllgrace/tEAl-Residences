@@ -161,7 +161,7 @@
                 // Show message to the user using SweetAlert2
                 echo "<script>
                 Swal.fire({
-                    title: 'Registration Sent',
+                    title: 'Confirmation Sent',
                     text: 'Please check your email for the verification link.',
                     icon: 'success',
                     confirmButtonText: 'OK'

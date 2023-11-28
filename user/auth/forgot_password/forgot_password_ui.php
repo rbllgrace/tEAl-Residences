@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="sweetalert2.min.css">
     <!--  -->
 
+
+
     <style>
         .forgot_password {
             display: inline-block;
@@ -55,8 +57,10 @@
         return bin2hex(random_bytes(32));
     }
 
-    function sendConfirmationEmail($userEmail)
+    function sendConfirmationEmail($userEmail, $token)
     {
+
+        $reset_link = "http://localhost/teal-residences/user/auth/forgot_password/reset_password_ui.php?token=$token";
 
 
         require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\PHPMailer.php';
@@ -83,7 +87,7 @@
         // Email content
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset';
-        $mail->Body = 'Click the following link to reset your password: <a href="http://localhost/teal-residences/user/auth/forgot_password/reset_password_ui.php">Reset Password</a>';
+        $mail->Body = "Click the following link to reset your password: <a href='$reset_link'>Reset Password</a>";
 
         // Send the email
         if (!$mail->send()) {
@@ -105,6 +109,7 @@
         return $data;
     }
 
+    // it goes here when submit
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Email validation
@@ -124,14 +129,21 @@
                 $userId = $row['user_id'];
 
                 // logic starts here
+                $token = generateUniqueToken();
 
-                sendConfirmationEmail($email);
+                // Store the token in the database along with the user's email
+                $stmt = $conn->prepare("INSERT INTO password_reset (email, token, expiration_time) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 1 HOUR))");
+                $stmt->bind_param("ss", $email, $token);
+                $stmt->execute();
+                $stmt->close();
+
+                sendConfirmationEmail($email, $token);
 
                 // Show message to the user using SweetAlert2
                 echo "<script>
                 Swal.fire({
-                    title: 'Password Reset Token Sent',
-                    text: 'Please check your email for the Password Reset.',
+                    title: 'Password reset token sent',
+                    text: 'Password reset instructions have been sent to your email.',
                     icon: 'success',
                     confirmButtonText: 'OK'
                 });

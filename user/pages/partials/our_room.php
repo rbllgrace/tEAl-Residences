@@ -1,7 +1,6 @@
 <?php require('/xampp/htdocs/tEAl-Residences/user/connection/connect.php');
 $sql = "SELECT * FROM rooms";
 $result = $conn->query($sql);
-
 ?>
 
 <!-- our room -->
@@ -50,16 +49,14 @@ $result = $conn->query($sql);
 
 
             <!-- Full-Screen Modal for Apartment -->
-            <div class="modal fade" id="fullScreenModalApartment1" tabindex="-1" aria-labelledby="fullScreenModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="fullScreenModalApartment1" tabindex="-1" aria-labelledby="fullScreenModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-fullscreen">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h5 class="modal-title" id="fullScreenModalLabel">Apartment</h5>
-                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <!-- Modal Body -->
@@ -135,8 +132,7 @@ $result = $conn->query($sql);
                             <div class="left">
                                 <!-- swiper -->
 
-                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-                                    class="swiper mySwiper2">
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <img src="../public/images/apartment.jpg" />
@@ -182,16 +178,14 @@ $result = $conn->query($sql);
             <!--  -->
 
             <!-- Full-Screen Modal for Family Room -->
-            <div class="modal fade" id="fullScreenModalApartment2" tabindex="-1"
-                aria-labelledby="fullScreenModalFamilyRoomLabel" aria-hidden="true">
+            <div class="modal fade" id="fullScreenModalApartment2" tabindex="-1" aria-labelledby="fullScreenModalFamilyRoomLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-fullscreen">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h5 class="modal-title" id="fullScreenModalFamilyRoomLabel">Family Room</h5>
-                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <!-- Modal Body -->
@@ -265,8 +259,7 @@ $result = $conn->query($sql);
                             </div>
                             <div class="left">
                                 <!-- swiper -->
-                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-                                    class="swiper mySwiper2">
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <img src="../public/images/fam_room1.jpg" />
@@ -314,16 +307,14 @@ $result = $conn->query($sql);
             <!--  -->
 
             <!-- Full-Screen Modal for Family Suite -->
-            <div class="modal fade" id="fullScreenModalApartment3" tabindex="-1"
-                aria-labelledby="fullScreenModalFamilySuiteLabel" aria-hidden="true">
+            <div class="modal fade" id="fullScreenModalApartment3" tabindex="-1" aria-labelledby="fullScreenModalFamilySuiteLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-fullscreen">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h5 class="modal-title" id="fullScreenModalFamilySuiteLabel">Family Suite</h5>
-                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <!-- Modal Body -->
@@ -400,8 +391,7 @@ $result = $conn->query($sql);
                             <div class="left">
                                 <!-- swiper -->
 
-                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-                                    class="swiper mySwiper2">
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <img src="../public/images/family_bedroom_bg.jpg" />
@@ -446,16 +436,14 @@ $result = $conn->query($sql);
             <!--  -->
 
             <!-- Full-Screen Modal for One-Bedroom Apartment -->
-            <div class="modal fade" id="fullScreenModalApartment4" tabindex="-1"
-                aria-labelledby="fullScreenModalOneBedroomLabel" aria-hidden="true">
+            <div class="modal fade" id="fullScreenModalApartment4" tabindex="-1" aria-labelledby="fullScreenModalOneBedroomLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-fullscreen">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h5 class="modal-title" id="fullScreenModalOneBedroomLabel">One-Bedroom Apartment</h5>
-                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <!-- Modal Body -->
@@ -532,8 +520,7 @@ $result = $conn->query($sql);
                             <div class="left">
                                 <!-- swiper -->
 
-                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-                                    class="swiper mySwiper2">
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <img src="../public/images/single_bedroom_bg.jpg" />

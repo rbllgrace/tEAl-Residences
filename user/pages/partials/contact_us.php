@@ -11,47 +11,47 @@ $result = $conn->query($sql);
 <!--  -->
 
 <style>
-form {
-    padding: 30px;
-}
+    form {
+        padding: 30px;
+    }
 
-.form-label {
-    margin-bottom: 0;
-    font-size: .7rem;
-}
+    .form-label {
+        margin-bottom: 0;
+        font-size: .7rem;
+    }
 
 
-.form-control {
-    font-size: .8rem;
-}
+    .form-control {
+        font-size: .8rem;
+    }
 
-.btn_submit {
-    background: #008080;
-    border-color: #008080;
+    .btn_submit {
+        background: #008080;
+        border-color: #008080;
 
-    font-size: .8rem;
-    width: 30%;
+        font-size: .8rem;
+        width: 30%;
 
-    margin-top: 5px;
-}
+        margin-top: 5px;
+    }
 
-.btn_submit:hover {
-    background: #0e9c9c;
-    border-color: #008080;
-}
+    .btn_submit:hover {
+        background: #0e9c9c;
+        border-color: #008080;
+    }
 
-.error {
-    color: red;
-    font-size: .6rem;
-    position: relative;
-    top: -18px;
-}
+    .error {
+        color: red;
+        font-size: .6rem;
+        position: relative;
+        top: -18px;
+    }
 
-.error2 {
-    color: red;
-    font-size: .6rem;
-    position: relative;
-}
+    .error2 {
+        color: red;
+        font-size: .6rem;
+        position: relative;
+    }
 </style>
 
 <?php
@@ -92,7 +92,7 @@ function sendConfirmationEmail($userEmail, $name, $subject, $message)
     $mail->Port = 587; // Change to 465 if using 'ssl'
 
     // Sender and recipient
-    $mail->setFrom($userEmail, $name);
+    $mail->setFrom($userEmail, $subject);
     $mail->addAddress($userEmail);
 
     // Email content
@@ -160,6 +160,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 confirmButtonText: 'OK'
             }).then(function() {
                 window.location.href = 'http://localhost/teal-residences/user/pages/homepage.php#contact-us'; 
+               
+                document.getElementById('exampleFormControlInput1').value = '';
+                document.getElementById('exampleFormControlInput2').value = '';
+                document.getElementById('exampleFormControlInput3').value = '';
+                document.getElementById('exampleFormControlTextarea1').value = '';
             });
             </script>";
         }
@@ -178,32 +183,28 @@ $conn->close();
 
     <div class="contacts_container container">
         <div class="left">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" id="myForm">
                 <div class="mb-1">
                     <label for="exampleFormControlInput1" class="form-label">Name</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name"
-                        value="<?php echo $name ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name" value="<?php echo $name ?>">
                     <span class="error"><?php echo $name_err; ?></span>
                 </div>
 
                 <div class="mb-1">
                     <label for="exampleFormControlInput2" class="form-label">Email address</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput2" name="email"
-                        value="<?php echo $email ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput2" name="email" value="<?php echo $email ?>">
                     <span class="error"><?php echo $email_err; ?></span>
                 </div>
 
                 <div class="mb-1">
                     <label for="exampleFormControlInput3" class="form-label">Subject</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput3" name="subject"
-                        value="<?php echo $subject ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput3" name="subject" value="<?php echo $subject ?>">
                     <span class="error"><?php echo $subject_err; ?></span>
                 </div>
 
                 <div class="mb-1">
                     <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                    <textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="8"
-                        name="message"><?php echo $message ?></textarea>
+                    <textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="8" name="message"><?php echo $message ?></textarea>
                     <span class="error2"><?php echo $message_err; ?></span>
                 </div>
 

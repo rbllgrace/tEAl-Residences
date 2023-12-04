@@ -69,6 +69,7 @@ function admin_login()
     if (!(isset($_SESSION['admin_login']) && isset($_SESSION['admin_login']) == true)) {
         header("Location: http://localhost/teal-residences/admin_panel/login.php");
     }
+    session_regenerate_id(true);
 }
 
 

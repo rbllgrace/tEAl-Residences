@@ -13,50 +13,50 @@ admin_login();
     <?php require('./partials/links.php') ?>
 
     <style>
-        * {
-            font-family: 'Poppins', sans-serif;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+    * {
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
 
-        .btn_logout {
-            background: black;
-            color: white;
-            border-color: black;
-            font-size: .8rem;
-        }
+    .btn_logout {
+        background: black;
+        color: white;
+        border-color: black;
+        font-size: .8rem;
+    }
 
-        .btn_logout:hover {
-            background: black;
-            border-color: white;
-        }
+    .btn_logout:hover {
+        background: black;
+        border-color: white;
+    }
 
-        .navbar {
-            background: #11151c !important;
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
+    .navbar {
+        background: #11151c !important;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
 
-        .nav-pills {
-            width: 250px;
-            text-align: center;
+    .nav-pills {
+        width: 250px;
+        text-align: center;
 
-            position: fixed;
-            top: 56px;
-            height: 100%;
-            background: #11151c;
-            border-top: 1px solid white;
-        }
+        position: fixed;
+        top: 56px;
+        height: 100%;
+        background: #11151c;
+        border-top: 1px solid white;
+    }
 
-        .nav-pills .nav-link {
-            color: white;
-        }
+    .nav-pills .nav-link {
+        color: white;
+    }
 
-        .center {
-            margin-left: 20vw;
-            margin-top: 5%;
-        }
+    .center {
+        margin-left: 20vw;
+        margin-top: 5%;
+    }
     </style>
 </head>
 
@@ -70,7 +70,8 @@ admin_login();
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="http://localhost/teal-residences/admin_panel/dashboard.php">Dashboard</a>
+            <a class="nav-link" aria-current="page"
+                href="http://localhost/teal-residences/admin_panel/dashboard.php">Dashboard</a>
         </li>
 
         <li class="nav-item">
@@ -92,7 +93,9 @@ admin_login();
         </li>
     </ul>
 
-    <p class="center">Dashboard</p>
+    <p class="center">facilities</p>
+
+
 
 </body>
 

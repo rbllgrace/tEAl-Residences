@@ -11,47 +11,47 @@ $result = $conn->query($sql);
 <!--  -->
 
 <style>
-    form {
-        padding: 30px;
-    }
+form {
+    padding: 30px;
+}
 
-    .form-label {
-        margin-bottom: 0;
-        font-size: .7rem;
-    }
+.form-label {
+    margin-bottom: 0;
+    font-size: .7rem;
+}
 
 
-    .form-control {
-        font-size: .8rem;
-    }
+.form-control {
+    font-size: .8rem;
+}
 
-    .btn_submit {
-        background: #008080;
-        border-color: #008080;
+.btn_submit {
+    background: #008080;
+    border-color: #008080;
 
-        font-size: .8rem;
-        width: 30%;
+    font-size: .8rem;
+    width: 30%;
 
-        margin-top: 5px;
-    }
+    margin-top: 5px;
+}
 
-    .btn_submit:hover {
-        background: #0e9c9c;
-        border-color: #008080;
-    }
+.btn_submit:hover {
+    background: #0e9c9c;
+    border-color: #008080;
+}
 
-    .error {
-        color: red;
-        font-size: .6rem;
-        position: relative;
-        top: -18px;
-    }
+.error {
+    color: red;
+    font-size: .6rem;
+    position: relative;
+    top: -18px;
+}
 
-    .error2 {
-        color: red;
-        font-size: .6rem;
-        position: relative;
-    }
+.error2 {
+    color: red;
+    font-size: .6rem;
+    position: relative;
+}
 </style>
 
 <?php
@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Show message to the user using SweetAlert2
             echo "<script>
             Swal.fire({
-                title: 'Submitted Successfully',
+                title: 'Query Sent',
                 icon: 'success',
                 confirmButtonText: 'OK'
             }).then(function() {
@@ -186,25 +186,29 @@ $conn->close();
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" id="myForm">
                 <div class="mb-1">
                     <label for="exampleFormControlInput1" class="form-label">Name</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name" value="<?php echo $name ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name"
+                        value="<?php echo $name ?>">
                     <span class="error"><?php echo $name_err; ?></span>
                 </div>
 
                 <div class="mb-1">
                     <label for="exampleFormControlInput2" class="form-label">Email address</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput2" name="email" value="<?php echo $email ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput2" name="email"
+                        value="<?php echo $email ?>">
                     <span class="error"><?php echo $email_err; ?></span>
                 </div>
 
                 <div class="mb-1">
                     <label for="exampleFormControlInput3" class="form-label">Subject</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput3" name="subject" value="<?php echo $subject ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput3" name="subject"
+                        value="<?php echo $subject ?>">
                     <span class="error"><?php echo $subject_err; ?></span>
                 </div>
 
                 <div class="mb-1">
                     <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                    <textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="8" name="message"><?php echo $message ?></textarea>
+                    <textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="8"
+                        name="message"><?php echo $message ?></textarea>
                     <span class="error2"><?php echo $message_err; ?></span>
                 </div>
 

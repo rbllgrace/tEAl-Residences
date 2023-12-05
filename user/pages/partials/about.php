@@ -14,13 +14,14 @@ $result2 = $conn->query($sql2);
     <div class="about_us_center" style="margin-inline: 5%">
         <h5>Who We Are</h5>
 
-        <p style="font-size: .8rem; text-align: center;"> <?php
-                                                            if ($result2->num_rows > 0) {
-                                                                if ($row = $result2->fetch_assoc()) {
-                                                                    echo $row["who_we_are"];
-                                                                }
-                                                            }
-                                                            ?></p>
+        <p style="font-size: .8rem; text-align: center;">
+            <?php
+            if ($result2->num_rows > 0) {
+                if ($row = $result2->fetch_assoc()) {
+                    echo $row["who_we_are"];
+                }
+            }
+            ?></p>
     </div>
 
     <div class="why_choose_us" style="margin-inline: 5%">

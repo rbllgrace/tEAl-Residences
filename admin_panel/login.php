@@ -13,9 +13,16 @@ if (isset($_SESSION['admin_login']) && isset($_SESSION['admin_login']) == true) 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login Panel</title>
     <?php require('./partials/links.php') ?>
-    <link rel="stylesheet" href="./public/css/default.css">
     <link rel="stylesheet" href="./public/css/alert.css">
     <link rel="stylesheet" href="./public/css/login.css">
+
+    <style>
+    * {
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+    </style>
 </head>
 
 <body>
@@ -155,7 +162,8 @@ if (isset($_SESSION['admin_login']) && isset($_SESSION['admin_login']) == true) 
             <div class="mb-1">
 
                 <label for="exampleFormControlInput1" class="form-label mb-0">Admin Name</label>
-                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name" value="<?php echo $name ?>">
+                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name"
+                    value="<?php echo $name ?>">
                 <span class="error"><?php echo $nameErr; ?></span>
 
 
@@ -163,7 +171,8 @@ if (isset($_SESSION['admin_login']) && isset($_SESSION['admin_login']) == true) 
 
             <div class="mb-1">
                 <label for="exampleFormControlInput2" class="form-label mb-0">Password</label>
-                <input type="password" class="form-control shadow-none" id="exampleFormControlInput2" name="password" value="<?php echo $password ?>">
+                <input type="password" class="form-control shadow-none" id="exampleFormControlInput2" name="password"
+                    value="<?php echo $password ?>">
                 <span class="error"><?php echo $passwordErr; ?></span>
 
             </div>

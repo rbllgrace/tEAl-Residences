@@ -52,35 +52,19 @@ if (isset($_POST['get_contacts'])) {
     echo $json_data;
 }
 
-
 if (isset($_POST['update_contact'])) {
     $frm_data = filteration($_POST);
 
-    // Assuming $frm_data['site_title'] and $frm_data['site_about'] are arrays with 5 elements
-    $phone1 = $frm_data['phone1'];
-    $phone2 = $frm_data['phone2'];
-    $phone3 = $frm_data['phone3'];
-    $facebook = $frm_data['facebook'];
-    $email = $frm_data['email'];
-
-    // Update query for 5 rows
-    $q = "UPDATE `contact_us_table` SET `contact_content` = ? WHERE `id` = ?";
+    // Assuming $frm_data['contact_content1'], $frm_data['contact_content2'], etc. contain 5 single values
+    $contactContent1 = $frm_data['phone1'];
+    // Update query for specific rows (replace IDs with your actual IDs)
+    $q = "UPDATE `contact_us_table` SET `contact_content` = ? WHERE `id` IN (?, ?, ?, ?, ?)";
 
     // Prepare values array for binding
-    $values = [];
+    $values = [$contactContent1, 1, 2, 3, 4, 5];
 
-    // Loop through the arrays and add values to the $values array
-    for ($i = 0; $i < 5; $i++) {
-        $values[] = $phone1[$i];
-        $values[] = $phone2[$i];
-        $values[] = $phone3[$i];
-        $values[] = $facebook[$i];
-        $values[] = $email[$i];
-        $values[] = $i + 1; // Assuming IDs start from 1 and go up to 5
-    }
-
-    // Update all 5 rows
-    $res = update($q, $values, str_repeat('i', 5));
+    // Update specific rows
+    $res = update($q, $values, 'sssssiiiii');
 
     echo $res;
 }

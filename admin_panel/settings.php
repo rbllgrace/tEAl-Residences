@@ -218,8 +218,8 @@ admin_login();
     </div>
 
     <!-- Contact Us Modal -->
-    <div class="modal fade my_modal" id="editAboutUsModal" tabindex="-1" aria-labelledby="editAboutUsModalLabel"
-        aria-hidden="true">
+    <div class="modal fade my_modal_contact_us" id="editAboutUsModal" tabindex="-1"
+        aria-labelledby="editAboutUsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form action="">
                 <div class="modal-content">
@@ -372,18 +372,23 @@ admin_login();
 
         xhr.onload = function() {
 
-            // let my_modal = document.querySelector('.my_modal')
-            // let modal = bootstrap.Modal.getInstance(my_modal)
-            // modal.hide()
+            let my_modal = document.querySelector('.my_modal_contact_us')
+            let modal = bootstrap.Modal.getInstance(my_modal)
+            modal.hide()
+
+            if (this.responseText.indexOf('1') != -1) {
+                alert('success', 'Changes saved!')
+                get_general()
+                get_contacts()
+            } else {
+                alert('error', 'No changes made!')
+
+            }
 
             // if (this.responseText == 1) {
-            //     alert('success', 'Changes saved!')
-            //     get_general()
-            //     get_contacts()
+
             // } else {
-            //     alert('error', 'No changes made!')
             // }
-            console.log(this.responseText);
 
         }
         // xhr.send('site_title=' + title_inp + '&site_about=' + about_inp + '&update_general')

@@ -54,17 +54,20 @@ if (isset($_POST['get_contacts'])) {
 
 if (isset($_POST['update_contact'])) {
     $frm_data = filteration($_POST);
-
-    // Assuming $frm_data['contact_content1'], $frm_data['contact_content2'], etc. contain 5 single values
-    $contactContent1 = $frm_data['phone1'];
-    // Update query for specific rows (replace IDs with your actual IDs)
-    $q = "UPDATE `contact_us_table` SET `contact_content` = ? WHERE `id` IN (?, ?, ?, ?, ?)";
-
-    // Prepare values array for binding
-    $values = [$contactContent1, 1, 2, 3, 4, 5];
-
-    // Update specific rows
-    $res = update($q, $values, 'sssssiiiii');
-
+    $q = "UPDATE `contact_us_table` SET `contact_content` =? WHERE `id` =?";
+    $values = [$frm_data['phone1'], 1];
+    $values2 = [$frm_data['phone2'], 2];
+    $values3 = [$frm_data['phone3'], 3];
+    $values4 = [$frm_data['facebook'], 4];
+    $values5 = [$frm_data['email'], 5];
+    $res = update($q, $values, 'si');
+    $res2 = update($q, $values2, 'si');
+    $res3 = update($q, $values3, 'si');
+    $res4 = update($q, $values4, 'si');
+    $res5 = update($q, $values5, 'si');
     echo $res;
+    echo $res2;
+    echo $res3;
+    echo $res4;
+    echo $res5;
 }

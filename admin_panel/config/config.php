@@ -92,6 +92,12 @@ function update($sql, $values, $datatypes)
         die('Query connect be prepared - Update');
     }
 }
+
+
+
+
+
+
 // -------------------------------------------------------
 
 

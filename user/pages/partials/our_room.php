@@ -26,9 +26,13 @@ $result = $conn->query($sql);
                             <div class="card-body">
                                 <h5 class="card-title">' . $row["room_title"] . '</h5>
                                 <p class="card-text">' . $row["room_description"] . '</p>
-                                <p class="card-text"><small class="text-body-secondary"> <span class="max">Max:
+                                <p class="card-text mb-0"><small class="text-body-secondary"> <span class="max">Max:
                                         </span>' . $row["room_max_person"] . '
                                         Persons</small></p>
+
+                                        <p class="card-text"><small class="text-body-secondary"> <span class="max">Per Night:
+                                        </span>₱' . $row["per_night"] . '
+                                        </small></p>
     
                                 <button type="button" class="btn btn-primary btn_room_details shadow-none" data-bs-toggle="modal" data-bs-target="#fullScreenModalApartment' . $row["room_id"] . '">
                                     + Room Details

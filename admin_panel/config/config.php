@@ -29,6 +29,14 @@ function filteration($data)
     return $data;
 }
 
+function filteration_without_special_chars($data)
+{
+    foreach ($data as $key => $value) {
+        $data[$key] = trim($value);
+    }
+    return $data;
+}
+
 // -------------------------------------------------------
 
 

@@ -115,8 +115,8 @@ admin_login();
 
     .custom_alert {
         position: fixed;
-        top: 25px;
-        right: 25px;
+        top: 75px;
+        right: 50px;
         font-size: 0.8rem;
     }
 
@@ -132,6 +132,10 @@ admin_login();
     .contact_us {
         font-size: .8rem;
     }
+
+    .f-title {
+        font-size: .7rem;
+    }
     </style>
 </head>
 
@@ -141,6 +145,26 @@ admin_login();
 
 
     <div class="center">
+        <div class="card">
+            <div class="card-body">
+                <div class="gen_and_edit">
+                    <h5 class="card-title">General Settings</h5>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn_edit shadow-none" data-bs-toggle="modal"
+                        data-bs-target="#editModal">
+                        <i class="bi bi-pencil-square"></i>Edit
+                    </button>
+                </div>
+                <h6 class="card-subtitle text-body-secondary mt-3">Site Title</h6>
+                <p class="card-text site_title"></p>
+                <h6 class="card-subtitle  text-body-secondary">About Us</h6>
+
+                <p class="card-text site_about"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="center mt-3">
         <div class="card">
             <div class="card-body">
                 <div class="gen_and_edit">
@@ -165,22 +189,39 @@ admin_login();
         </div>
     </div>
 
-    <div class="center">
+    <!-- Facilities Settings -->
+    <div class="center mt-3">
         <div class="card">
             <div class="card-body">
                 <div class="gen_and_edit">
-                    <h5 class="card-title">General Settings</h5>
+                    <h5 class="card-title">Facilities Settings</h5>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary btn_edit shadow-none" data-bs-toggle="modal"
-                        data-bs-target="#editModal">
+                        data-bs-target="#editFacilitiesModal">
                         <i class="bi bi-pencil-square"></i>Edit
                     </button>
                 </div>
-                <h6 class="card-subtitle text-body-secondary mt-3">Site Title</h6>
-                <p class="card-text site_title"></p>
-                <h6 class="card-subtitle  text-body-secondary">About Us</h6>
+                <h6 class="card-subtitle text-body-secondary mt-3"> Facilities #1</h6>
+                <p class="card-text" id="f1"></p>
 
-                <p class="card-text site_about"></p>
+                <h6 class="card-subtitle text-body-secondary mt-3"> Facilities #2</h6>
+                <p class="card-text" id="f2"></p>
+
+                <h6 class="card-subtitle text-body-secondary mt-3"> Facilities #3</h6>
+                <p class="card-text" id="f3"></p>
+
+                <h6 class="card-subtitle text-body-secondary mt-3"> Facilities #4</h6>
+                <p class="card-text" id="f4"></p>
+
+                <h6 class="card-subtitle text-body-secondary mt-3"> Facilities #5</h6>
+                <p class="card-text" id="f5"></p>
+
+                <h6 class="card-subtitle text-body-secondary mt-3"> Facilities #6</h6>
+                <p class="card-text" id="f6"></p>
+
+                <h6 class="card-subtitle text-body-secondary mt-3"> Facilities #7</h6>
+                <p class="card-text" id="f7"></p>
+
             </div>
         </div>
     </div>
@@ -231,19 +272,19 @@ admin_login();
                     <div class="modal-body">
                         <div class="mb-1">
                             <label for="exampleFormControlInput3" class="form-label fw-bold text-sm">Phone #1</label>
-                            <input type="text" class="form-control contact_us shadow-none phone1_inp"
+                            <input type="number" class="form-control contact_us shadow-none phone1_inp"
                                 id="exampleFormControlInput3" name="phone1" required>
                         </div>
 
                         <div class="mb-1">
                             <label for="exampleFormControlInput3" class="form-label fw-bold text-sm">Phone #2</label>
-                            <input type="text" class="form-control contact_us shadow-none phone2_inp"
+                            <input type="number" class="form-control contact_us shadow-none phone2_inp"
                                 id="exampleFormControlInput3" name="phone2" required>
                         </div>
 
                         <div class="mb-1">
                             <label for="exampleFormControlInput3" class="form-label fw-bold text-sm">Phone #3</label>
-                            <input type="text" class="form-control contact_us shadow-none phone3_inp"
+                            <input type="number" class="form-control contact_us shadow-none phone3_inp"
                                 id="exampleFormControlInput3" name="phone3" required>
                         </div>
 
@@ -270,10 +311,144 @@ admin_login();
         </div>
     </div>
 
+    <!-- Facilities Modal -->
+    <div class="modal fade my_modal_facility_us" id="editFacilitiesModal" tabindex="-1"
+        aria-labelledby="editFacilitiesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editFacilitiesModalLabel">Facilities Settings</h1>
+                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Facility #1</label>
+                            <input type="text" class="form-control shadow-none contact_us f1_inp"
+                                id="exampleFormControlInput3" name="f1" required>
+
+                            <!-- icon -->
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+                            <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+                                icon.</a>
+                            <input type="text" class="form-control shadow-none contact_us icon1_inp"
+                                id="exampleFormControlInput3" name="icon1" required>
+                            <!-- icon -->
+                        </div>
+
+                        <hr class="mt-2 mb-1">
+
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Facility #2</label>
+                            <input type="text" class="form-control  shadow-none contact_us f2_inp"
+                                id="exampleFormControlInput3" name="f2" required>
+
+                            <!-- icon -->
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+                            <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+                                icon.</a>
+                            <input type="text" class="form-control shadow-none contact_us icon2_inp"
+                                id="exampleFormControlInput3" name="icon2" required>
+                            <!-- icon -->
+                        </div>
+
+                        <hr class="mt-2 mb-1">
+
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Facility #3</label>
+                            <input type="text" class="form-control  shadow-none contact_us f3_inp"
+                                id="exampleFormControlInput3" name="f3" required>
+
+                            <!-- icon -->
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+                            <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+                                icon.</a>
+                            <input type="text" class="form-control shadow-none contact_us icon3_inp"
+                                id="exampleFormControlInput3" name="icon3" required>
+                            <!-- icon -->
+                        </div>
+
+                        <hr class="mt-2 mb-1">
+
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Facility #4</label>
+                            <input type="text" class="form-control  shadow-none contact_us f4_inp"
+                                id="exampleFormControlInput3" name="f4" required>
+
+                            <!-- icon -->
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+                            <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+                                icon.</a>
+                            <input type="text" class="form-control shadow-none contact_us icon4_inp"
+                                id="exampleFormControlInput3" name="icon4" required>
+                            <!-- icon -->
+                        </div>
+
+                        <hr class="mt-2 mb-1">
+
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Facility #5</label>
+                            <input type="text" class="form-control  shadow-none contact_us f5_inp"
+                                id="exampleFormControlInput3" name="f5" required>
+
+                            <!-- icon -->
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+                            <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+                                icon.</a>
+                            <input type="text" class="form-control shadow-none contact_us icon5_inp"
+                                id="exampleFormControlInput3" name="icon5" required>
+                            <!-- icon -->
+                        </div>
+
+                        <hr class="mt-2 mb-1">
+
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Facility #6</label>
+                            <input type="text" class="form-control  shadow-none contact_us f6_inp"
+                                id="exampleFormControlInput3" name="f6" required>
+
+                            <!-- icon -->
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+                            <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+                                icon.</a>
+                            <input type="text" class="form-control shadow-none contact_us icon6_inp"
+                                id="exampleFormControlInput3" name="icon6" required>
+                            <!-- icon -->
+                        </div>
+
+                        <hr class="mt-2 mb-1">
+
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Facility #7</label>
+                            <input type="text" class="form-control  shadow-none contact_us f7_inp"
+                                id="exampleFormControlInput3" name="f7" required>
+
+                            <!-- icon -->
+                            <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+                            <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+                                icon.</a>
+                            <input type="text" class="form-control shadow-none contact_us icon7_inp"
+                                id="exampleFormControlInput3" name="icon7" required>
+                            <!-- icon -->
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn_edit shadow-none"
+                            onclick="update_facilities(f1.value, f2.value, f3.value, f4.value, f5.value, f6.value, f7.value, icon1.value, icon2.value, icon3.value, icon4.value, icon5.value, icon6.value, icon7.value)">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 
     <script>
-    let gen_data, contacts_data
+    let gen_data, contacts_data, facilities_data
 
     function get_general() {
         let site_title = document.querySelector('.site_title')
@@ -336,7 +511,7 @@ admin_login();
         // Use setTimeout to remove the alert after the specified duration
         setTimeout(function() {
             element.remove();
-        }, 1000);
+        }, 2000);
     }
 
     function get_contacts() {
@@ -376,6 +551,8 @@ admin_login();
             let modal = bootstrap.Modal.getInstance(my_modal)
             modal.hide()
 
+
+
             if (this.responseText.indexOf('1') != -1) {
                 alert('success', 'Changes saved!')
                 get_general()
@@ -384,21 +561,74 @@ admin_login();
                 alert('error', 'No changes made!')
 
             }
-
-            // if (this.responseText == 1) {
-
-            // } else {
-            // }
-
         }
-        // xhr.send('site_title=' + title_inp + '&site_about=' + about_inp + '&update_general')
+
         xhr.send('phone1=' + phone1 + '&phone2=' + phone2 + '&phone3=' + phone3 + '&facebook=' + facebook + '&email=' +
             email + '&update_contact')
+    }
+
+    function get_facilities() {
+
+        let facilities_ids = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7']
+        let facilities_class_inp = ['.f1_inp', '.f2_inp', '.f3_inp', '.f4_inp', '.f5_inp', '.f6_inp', '.f7_inp']
+
+        let icons_class_inp = ['.icon1_inp', '.icon2_inp', '.icon3_inp', '.icon4_inp', '.icon5_inp', '.icon6_inp',
+            '.icon7_inp'
+        ]
+
+
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onload = function() {
+            facilities_data = JSON.parse(this.responseText)
+
+            for (let i = 0; i < facilities_ids.length; i++) {
+                document.getElementById(facilities_ids[i]).innerText = facilities_data[i].item;
+                document.querySelector(facilities_class_inp[i]).value = facilities_data[i].item;
+
+                document.querySelector(icons_class_inp[i]).value = facilities_data[i].icon;
+
+            }
+
+        }
+        xhr.send('get_facilities')
+    }
+
+    function update_facilities(f1, f2, f3, f4, f5, f6, f7, icon1, icon2, icon3, icon4, icon5, icon6, icon7) {
+
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onload = function() {
+
+            let my_modal = document.querySelector('.my_modal_facility_us')
+            let modal = bootstrap.Modal.getInstance(my_modal)
+            modal.hide()
+
+
+            if (this.responseText.indexOf('1') != -1) {
+                alert('success', 'Changes saved!')
+                get_general()
+                get_contacts()
+                get_facilities()
+            } else {
+                alert('error', 'No changes made!')
+
+            }
+        }
+
+        xhr.send('f1=' + f1 + '&f2=' + f2 + '&f3=' + f3 + '&f4=' + f4 + '&f5=' +
+            f5 + '&f6=' + f6 + '&f7=' + f7 + '&icon1=' + icon1 + '&icon2=' + icon2 + '&icon3=' + icon3 + '&icon4=' +
+            icon4 + '&icon5=' + icon5 + '&icon6=' + icon6 + '&icon7=' + icon7 + '&update_facilities')
     }
 
     window.onload = function() {
         get_general()
         get_contacts()
+        get_facilities()
     }
     </script>
 </body>

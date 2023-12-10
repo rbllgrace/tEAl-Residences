@@ -50,3 +50,55 @@
         </form>
     </div>
 </div>
+
+<script>
+let gen_data
+
+function get_general() {
+    let site_title = document.querySelector('.site_title')
+    let site_about = document.querySelector('.site_about')
+
+    let title_inp = document.querySelector('.title_inp');
+    let about_inp = document.querySelector('.about_inp');
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+    xhr.onload = function() {
+        gen_data = JSON.parse(this.responseText)
+
+        // console.log(gen_data);
+
+        site_title.innerText = gen_data.site_title
+        site_about.innerText = gen_data.who_we_are
+
+        title_inp.value = gen_data.site_title
+        about_inp.value = gen_data.who_we_are
+    }
+    xhr.send('get_general')
+}
+
+function update_general(title_inp, about_inp) {
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+    xhr.onload = function() {
+
+        let my_modal = document.querySelector('.my_modal')
+        let modal = bootstrap.Modal.getInstance(my_modal)
+        modal.hide()
+
+        if (this.responseText == 1) {
+            alert('success', 'Changes saved!')
+            get_general()
+        } else {
+            alert('error', 'No changes made!')
+
+        }
+    }
+    xhr.send('site_title=' + title_inp + '&site_about=' + about_inp + '&update_general')
+}
+</script>

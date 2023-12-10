@@ -84,3 +84,43 @@
         </form>
     </div>
 </div>
+
+<script>
+    function get_why_choose_us() {
+
+        let why_choose_us_data
+
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onload = function() {
+            const why_choose_us_container = document.querySelector('.why_choose_us_container');
+            why_choose_us_container.innerHTML = this.responseText
+
+            // console.log(this.responseText);
+        }
+        xhr.send('get_why_choose_us')
+    }
+
+    function remove_why_choose_us(val) {
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onload = function() {
+            console.log(this.responseText);
+
+            if (this.responseText == 1) {
+                alert('success', 'Changes saved!')
+                get_general()
+                get_contacts()
+                get_why_choose_us()
+            } else {
+                alert('error', 'Someting went wrong!')
+
+            }
+        }
+        xhr.send('remove_why_choose_us=' + val)
+    }
+</script>

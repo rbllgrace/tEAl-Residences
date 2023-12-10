@@ -75,3 +75,63 @@
         </form>
     </div>
 </div>
+
+<script>
+let contacts_data
+
+function get_contacts() {
+
+    let contacts_id = ['phone1', 'phone2', 'phone3', 'facebook', 'email']
+    let contacts_class_inp = ['.phone1_inp', '.phone2_inp', '.phone3_inp', '.facebook_inp',
+        '.email_inp'
+    ]
+
+
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+    xhr.onload = function() {
+        contacts_data = JSON.parse(this.responseText)
+
+        for (let i = 0; i < contacts_id.length; i++) {
+            document.getElementById(contacts_id[i]).innerText = contacts_data[i]
+                .contact_content;
+
+            document.querySelector(contacts_class_inp[i]).value = contacts_data[i]
+                .contact_content;
+        }
+
+    }
+    xhr.send('get_contacts')
+}
+
+function update_contact(phone1, phone2, phone3, facebook, email) {
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+    xhr.onload = function() {
+
+        let my_modal = document.querySelector('.my_modal_contact_us')
+        let modal = bootstrap.Modal.getInstance(my_modal)
+        modal.hide()
+
+
+        if (this.responseText.indexOf('1') != -1) {
+            alert('success', 'Changes saved!')
+            get_general()
+            get_contacts()
+        } else {
+            alert('error', 'No changes made!')
+
+        }
+    }
+
+    xhr.send('phone1=' + phone1 + '&phone2=' + phone2 + '&phone3=' + phone3 + '&facebook=' +
+        facebook + '&email=' +
+        email + '&update_contact')
+}
+</script>

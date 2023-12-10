@@ -29,8 +29,6 @@ $result2 = $conn->query($sql2);
 
 
         <h5 class="mb-2">Why Choose Us</h5>
-
-
         <div class="row">
 
             <?php

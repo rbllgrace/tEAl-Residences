@@ -152,3 +152,27 @@ if (isset($_POST['update_facilities'])) {
     echo $icon_res6;
     echo $icon_res7;
 }
+
+if (isset($_POST['get_why_choose_us'])) {
+    $res = selectAllIn('why_choose_us_table');
+    $countThis = 0;
+    while ($row = mysqli_fetch_assoc($res)) {
+        $countThis++;
+
+        echo '<h6 class="card-subtitle text-body-secondary mt-3">Why Choose Us #' . $countThis . ' </h6>
+        
+        <button type="button" onclick="remove_why_choose_us(' . $row['id'] . ')" class="btn btn-primary btn_delete shadow-none"><i class="bi bi-trash"></i></button>
+        <p class="card-text"><span class="fw-bold">Title: </span>' . $row['title'] . '</p>
+        <p class="card-text" id="phone' . $countThis . '"><span class="fw-bold">Description: </span>' . $row['description'] . '</p>';
+    }
+}
+
+
+if (isset($_POST['remove_why_choose_us'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['remove_why_choose_us']];
+    $q = "DELETE FROM `why_choose_us_table` WHERE `id` =?";
+
+    $res = delete($q, $values, 'i');
+    echo $res;
+}

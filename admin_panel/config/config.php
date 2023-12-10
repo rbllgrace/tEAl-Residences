@@ -100,19 +100,48 @@ function update($sql, $values, $datatypes)
         die('Query connect be prepared - Update');
     }
 }
-
-
-
-
-
+// -------------------------------------------------------
+function insert($sql, $values, $datatypes)
+{
+    $con = $GLOBALS['conn'];
+    if ($stmt = mysqli_prepare($con, $sql)) {
+        mysqli_stmt_bind_param($stmt, $datatypes, ...$values);
+        if (mysqli_stmt_execute($stmt)) {
+            $res = mysqli_stmt_affected_rows($stmt);
+            mysqli_stmt_close($stmt);
+            return $res;
+        } else {
+            mysqli_stmt_close($stmt);
+            die('Query connect be executed - Insert');
+        }
+    } else {
+        die('Query connect be prepared - Insert');
+    }
+}
 
 // -------------------------------------------------------
-
-
+function delete($sql, $values, $datatypes)
+{
+    $con = $GLOBALS['conn'];
+    if ($stmt = mysqli_prepare($con, $sql)) {
+        mysqli_stmt_bind_param($stmt, $datatypes, ...$values);
+        if (mysqli_stmt_execute($stmt)) {
+            $res = mysqli_stmt_affected_rows($stmt);
+            mysqli_stmt_close($stmt);
+            return $res;
+        } else {
+            mysqli_stmt_close($stmt);
+            die('Query connect be executed - Delete');
+        }
+    } else {
+        die('Query connect be prepared - Delete');
+    }
+}
 // -------------------------------------------------------
-
-
-// -------------------------------------------------------
-
-
+function selectAllIn($table)
+{
+    $con = $GLOBALS['conn'];
+    $res = mysqli_query($con, "SELECT * FROM $table");
+    return $res;
+}
 // -------------------------------------------------------

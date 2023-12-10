@@ -306,8 +306,6 @@
                                         <input type="text" class="form-control  shadow-none contact_us f6_inp"
                                             id="exampleFormControlInput3" name="f6" required>
 
-
-
                                         <!-- icon -->
                                         <label for="exampleFormControlInput3"
                                             class="form-label fw-bold f-title">Icon</label>

@@ -56,19 +56,6 @@ if (isset($_POST['update_contact'])) {
     $frm_data = filteration($_POST);
     $q = "UPDATE `contact_us_table` SET `contact_content` =? WHERE `id` =?";
 
-    // 
-    $selectedColumn = "contact_content";
-    $sql = "SELECT $selectedColumn, COUNT(*) AS count FROM contact_us_table GROUP BY $selectedColumn";
-    $result = $conn->query($sql);
-    $count = 0;
-    if ($result) {
-        while ($row = $result->fetch_assoc()) {
-            ++$count;
-        }
-        $result->free();
-    }
-    // 
-
     $values = [$frm_data['phone1'], 1];
     $values2 = [$frm_data['phone2'], 2];
     $values3 = [$frm_data['phone3'], 3];
@@ -175,4 +162,53 @@ if (isset($_POST['remove_why_choose_us'])) {
 
     $res = delete($q, $values, 'i');
     echo $res;
+}
+
+
+if (isset($_POST['get_why_choose_us_inp'])) {
+    $res = selectAllIn('why_choose_us_table');
+    $countThis = 0;
+    $inputNames = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+        $countThis++;
+        $inputNames[] = 'why_choose_us_' . $countThis . '.value';
+        echo '<div class="mb-1"> 
+        <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Why Choose Us #' . $countThis . '</label>
+        <br><span style="font-size: .7rem;">Title</span>
+        <input type="text" class="form-control shadow-none contact_us" id="exampleFormControlInput3" name="why_choose_us_' . $countThis . '" required value="' . $row['title'] . '">
+
+        <span style="font-size: .7rem;">Description</span>
+        <input type="text" class="form-control shadow-none contact_us" id="exampleFormControlInput3"  required value="' . $row['description'] . '">
+
+        <!-- icon -->
+        <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+        <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+            icon.</a>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">' . $row['icon'] . '</span>
+            <input type="text" class="form-control shadow-none contact_us why_choose_us_icon' . $countThis . '_inp" id="exampleFormControlInput3" name="why_choose_us_icon_' . $countThis . '" aria-describedby="basic-addon1">
+            <!-- icon -->
+        </div>
+    </div> <hr>';
+    }
+
+    echo ' <div class="modal-footer">
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn_edit shadow-none" onclick="update_why_choose_us(' . implode(', ', $inputNames) . ')">Save</button>
+    </div>
+</div>';
+}
+
+
+if (isset($_POST['add_why_choose_us'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+    $values = [$frm_data['title_val'], $frm_data['des_val'], $frm_data['icon_val']];
+    if (!($frm_data['title_val']) && !($frm_data['des_val']) && !($frm_data['icon_val'])) {
+        return 0;
+    } else {
+        $q = "INSERT INTO `why_choose_us_table`(`icon`, `title`, `description`) VALUES (?,?,?) ";
+
+        $res = insert($q, $values, 'sss');
+        echo $res;
+    }
 }

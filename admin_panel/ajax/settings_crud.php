@@ -212,3 +212,22 @@ if (isset($_POST['add_why_choose_us'])) {
         echo $res;
     }
 }
+
+
+if (isset($_POST['get_rooms'])) {
+    $res = selectAllIn('rooms');
+    $countThis = 0;
+    while ($row = mysqli_fetch_assoc($res)) {
+        echo '<tr>
+        <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
+        <td>' . $row['room_title'] . '</td>
+        <td class="room_description_text">' . $row['room_description'] . '</td>
+        <td>' . $row['room_max_person'] . '</td>
+        <td>' . $row['per_night'] . '</td>
+        <td class="actions">
+            <button type="button" class="btn btn-primary shadow-none btn_delete" ><i class="bi bi-trash"></i></button>
+            <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="edit_room(this)"><i class="bi bi-pencil-square"></i></button>
+        </td>
+    </tr>';
+    }
+}

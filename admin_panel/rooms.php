@@ -54,8 +54,8 @@ admin_login();
     <?php require('./partials/nav_pills.php'); ?>
 
     <div class="center">
-        <div class="top d-flex justify-content-between align-items-center">
-        <h1>Rooms</h1>
+                    <div class="top d-flex justify-content-between align-items-center">
+                    <h1>Rooms</h1>
         <button class="btn btn-primary btn_add"><i class="bi bi-plus-square"></i>&nbsp; Add</button>
         </div>
         <table class="table">

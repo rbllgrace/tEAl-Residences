@@ -1,13 +1,20 @@
 .custom_alert {
   position: fixed;
-  top: 50;
-  right: 25px;
+  /* top: 75px; */
+  /* right: 50px; */
+  top: 30px;
+  right: 41%;
   font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 1;
+  height: 31px;
+  display: flex;
+  align-items: center;
 }
 
 .alert-dismissible .btn-close {
   position: absolute;
-  top: 0px;
+  top: -9px;
   right: 3px;
   z-index: 2;
   padding: 1.25rem 1rem;

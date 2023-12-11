@@ -99,21 +99,7 @@
     font-size: .9rem;
 }
 
-.custom_alert {
-    position: fixed;
-    top: 75px;
-    right: 50px;
-    font-size: 0.8rem;
-}
 
-.alert-dismissible .btn-close {
-    position: absolute;
-    top: 0px;
-    right: 3px;
-    z-index: 2;
-    padding: 1.25rem 1rem;
-    font-size: 0.7rem;
-}
 
 .contact_us {
     font-size: .8rem;

@@ -1,8 +1,6 @@
 <?php require('./config/config.php');
 admin_login();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +9,7 @@ admin_login();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <?php require('./partials/links.php') ?>
+    <link rel="stylesheet" href="./public/css/alert.css">
 </head>
 
 <body>

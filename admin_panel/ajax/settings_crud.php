@@ -224,9 +224,11 @@ if (isset($_POST['get_rooms'])) {
         <td class="room_description_text">' . $row['room_description'] . '</td>
         <td>' . $row['room_max_person'] . '</td>
         <td>' . $row['per_night'] . '</td>
+        <td style="display: none;">' . $row['room_id'] . '</td>
+
         <td class="actions">
             <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
-            <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="edit_room(this)"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
         </td>
     </tr>';
     }
@@ -297,5 +299,29 @@ if (isset($_POST['remove_room_val'])) {
     $values = [$frm_data['remove_room_val']];
     $q = "DELETE FROM `rooms` WHERE `room_id` =?";
     $res = delete($q, $values, 'i');
+    echo $res;
+}
+
+if (isset($_POST['edit_room'])) {
+    $frm_data = filteration($_POST);
+    // Assuming 'room_picture', 'room_title', 'room_description', 'room_max_person', and 'per_night' are the column names
+    $values = [
+        $frm_data['class_file'],
+        $frm_data['class_title'],
+        $frm_data['class_description'],
+        $frm_data['class_max'],
+        $frm_data['class_night'],
+        $frm_data['edit_room'] // Assuming 'edit_room' contains the room_id
+    ];
+
+    $q = "UPDATE `rooms` SET 
+        `room_picture` = ?, 
+        `room_title` = ?, 
+        `room_description` = ?, 
+        `room_max_person` = ?, 
+        `per_night` = ? 
+        WHERE `room_id` = ?";
+
+    $res = update($q, $values, 'sssssi'); // Adjust the 'sssssi' based on the data types of your columns
     echo $res;
 }

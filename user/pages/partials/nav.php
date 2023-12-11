@@ -4,24 +4,24 @@ $result = $conn->query($sql);
 ?>
 
 <style>
-.btn_logout {
-    color: #008080;
-    border-color: #008080;
-    font-size: .8rem;
-}
+    .btn_logout {
+        color: #008080;
+        border-color: #008080;
+        font-size: .8rem;
+    }
 
-.btn_logout:hover {
-    background: #008080;
-    border-color: #008080;
-}
+    .btn_logout:hover {
+        background: #008080;
+        border-color: #008080;
+    }
 
-.my_booking {
-    font-size: .8rem;
-}
+    .my_booking {
+        font-size: .8rem;
+    }
 </style>
 
 
-<?php session_start(); ?>
+
 
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav" data-aos="fade-up">
@@ -38,9 +38,7 @@ $result = $conn->query($sql);
                 ?></span></a>
 
         <!-- toggle -->
-        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <!-- toggle btn -->
             <span class="navbar-toggler-icon"></span> <!-- toggle btn -->
         </button>

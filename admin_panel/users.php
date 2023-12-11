@@ -11,63 +11,82 @@ admin_login();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <?php require('./partials/links.php') ?>
-
+    <link rel="stylesheet" href="./public/css/common.css">
     <style>
-    * {
-        font-family: 'Poppins', sans-serif;
-        box-sizing: border-box;
-        scroll-behavior: smooth;
+    th {
+        font-size: 0.8rem;
+        text-align: center;
     }
 
-    .btn_logout {
-        background: black;
-        color: white;
-        border-color: black;
-        font-size: .8rem;
-    }
-
-    .btn_logout:hover {
-        background: black;
-        border-color: white;
-    }
-
-    .navbar {
-        background: #11151c !important;
-        position: fixed;
-        top: 0;
-        width: 100%;
-    }
-
-    .nav-pills {
-        width: 250px;
+    td {
+        font-size: 0.8rem;
         text-align: center;
 
-        position: fixed;
-        top: 56px;
-        height: 100%;
-        background: #11151c;
-        border-top: 1px solid white;
+        vertical-align: middle;
     }
 
-    .nav-pills .nav-link {
-        color: white;
+    .btn_edit {
+        padding: 2px 10px;
     }
 
-    .center {
-        margin-left: 20vw;
-        margin-top: 5%;
+    .room_description_text {
+        font-size: 0.7rem;
+        width: 300px;
+    }
+
+    input {
+        font-size: 0.7rem !important;
     }
     </style>
+
 </head>
 
 <body>
     <?php require('./partials/header.php'); ?>
-
     <?php require('./partials/nav_pills.php'); ?>
 
 
-    <p class="center">users</p>
+    <div class="center">
+        <div class="top d-flex justify-content-between align-items-center">
+            <h1>Users</h1>
 
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Is Verified</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody class="table_body">
+                <!-- Example row, you can add more rows dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+
+    <script>
+    window.onload = function() {
+        get_users()
+    }
+
+    function get_users() {
+
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onload = function() {
+            const table_body = document.querySelector('.table_body');
+            table_body.innerHTML = this.responseText
+            // console.log(this.responseText);
+        }
+        xhr.send('get_users')
+    }
+    </script>
 
 
 </body>

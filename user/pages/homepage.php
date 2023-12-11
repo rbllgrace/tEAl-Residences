@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!(isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true)) {
+    header("Location: http://localhost/teal-residences/user/auth/login/login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +47,10 @@
         height: 5px;
         width: 5px;
         padding-bottom: 1.5rem;
+    }
+
+    .navbar {
+        height: 50px;
     }
     </style>
 </head>

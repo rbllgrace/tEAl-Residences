@@ -325,3 +325,17 @@ if (isset($_POST['edit_room'])) {
     $res = update($q, $values, 'sssssi'); // Adjust the 'sssssi' based on the data types of your columns
     echo $res;
 }
+
+
+if (isset($_POST['get_users'])) {
+    $res = selectAllIn('user_table');
+    while ($row = mysqli_fetch_assoc($res)) {
+        echo '<tr>
+        <td>' . $row['user_id'] . '</td>
+        <td>' . $row['name'] . '</td>
+        <td>' . $row['email'] . '</td>
+        <td>' . $row['is_verified'] . '</td>
+        <td>' . $row['created_at'] . '</td>
+    </tr>';
+    }
+}

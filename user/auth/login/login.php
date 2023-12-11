@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true) {
+    header("Location: http://localhost/teal-residences/admin_panel/dashboard.php");
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +44,6 @@
 </head>
 
 <body>
-    <?php session_start(); ?>
     <?php require('../../connection/connect.php') ?>
     <?php require('./login_nav.php') ?>
 
@@ -109,8 +117,10 @@
                 if ($row["is_verified"] == 1 && password_verify($password, $row["password"])) {
                     // Login successful
 
+
                     $_SESSION['user_id'] = $row['user_id'];
-                    $_SESSION['name'] = $name;
+                    // $_SESSION['name'] = $name;
+                    $_SESSION['user_login'] = true;
 
                     unset($_SESSION['login_attempts']);
 

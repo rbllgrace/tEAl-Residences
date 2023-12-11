@@ -12,41 +12,8 @@ admin_login();
     <title>Admin Dashboard</title>
     <?php require('./partials/links.php') ?>
     <link rel="stylesheet" href="./public/css/common.css">
-    <style>
-    .actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        margin-top: 40px;
-        border-bottom: none;
-    }
-
-    th {
-        font-size: .8rem;
-        text-align: center;
-    }
-
-    td {
-        font-size: .8rem;
-        text-align: center;
-
-        vertical-align: middle;
-    }
-
-    .btn_edit {
-        padding: 2px 10px;
-    }
-
-    .room_description_text {
-        font-size: .7rem;
-        width: 300px;
-    }
-
-    input {
-        font-size: .7rem !important;
-    }
-    </style>
+    <link rel="stylesheet" href="./public/css/rooms.css">
+   
 </head>
 
 <body>

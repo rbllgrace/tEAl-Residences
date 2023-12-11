@@ -231,3 +231,63 @@ if (isset($_POST['get_rooms'])) {
     </tr>';
     }
 }
+
+
+// if (isset($_POST['add_room'])) {
+//     $frm_data = filteration($_POST);
+//     $values = [$frm_data['picture'], $frm_data['title'], $frm_data['description'], $frm_data['max'],  $frm_data['per_night']];
+
+//     $q = "INSERT INTO `rooms` (`room_picture`, `room_title`, `room_description`, `room_max_person`, `per_night`) VALUES (?,?,?,?,?) ";
+
+//     $res = insert($q, $values, 'sssss');
+//     echo $res;
+// }
+
+if (isset($_POST['add_room'])) {
+    // $frm_data = filteration($_POST);
+    // upload_image($_FILES['picture'], ROOM_IMAGES_FOLDER);
+
+    $title = $_POST["title"];
+    $description = $_POST["description"];
+    $max = $_POST["max"];
+    $per_night = $_POST["per_night"];
+
+    $file = $_FILES["picture"];
+
+    // File properties
+    $fileName = $file["name"];
+    $fileTmpName = $file["tmp_name"];
+    $fileSize = $file["size"];
+    $fileError = $file["error"];
+
+    // File extension
+    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    // Allowed file types
+    $allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+
+    if (in_array($fileExt, $allowedExtensions)) {
+        if ($fileError === 0) {
+            // Specify the directory where you want to save the uploaded files
+            $uploadDirectory = "C:/xampp/htdocs/tEAl-Residences/user/public/images/";
+
+            // Move the uploaded file to the specified directory
+            $destination = $uploadDirectory . $fileName;
+            move_uploaded_file($fileTmpName, $destination);
+
+            // Insert into database with the file path
+            $sql = "INSERT INTO rooms (room_title, room_description, room_max_person, per_night, room_picture) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssss", $title, $description, $max, $per_night, $fileName);
+            $stmt->execute();
+
+            echo "Room added successfully.";
+        } else {
+            echo "Error uploading file.";
+        }
+    } else {
+        echo "Invalid file type. Allowed types: " . implode(", ", $allowedExtensions);
+    }
+
+    $conn->close();
+}

@@ -16,7 +16,8 @@ if ($conn->connect_error) {
 
 // -------------------------------------------------------
 
-
+define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/tEAl-Residences/user/public/images/');
+define('ROOM_IMAGES_FOLDER', 'room_images/');
 function filteration($data)
 {
 
@@ -145,3 +146,7 @@ function selectAllIn($table)
     return $res;
 }
 // -------------------------------------------------------
+
+function upload_image($img, $folder)
+{
+}

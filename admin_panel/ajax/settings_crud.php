@@ -281,7 +281,7 @@ if (isset($_POST['add_room'])) {
             $stmt->bind_param("sssss", $title, $description, $max, $per_night, $fileName);
             $stmt->execute();
 
-            echo "Room added successfully.";
+            echo 1;
         } else {
             echo "Error uploading file.";
         }

@@ -190,6 +190,22 @@ admin_login();
         add_room(picture, title, description, max, night)
     })
 
+    function alert(type, msg) {
+
+        let base_class = (type == 'success') ? 'alert-success' : 'alert-danger'
+        let element = document.createElement('div')
+        element.innerHTML = `<div class="alert ${base_class} alert-dismissible fade show custom_alert" role="alert">
+      ${msg}
+  <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>`
+        document.body.append(element)
+
+        // Use setTimeout to remove the alert after the specified duration
+        setTimeout(function() {
+            element.remove();
+        }, 2000);
+    }
+
     function add_room(picture, title, description, max, per_night) {
 
         let data = new FormData()
@@ -205,7 +221,17 @@ admin_login();
         xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
 
         xhr.onload = function() {
-            console.log(this.responseText);
+            let my_modal = document.querySelector('.my_modal_add_room')
+            let modal = bootstrap.Modal.getInstance(my_modal)
+            modal.hide()
+
+            if (this.responseText == 1) {
+                alert('success', 'Added successfully!')
+                get_rooms()
+            } else {
+                alert('error', this.responseText)
+
+            }
         }
         xhr.send(data)
 

@@ -225,7 +225,7 @@ if (isset($_POST['get_rooms'])) {
         <td>' . $row['room_max_person'] . '</td>
         <td>' . $row['per_night'] . '</td>
         <td class="actions">
-            <button type="button" class="btn btn-primary shadow-none btn_delete" ><i class="bi bi-trash"></i></button>
+            <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
             <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="edit_room(this)"><i class="bi bi-pencil-square"></i></button>
         </td>
     </tr>';
@@ -290,4 +290,12 @@ if (isset($_POST['add_room'])) {
     }
 
     $conn->close();
+}
+
+if (isset($_POST['remove_room_val'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['remove_room_val']];
+    $q = "DELETE FROM `rooms` WHERE `room_id` =?";
+    $res = delete($q, $values, 'i');
+    echo $res;
 }

@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (!(isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true)) {
-    header("Location: http://localhost/teal-residences/user/auth/login/login.php");
-    exit;
-}
+// if (!(isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true)) {
+//     header("Location: http://localhost/teal-residences/user/auth/login/login.php");
+//     exit;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">

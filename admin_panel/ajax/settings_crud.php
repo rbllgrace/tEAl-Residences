@@ -338,7 +338,15 @@ if (isset($_POST['get_users'])) {
         <td>' . $row['created_at'] . '</td>
     </tr>';
     }
+} else {
+    echo "<tr>
+    <td colspan ='5'>NO DATA
+    </td>
+    </tr>
+    ";
 }
+
+
 
 
 // ------------------- user ------------------------

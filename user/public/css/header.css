@@ -74,8 +74,7 @@ nav .nav-link {
 
 nav .booking_logout_container .my_bookings {
   width: auto;
-
-  width: 82px;
+  width: 150px;
 }
 
 nav .booking_logout_container .my_bookings a {
@@ -84,6 +83,7 @@ nav .booking_logout_container .my_bookings a {
   color: black;
   font-weight: 300;
 }
+
 @keyframes fadeInDown {
   from {
     opacity: 0;

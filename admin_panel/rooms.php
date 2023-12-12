@@ -271,6 +271,7 @@ admin_login();
         function edit_room(val) {
             let class_file = document.querySelector('.class_file');
             const class_title = document.querySelector('.class_title');
+            // const class_img_file = document.querySelector('.class_img_file');
             const class_description = document.querySelector('.class_description');
             const class_max = document.querySelector('.class_max');
             const class_night = document.querySelector('.class_night');

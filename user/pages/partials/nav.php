@@ -16,7 +16,13 @@ $result = $conn->query($sql);
     }
 
     .my_booking {
-        font-size: .8rem;
+        font-size: .7rem !important;
+        width: 150px;
+    }
+
+    nav .booking_logout_container .my_bookings {
+        width: auto;
+        width: 105px;
     }
 </style>
 
@@ -85,7 +91,7 @@ $result = $conn->query($sql);
                 // The user is logged in
                 echo '<div class="d-flex justify-content-center align-items-center gap-2 booking_logout_container">
                 
-               <div class="my_bookings"><a href="#" class="my_booking">My Bookings</a></div>
+               <div class="my_bookings"><a href="http://localhost/teal-residences/user/pages/my_reservation_ui.php" class="my_booking">My Reservations</a></div>
                 
                 <form action="http://localhost/teal-residences/user/auth/login/logout.php" method="POST">
                     <button type="submit" class="btn btn-outline-primary btn_logout">Logout</button>

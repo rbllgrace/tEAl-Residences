@@ -2,15 +2,38 @@
 $sql = "SELECT * FROM rooms";
 $result = $conn->query($sql);
 
-require('/xampp/htdocs/tEAl-Residences/admin_panel/config/config.php');
+// require('/xampp/htdocs/tEAl-Residences/admin_panel/config/config.php');
 // require('/xampp/htdocs/tEAl-Residences/admin_panel/ajax/settings_crud.php');
 ?>
 
 <style>
-    img {
-        max-height: 300px;
-        width: 100%;
-    }
+img {
+    max-height: 300px;
+    width: 100%;
+}
+
+.custom_alert {
+    position: fixed;
+    /* top: 75px; */
+    /* right: 50px; */
+    top: 30px;
+    right: 41%;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 1;
+    height: 31px;
+    display: flex;
+    align-items: center;
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: -9px;
+    right: 3px;
+    z-index: 2;
+    padding: 1.25rem 1rem;
+    font-size: 0.7rem;
+}
 </style>
 
 <!-- our room -->
@@ -70,19 +93,40 @@ require('/xampp/htdocs/tEAl-Residences/admin_panel/config/config.php');
     <!--  -->
 
     <script>
-        function get_room_by_id(val) {
+    function get_room_by_id(val) {
 
-            console.log(val);
 
-            let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
-            xhr.onload = function() {
-                // const table_body = document.querySelector('.table_body');
-                // table_body.innerHTML = this.responseText
-                console.log(this.responseText);
+        xhr.onload = function() {
+            // const table_body = document.querySelector('.table_body');
+            // table_body.innerHTML = this.responseText
+
+            if (this.responseText == 1) {
+                alert('success', 'Added to reserve area!')
+            } else {
+                alert('error', this.responseText)
+
             }
-            xhr.send('get_room_by_id=' + val)
         }
+        xhr.send('get_room_by_id=' + val)
+    }
+
+    function alert(type, msg) {
+
+        let base_class = (type == 'success') ? 'alert-success' : 'alert-danger'
+        let element = document.createElement('div')
+        element.innerHTML = `<div class="alert ${base_class} alert-dismissible fade show custom_alert" role="alert">
+${msg}
+<button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>`
+        document.body.append(element)
+
+        // Use setTimeout to remove the alert after the specified duration
+        setTimeout(function() {
+            element.remove();
+        }, 2000);
+    }
     </script>

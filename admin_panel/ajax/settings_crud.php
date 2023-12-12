@@ -387,3 +387,44 @@ if (isset($_POST['get_room_by_id'])) {
     $statement->close();
     $mysqli->close();
 }
+
+
+
+if (isset($_POST['get_rooms_to_serve'])) {
+    $res = selectAllIn('ready_to_reserve_table');
+    while ($row = mysqli_fetch_assoc($res)) {
+        echo '<tr>
+        <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
+        <td>' . $row['room_title'] . '</td>
+        <td class="room_description_text">' . $row['room_desc'] . '</td>
+        <td>' . $row['room_max'] . '</td>
+        <td>' . $row['per_night'] . '</td>
+
+        <td class="actions">
+            <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_reservation(' . $row['id'] . ')"><i class="bi bi-trash"></i></button>
+            
+        </td>
+    </tr>';
+    }
+}
+
+
+if (isset($_POST['remove_reservation_val'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['remove_reservation_val']];
+    $q = "DELETE FROM `ready_to_reserve_table` WHERE `id` =?";
+    $res = delete($q, $values, 'i');
+    echo $res;
+}
+
+
+if (isset($_POST['get_total'])) {
+    $res = selectAllIn('ready_to_reserve_table');
+    $values = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+        // echo (int)$row['per_night'];
+        $values[] =  (int)$row['per_night'];
+    }
+    $sum = array_sum($values);
+    echo $sum;
+}

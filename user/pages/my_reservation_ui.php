@@ -169,7 +169,7 @@ ${msg}
 
     window.onload = function() {
         get_rooms_to_serve()
-        get_total()
+        // get_total()
     }
 </script>
 

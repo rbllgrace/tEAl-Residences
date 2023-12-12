@@ -1,9 +1,9 @@
 <?php
 session_start();
-// if (!(isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true)) {
-//     header("Location: http://localhost/teal-residences/user/auth/login/login.php");
-//     exit;
-// }
+if (!(isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true)) {
+    header("Location: http://localhost/teal-residences/user/auth/login/login.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,40 +18,40 @@ session_start();
     <?php require('./partials/links.php') ?>
 
     <style>
-        .swiperr {
-            width: 100%;
-            padding-top: 50px;
-            padding-bottom: 50px;
+    .swiperr {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
 
-        }
+    }
 
-        .swiper-slide {
-            background-position: center;
-            background-size: cover;
-            background: #008080;
-            color: white;
-            width: 150px;
-            height: 150px;
-            border-radius: 5px;
-        }
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        background: #008080;
+        color: white;
+        width: 150px;
+        height: 150px;
+        border-radius: 5px;
+    }
 
-        .test {
-            overflow: hidden;
-            border-radius: 5px;
+    .test {
+        overflow: hidden;
+        border-radius: 5px;
 
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-                rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-        }
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+            rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
 
-        .swiper-pagination {
-            height: 5px;
-            width: 5px;
-            padding-bottom: 1.5rem;
-        }
+    .swiper-pagination {
+        height: 5px;
+        width: 5px;
+        padding-bottom: 1.5rem;
+    }
 
-        .navbar {
-            height: 50px;
-        }
+    .navbar {
+        height: 50px;
+    }
     </style>
 </head>
 
@@ -70,28 +70,28 @@ session_start();
     <?php require('./partials/footer.php') ?>
 
     <script>
-        var swiperr = new Swiper(".mySwiper2", {
-            effect: "coverflow",
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: "auto",
-            coverflowEffect: {
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: true,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-            },
-        });
+    var swiperr = new Swiper(".mySwiper2", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+        },
+    });
 
-        AOS.init({
-            offset: 200,
-            duration: 500,
-            once: true
-        });
+    AOS.init({
+        offset: 200,
+        duration: 500,
+        once: true
+    });
     </script>
 </body>
 

@@ -84,7 +84,540 @@ img {
             ?>
 
 
+            <!-- Full-Screen Modal for Apartment -->
+            <div class="modal fade" id="fullScreenModalApartment1" tabindex="-1" aria-labelledby="fullScreenModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                    <div class="modal-content">
 
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullScreenModalLabel">Apartment</h5>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body modal_body_container">
+                            <div class="right">
+                                <span style="font-weight: bold">Room Type:</span> Apartment <br> <br>
+
+                                <span style="font-weight: bold">Description:</span>
+
+                                <span style="font-size: .6rem;">
+                                    Experience comfort and luxury in our Apartment, designed for a perfect retreat
+                                    for
+                                    two.
+                                    This
+                                    spacious and elegantly furnished apartment combines modern amenities with a
+                                    touch of
+                                    sophistication, ensuring a memorable stay for our guests. <br> <br>
+                                </span>
+
+
+                                <span style="font-weight: bold">Room Features: <br></span>
+
+
+                                <ul>
+                                    <li>Bed Type: Queen-size bed with premium linens and plush pillows.</li>
+                                    <li>View: Choose between a cityscape or courtyard view.</li>
+                                    <li>Living Area: Cozy seating with a coffee table for relaxation.</li>
+                                    <li>Kitchenette: Equipped with a mini-fridge, microwave, and basic kitchenware.
+                                    </li>
+                                    <li>Work Desk: A dedicated workspace for business travelers.</li>
+                                    <li>Entertainment: Flat-screen TV with cable channels.</li>
+                                    <li>Internet: Complimentary high-speed Wi-Fi.</li>
+                                    <li>Bathroom: En-suite bathroom with a shower, luxurious toiletries, and fluffy
+                                        towels.
+                                    </li>
+
+                                </ul>
+
+
+
+                                <span style="font-weight: bold">Additional Amenities: <br></span>
+
+                                <ul>
+                                    <li>Complimentary bottled water.</li>
+                                    <li>Coffee and tea making facilities.</li>
+                                    <li>Iron and ironing board.</li>
+                                    <li>Hairdryer.</li>
+                                    <li>Daily housekeeping service. <br></li>
+                                </ul>
+
+                                <span style="font-weight: bold">Services: <br></span>
+
+                                <ul>
+                                    <li>24/7 Room Service.</li>
+                                    <li>Concierge service to assist with any requests.</li>
+                                    <li>Laundry and dry-cleaning services available. <br></li>
+                                </ul>
+
+                                <span style="font-weight: bold">Optional Upgrades: <br></span>
+                                <ul>
+                                    <li>Breakfast-in-bed service.</li>
+                                    <li>Access to the hotel's fitness center and spa facilities. <br>
+                                    </li>
+                                </ul>
+
+
+                                <span style="font-weight: bold">Note: </span>
+
+                                Rates may vary based on the season and availability. Contact our reservations team
+                                for
+                                current pricing and special offers.
+                            </div>
+                            <div class="left">
+                                <!-- swiper -->
+
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                                    class="swiper mySwiper2">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/apartment.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/ap1.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/ap2.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/ap3.jpg" />
+                                        </div>
+
+                                    </div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+                                <div thumbsSlider="" class="swiper mySwiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/ap1.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/ap2.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/ap3.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/ap4.jpg" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+
+            <!-- Full-Screen Modal for Family Room -->
+            <div class="modal fade" id="fullScreenModalApartment2" tabindex="-1"
+                aria-labelledby="fullScreenModalFamilyRoomLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullScreenModalFamilyRoomLabel">Family Room</h5>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body modal_body_container">
+                            <div class="right">
+                                <span style="font-weight: bold">Room Type:</span> Family Room <br> <br>
+
+                                <span style="font-weight: bold">Description:</span>
+
+                                <span style="font-size: .6rem;">
+                                    Our Family Room provides a comfortable and spacious retreat for two persons, perfect
+                                    for a couple's getaway. Enjoy a cozy atmosphere with thoughtful amenities to make
+                                    your stay memorable. <br> <br>
+                                </span>
+
+
+                                <span style="font-weight: bold">Room Features: <br></span>
+
+
+                                <ul>
+                                    <li>Bed Type: King-size bed with premium linens and extra pillows for added comfort.
+                                    </li>
+                                    <li>Additional Sleeping Arrangement: Sofa bed for additional guests (upon request).
+                                    </li>
+                                    <li>View: Choose between city views or a tranquil courtyard setting.</li>
+                                    <li>Living Area: Relax in a separate sitting area with a sofa, coffee table, and
+                                        extra seating.
+                                    </li>
+                                    <li>Entertainment: Flat-screen TV with cable channels.</li>
+                                    <li>Work Desk: A dedicated workspace for those who need to stay connected.</li>
+                                    <li>Kitchenette: Equipped with a mini-fridge, microwave, and basic kitchenware.</li>
+                                    <li>Bathroom: En-suite bathroom with a combination tub/shower, luxurious toiletries,
+                                        and fluffy towels.
+                                    </li>
+
+                                </ul>
+
+
+
+                                <span style="font-weight: bold">Additional Amenities: <br></span>
+
+                                <ul>
+                                    <li>
+                                        Complimentary bottled water.</li>
+                                    <li>Coffee and tea making facilities.</li>
+                                    <li>Iron and ironing board.</li>
+                                    <li>Hairdryer.</li>
+                                </ul>
+
+                                <span style="font-weight: bold">Services: <br></span>
+
+                                <ul>
+                                    <li>24/7 Room Service.</li>
+                                    <li>Concierge service to assist with any requests.</li>
+                                    <li>Laundry and dry-cleaning services available. <br></li>
+                                </ul>
+
+                                <span style="font-weight: bold">Optional Upgrades: <br></span>
+                                <ul>
+                                    <li>Breakfast-in-bed service.</li>
+                                    <li>Access to the hotel's fitness center and spa facilities. <br>
+                                    </li>
+                                </ul>
+
+
+                                <span style="font-weight: bold">Note: </span>
+
+                                Rates may vary based on the season and availability. Contact our reservations team for
+                                current pricing and special offers. Additional charges may apply for extra guests using
+                                the sofa bed.
+                            </div>
+                            <div class="left">
+                                <!-- swiper -->
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                                    class="swiper mySwiper2">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_room1.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_room2.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_room3.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_room4.jpg" />
+                                        </div>
+
+                                    </div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+                                <div thumbsSlider="" class="swiper mySwiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_room1.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_room2.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_room3.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_room4.jpg" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+
+            <!-- Full-Screen Modal for Family Suite -->
+            <div class="modal fade" id="fullScreenModalApartment3" tabindex="-1"
+                aria-labelledby="fullScreenModalFamilySuiteLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullScreenModalFamilySuiteLabel">Family Suite</h5>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body modal_body_container">
+                            <div class="right">
+                                <span style="font-weight: bold">Room Type:</span> Family Suite <br> <br>
+
+                                <span style="font-weight: bold">Description:</span>
+
+                                <span style="font-size: .6rem;">
+                                    Indulge in the comfort of our Family Suite, a spacious retreat designed to
+                                    accommodate up to four persons. Perfect for family vacations or group getaways, this
+                                    suite offers a blend of style and functionality to ensure a memorable stay for
+                                    everyone. <br> <br>
+                                </span>
+
+
+                                <span style="font-weight: bold">Room Features: <br></span>
+
+
+                                <ul>
+                                    <li>Bedding: Two separate sleeping areas with a combination of a King-size bed and
+                                        two Twin beds.</li>
+                                    <li>
+                                        Living Area: A cozy lounge with a sofa, coffee table, and additional seating.
+                                    </li>
+                                    <li>View: Choose between panoramic city views or a serene courtyard setting.</li>
+                                    <li>Entertainment: Two flat-screen TVs with cable channels, ensuring everyone can
+                                        enjoy their preferred shows.
+                                    </li>
+                                    <li>Work Desk: A dedicated workspace for those who need to stay connected.</li>
+                                    <li>Kitchenette: Equipped with a mini-fridge, microwave, and basic kitchenware for
+                                        added convenience.</li>
+                                    <li>Internet: Complimentary high-speed Wi-Fi.</li>
+                                    <li>Bathroom: En-suite bathroom with a combination tub/shower, luxurious toiletries,
+                                        and plenty of towels.
+                                    </li>
+
+                                </ul>
+
+
+
+                                <span style="font-weight: bold">Additional Amenities: <br></span>
+
+                                <ul>
+                                    <li>Complimentary bottled water.</li>
+                                    <li>Coffee and tea making facilities.</li>
+                                    <li>Iron and ironing board.</li>
+                                    <li>Hairdryer.</li>
+                                    <li>Daily housekeeping service. <br></li>
+                                </ul>
+
+                                <span style="font-weight: bold">Services: <br></span>
+
+                                <ul>
+                                    <li>24/7 Room Service.</li>
+                                    <li>Concierge service to assist with any requests.</li>
+                                    <li>Laundry and dry-cleaning services available. <br></li>
+                                </ul>
+
+                                <span style="font-weight: bold">Optional Upgrades: <br></span>
+                                <ul>
+                                    <li>Breakfast-in-bed service.</li>
+                                    <li>Access to the hotel's fitness center and spa facilities. <br>
+                                    </li>
+                                </ul>
+
+
+                                <span style="font-weight: bold">Note: </span>
+
+                                Rates may vary based on the season and availability. Contact our reservations team for
+                                current pricing and special offers. Additional charges may apply for extra guests..
+                            </div>
+                            <div class="left">
+                                <!-- swiper -->
+
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                                    class="swiper mySwiper2">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/family_bedroom_bg.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_suite2.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_suite3.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_suite4.jpg" />
+                                        </div>
+
+                                    </div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+                                <div thumbsSlider="" class="swiper mySwiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_suite1.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_suite2.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_suite3.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/fam_suite4.jpg" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+
+            <!-- Full-Screen Modal for One-Bedroom Apartment -->
+            <div class="modal fade" id="fullScreenModalApartment4" tabindex="-1"
+                aria-labelledby="fullScreenModalOneBedroomLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullScreenModalOneBedroomLabel">One-Bedroom Apartment</h5>
+                            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body modal_body_container">
+                            <div class="right">
+                                <span style="font-weight: bold">Room Type:</span> One-Bedroom Apartment <br> <br>
+
+                                <span style="font-weight: bold">Description:</span>
+
+                                <span style="font-size: .6rem;">
+                                    Experience the perfect blend of comfort and style in our One-Bedroom Suite, designed
+                                    for couples seeking a spacious and private retreat. This suite offers a separate
+                                    bedroom and living area, providing an ideal setting for a romantic getaway or a
+                                    relaxing escape.<br> <br>
+                                </span>
+
+
+                                <span style="font-weight: bold">Room Features: <br></span>
+
+
+                                <ul>
+                                    <li>Bedroom: King-size bed with premium linens and a choice of pillows for a restful
+                                        night's sleep.</li>
+                                    <li>Living Area: Comfortable seating, including a sofa and armchairs, for relaxation
+                                        and entertainment.</li>
+                                    <li>View: Enjoy picturesque views of the city or surrounding landscapes.</li>
+                                    <li>Entertainment: Flat-screen TV in both the bedroom and living area with cable
+                                        channels.
+                                    </li>
+                                    <li>
+                                        Kitchen: Fully equipped kitchen with a stove, oven, refrigerator, microwave, and
+                                        basic cookware for a convenient and enjoyable stay.</li>
+                                    <li>Dining Area: A dining table for two, perfect for intimate meals.</li>
+                                    <li>Work Desk: A dedicated workspace for business travelers.</li>
+                                    <li>Bathroom: En-suite bathroom with a bathtub or shower, luxurious toiletries, and
+                                        plush towels.
+                                    </li>
+
+                                </ul>
+
+
+
+                                <span style="font-weight: bold">Additional Amenities: <br></span>
+
+                                <ul>
+                                    <li>Complimentary bottled water.</li>
+                                    <li>Coffee and tea making facilities.</li>
+                                    <li>Iron and ironing board.</li>
+                                    <li>Hairdryer.</li>
+                                    <li>Daily housekeeping service. <br></li>
+                                </ul>
+
+                                <span style="font-weight: bold">Services: <br></span>
+
+                                <ul>
+                                    <li>24/7 Room Service.</li>
+                                    <li>Concierge service to assist with any requests.</li>
+                                    <li>Laundry and dry-cleaning services available. <br></li>
+                                </ul>
+
+                                <span style="font-weight: bold">Optional Upgrades: <br></span>
+                                <ul>
+                                    <li>Breakfast-in-bed service.</li>
+                                    <li>Access to the hotel's fitness center and spa facilities. <br>
+                                    </li>
+                                </ul>
+
+
+                                <span style="font-weight: bold">Note: </span>
+
+                                Rates may vary based on the season and availability. Contact our reservations team for
+                                current pricing and special offers.
+                            </div>
+                            <div class="left">
+                                <!-- swiper -->
+
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                                    class="swiper mySwiper2">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/single_bedroom_bg.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/single2.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/single3.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/single4.jpg" />
+                                        </div>
+
+                                    </div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+                                <div thumbsSlider="" class="swiper mySwiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/single1.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/single2.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/single3.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../public/images/single4.jpg" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+
+                        <!-- Modal Footer
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary shadow-none"
+                                data-bs-dismiss="modal">Close</button>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+            <!--  -->
 
 
         </div>

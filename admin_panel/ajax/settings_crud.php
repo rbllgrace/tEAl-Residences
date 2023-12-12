@@ -336,15 +336,30 @@ if (isset($_POST['get_users'])) {
         <td>' . $row['email'] . '</td>
         <td>' . $row['is_verified'] . '</td>
         <td>' . $row['created_at'] . '</td>
+        <td>
+            <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+            <button class="btn btn-primary shadow-none btn_del">Delete</button>
+        </td>
     </tr>';
     }
-} else {
-    echo "<tr>
-    <td colspan ='5'>NO DATA
-    </td>
-    </tr>
-    ";
 }
+
+// if (isset($_POST['get_users_inp'])) {
+//     $res = selectAllIn('user_table');
+//     while ($row = mysqli_fetch_assoc($res)) {
+//         echo '<tr>
+//         <td>' . $row['user_id'] . '</td>
+//         <td>' . $row['name'] . '</td>
+//         <td>' . $row['email'] . '</td>
+//         <td>' . $row['is_verified'] . '</td>
+//         <td>' . $row['created_at'] . '</td>
+//         <td>
+//             <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+//             <button class="btn btn-primary shadow-none btn_del">Delete</button>
+//         </td>
+//     </tr>';
+//     }
+// }
 
 
 
@@ -435,4 +450,27 @@ if (isset($_POST['get_total'])) {
     }
     $sum = array_sum($values);
     echo $sum;
+}
+
+if (isset($_POST['get_users_inp'])) {
+    $res = selectAllIn('user_table');
+    $countThis = 0;
+    // $inputNames = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+        // $countThis++;
+        // $inputNames[] = 'why_choose_us_' . $countThis . '.value';
+        echo '<label style="font-size: .7rem; font-weight: bold;">Name</label>
+        <input type="text" class="shadow-none form-control name_class" value="' . $row['name'] . '">
+        <label style="font-size: .7rem; font-weight: bold;">Email</label>
+        <input type="text" class="shadow-none form-control email_class" value="' . $row['email'] . '">
+        <label style="font-size: .7rem; font-weight: bold;">Is Verified</label>
+        <input type="text" class="shadow-none form-control is_verified_class" value="' . $row['is_verified'] . '"><hr>';
+        break;
+    }
+
+    echo ' <div class="modal-footer">
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn_edit shadow-none">Save</button>
+    </div>
+</div>';
 }

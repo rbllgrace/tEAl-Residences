@@ -457,6 +457,7 @@ if (isset($_POST['get_users_inp'])) {
     $countThis = 0;
     // $inputNames = [];
     while ($row = mysqli_fetch_assoc($res)) {
+
         // $countThis++;
         // $inputNames[] = 'why_choose_us_' . $countThis . '.value';
         echo '<label style="font-size: .7rem; font-weight: bold;">Name</label>
@@ -465,6 +466,8 @@ if (isset($_POST['get_users_inp'])) {
         <input type="text" class="shadow-none form-control email_class" value="' . $row['email'] . '">
         <label style="font-size: .7rem; font-weight: bold;">Is Verified</label>
         <input type="text" class="shadow-none form-control is_verified_class" value="' . $row['is_verified'] . '"><hr>';
+
+        echo '<input type="hidden" name="user_id" value="' . $row['user_id'] . '">';
         break;
     }
 

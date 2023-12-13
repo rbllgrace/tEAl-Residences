@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2023 at 01:33 AM
+-- Generation Time: Dec 13, 2023 at 01:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -135,12 +135,35 @@ INSERT INTO `faq_table` (`id`, `question`, `answer`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ready_to_reserve_table`
+--
+
+CREATE TABLE `ready_to_reserve_table` (
+  `id` int(11) NOT NULL,
+  `room_picture` varchar(200) NOT NULL,
+  `room_title` varchar(200) NOT NULL,
+  `room_desc` varchar(600) NOT NULL,
+  `room_max` tinyint(4) NOT NULL,
+  `per_night` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ready_to_reserve_table`
+--
+
+INSERT INTO `ready_to_reserve_table` (`id`, `room_picture`, `room_title`, `room_desc`, `room_max`, `per_night`) VALUES
+(19, 'fam_room.jpg', 'Family Room', 'Our Family Room provides a comfortable and spacious retreat for two persons, perfect for a couple\'s getaway. Enjoy a cozy atmosphere with thoughtful amenities to make your stay memorable.', 2, 3500),
+(20, 'apartment.jpg', 'Apartment', 'Experience comfort and luxury in our Apartment, designed for a perfect retreat for two. This spacious and elegantly furnished apartment combines modern amenities with a touch of sophistication, ensuring a memorable stay for our guests.', 2, 4000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rooms`
 --
 
 CREATE TABLE `rooms` (
   `room_id` int(11) NOT NULL,
-  `room_picture` varchar(100) NOT NULL,
+  `room_picture` varchar(500) NOT NULL,
   `room_title` varchar(100) NOT NULL,
   `room_description` varchar(450) NOT NULL,
   `room_max_person` tinyint(20) NOT NULL,
@@ -155,7 +178,8 @@ INSERT INTO `rooms` (`room_id`, `room_picture`, `room_title`, `room_description`
 (1, 'apartment.jpg', 'Apartment', 'Experience comfort and luxury in our Apartment, designed for a perfect retreat for two. This spacious and elegantly furnished apartment combines modern amenities with a touch of sophistication, ensuring a memorable stay for our guests.', 2, 4000),
 (2, 'fam_room.jpg', 'Family Room', 'Our Family Room provides a comfortable and spacious retreat for two persons, perfect for a couple\'s getaway. Enjoy a cozy atmosphere with thoughtful amenities to make your stay memorable.', 2, 3500),
 (3, 'fam_suite.jpg', 'Family Suite', 'Indulge in the comfort of our Family Suite, a spacious retreat designed to accommodate up to four persons. Perfect for family vacations or group getaways, this suite offers a blend of style and functionality to ensure a memorable stay for everyone.', 4, 6500),
-(4, 'one_bed.jpg', 'One-Bedroom Suite', 'Experience the perfect blend of comfort and style in our One-Bedroom Suite, designed for couples seeking a spacious and private retreat. This suite offers a separate bedroom and living area, providing an ideal setting for a romantic getaway or a relaxing escape.', 2, 5000);
+(4, 'one_bed.jpg', 'One-Bedroom Suite', 'Experience the perfect blend of comfort and style in our One-Bedroom Suite, designed for couples seeking a spacious and private retreat. This suite offers a separate bedroom and living area, providing an ideal setting for a romantic getaway or a relaxing escape.', 2, 5000),
+(55, 'Purple aesthetic phone wallpaper.jpg', 'Deluxe', 'Residential', 4, 2000);
 
 -- --------------------------------------------------------
 
@@ -196,7 +220,8 @@ CREATE TABLE `user_table` (
 --
 
 INSERT INTO `user_table` (`user_id`, `name`, `email`, `password`, `is_verified`, `confirmation_code`, `created_at`, `token`, `expiration_time`) VALUES
-(18, 'qwe', 'palisocericson87@gmail.com', '$2y$10$muIuLyRWlsEcqoSwZ2hSLumSZmnSnHvTxfA67u4WPmmITdO2g5cR2', 1, 'xXxXt18lAjBvsbUjFoC5ME2VH74BDQT8', '2023-11-26', '', '2023-11-26 19:11:51');
+(18, 'qwe', 'palisocericson87@gmail.com', '$2y$10$muIuLyRWlsEcqoSwZ2hSLumSZmnSnHvTxfA67u4WPmmITdO2g5cR2', 1, 'xXxXt18lAjBvsbUjFoC5ME2VH74BDQT8', '2023-11-26', '', '2023-11-26 19:11:51'),
+(19, 'Leandro', 'hfffgh244@gmail.com', '$2y$10$Zn/GsfZfyl7Ffg4Jzh3IIet6q3CS6odFRqxQdkqxvl3qu1OYZ9l1S', 0, 'kIsZPN2ypyTsbdQuwNCYjEuRxDWaoas9', '2023-12-12', '', '2023-12-12 11:18:22');
 
 -- --------------------------------------------------------
 
@@ -258,6 +283,12 @@ ALTER TABLE `faq_table`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ready_to_reserve_table`
+--
+ALTER TABLE `ready_to_reserve_table`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -316,10 +347,16 @@ ALTER TABLE `faq_table`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `ready_to_reserve_table`
+--
+ALTER TABLE `ready_to_reserve_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `user_queries_table`
@@ -331,7 +368,7 @@ ALTER TABLE `user_queries_table`
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `why_choose_us_table`

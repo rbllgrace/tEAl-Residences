@@ -5,45 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEAL Register</title>
-
-    <!-- bootstrap 5 cdn -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!--  -->
-
-    <!-- vanilla css -->
-    <link rel="stylesheet" href="../../public/css/default.css">
-    <link rel="stylesheet" href="../../public/css/header.css">
-
-    <link rel="stylesheet" href="../register/register.css">
-    <!--  -->
-
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
-    <!--  -->
-
-
+    <?php require('./partials/links.php') ?>
 
 </head>
 
 <body>
-    <?php require('../../connection/connect.php') ?>
-    <?php require('./register_nav.php') ?>
-
     <?php
+
+    require('../../config/db_connect.php');
+    require('./partials/register_nav.php');
+
     // Function to send a confirmation email
     function sendConfirmationEmail($userEmail, $confirmationCode)
     {
-
-
         require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\PHPMailer.php';
         require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\SMTP.php';
         require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\Exception.php';
-
-
 
         $mail = new PHPMailer\PHPMailer\PHPMailer();
 
@@ -87,10 +64,7 @@
 
         return $confirmationCode;
     }
-
     ?>
-
-
 
     <?php
     // Define variables and set to empty values
@@ -134,7 +108,6 @@
             // Add additional password strength checks if needed
         }
 
-
         $uppercase = preg_match('@[A-Z]@', $password);
         $lowercase = preg_match('@[a-z]@', $password);
         $number = preg_match('@[0-9]@', $password);
@@ -152,7 +125,6 @@
         if (!$specialChars) {
             $pass_err = "Password should contain at least one special character.";
         }
-
 
         // Password validation for minimum length
         if (strlen($password) < 6) {
@@ -191,19 +163,6 @@
                     window.location.href = 'http://localhost/teal-residences/user/auth/login/login.php'; // Redirect to your login page
                 });
                 </script>";
-
-
-                // echo "User registered successfully!";
-                // echo "<script>
-                //     Swal.fire({
-                //         title: 'Registration Successful',
-                //         text: 'You are now registered!',
-                //         icon: 'success',
-                //         confirmButtonText: 'OK'
-                //     }).then(function() {
-                //         window.location.href = 'http://localhost/teal-residences/user/pages/homepage.php'; // Redirect to your homepage
-                //     });
-                //   </script>";
             } else {
                 echo "Error: " . $insertQuery . "<br>" . $conn->error;
             }
@@ -211,7 +170,6 @@
     }
 
     $conn->close();
-
 
     // Function to sanitize input data
     function test_input($data)
@@ -223,40 +181,47 @@
     }
     ?>
 
+    <div class="main">
+        <div class="container form_container">
+            <h1 class="text-center login_text">REGISTER</h1>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <div>
+                    <label for="exampleFormControlInput1" class="form-label mb-0">Name</label>
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name"
+                        value="<?php echo $name ?>">
+                    <span class="error"><?php echo $name_err; ?></span>
+                </div>
 
-    <div class="container form_container">
-        <h1 class="text-center login_text">REGISTER</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <div class="mb-1">
-                <label for="exampleFormControlInput1" class="form-label mb-0">Name</label>
-                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name" value="<?php echo $name ?>">
-                <span class="error"><?php echo $name_err; ?></span>
-            </div>
+                <div>
+                    <label for="exampleFormControlInput2" class="form-label mb-0">Email Address</label>
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput2" name="email"
+                        value="<?php echo $email ?>">
+                    <span class="error"><?php echo $email_err; ?></span>
+                </div>
 
-            <div class="mb-1">
-                <label for="exampleFormControlInput2" class="form-label mb-0">Email Address</label>
-                <input type="text" class="form-control shadow-none" id="exampleFormControlInput2" name="email" value="<?php echo $email ?>">
-                <span class="error"><?php echo $email_err; ?></span>
-            </div>
+                <div>
+                    <label for="exampleFormControlInput3" class="form-label mb-0">Password</label>
+                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput3"
+                        name="password" value="<?php echo $password ?>">
+                    <span class="error"><?php echo $pass_err; ?></span>
+                </div>
 
-            <div class="mb-1">
-                <label for="exampleFormControlInput3" class="form-label mb-0">Password</label>
-                <input type="password" class="form-control shadow-none" id="exampleFormControlInput3" name="password" value="<?php echo $password ?>">
-                <span class="error"><?php echo $pass_err; ?></span>
-            </div>
+                <div>
+                    <label for="exampleFormControlInput4" class="form-label mb-0">Confirm Password</label>
+                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput4"
+                        name="confirm_password" value="<?php echo $confirm_password ?>">
+                    <span class="error"><?php echo $confirm_password_err; ?></span>
+                </div>
 
-            <div class="mb-1">
-                <label for="exampleFormControlInput4" class="form-label mb-0">Confirm Password</label>
-                <input type="password" class="form-control shadow-none" id="exampleFormControlInput4" name="confirm_password" value="<?php echo $confirm_password ?>">
-                <span class="error"><?php echo $confirm_password_err; ?></span>
-            </div>
+                <button type="submit" class="btn btn-primary btn_login">Register</button>
+            </form>
 
-            <button type="submit" class="btn btn-primary btn_login mt-2">Register</button>
-        </form>
-
-        <p class="dont_have">Already have an account?</p>
-        <a href="http://localhost/teal-residences/user/auth/login/login.php" class="btn btn-primary btn_register">Login</a>
+            <p class="dont_have">Already have an account?</p>
+            <a href="http://localhost/teal-residences/user/auth/login/login.php"
+                class="btn btn-primary btn_register">Login</a>
+        </div>
     </div>
+
 </body>
 
 </html>

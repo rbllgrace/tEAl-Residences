@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEAL Register</title>
     <?php require('./partials/links.php') ?>
-
 </head>
 
 <body>
@@ -187,29 +186,25 @@
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                 <div>
                     <label for="exampleFormControlInput1" class="form-label mb-0">Name</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name"
-                        value="<?php echo $name ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name" value="<?php echo $name ?>">
                     <span class="error"><?php echo $name_err; ?></span>
                 </div>
 
                 <div>
                     <label for="exampleFormControlInput2" class="form-label mb-0">Email Address</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput2" name="email"
-                        value="<?php echo $email ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput2" name="email" value="<?php echo $email ?>">
                     <span class="error"><?php echo $email_err; ?></span>
                 </div>
 
                 <div>
                     <label for="exampleFormControlInput3" class="form-label mb-0">Password</label>
-                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput3"
-                        name="password" value="<?php echo $password ?>">
+                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput3" name="password" value="<?php echo $password ?>">
                     <span class="error"><?php echo $pass_err; ?></span>
                 </div>
 
                 <div>
                     <label for="exampleFormControlInput4" class="form-label mb-0">Confirm Password</label>
-                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput4"
-                        name="confirm_password" value="<?php echo $confirm_password ?>">
+                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput4" name="confirm_password" value="<?php echo $confirm_password ?>">
                     <span class="error"><?php echo $confirm_password_err; ?></span>
                 </div>
 
@@ -217,8 +212,7 @@
             </form>
 
             <p class="dont_have">Already have an account?</p>
-            <a href="http://localhost/teal-residences/user/auth/login/login.php"
-                class="btn btn-primary btn_register">Login</a>
+            <a href="http://localhost/teal-residences/user/auth/login/login.php" class="btn btn-primary btn_register">Login</a>
         </div>
     </div>
 

@@ -6,7 +6,7 @@
 require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\PHPMailer.php';
 require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\SMTP.php';
 require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\Exception.php';
-require('../../connection/connect.php');
+require('../../config/db_connect.php');
 
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {

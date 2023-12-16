@@ -5,33 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password</title>
-
-    <!-- bootstrap 5 cdn -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!--  -->
-
-    <!-- vanilla css -->
-    <link rel="stylesheet" href="../../public/css/default.css">
-    <link rel="stylesheet" href="../../public/css/header.css">
-
-    <link rel="stylesheet" href="../login/login.css">
-    <!--  -->
-
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
-    <!--  -->
+    <?php require('./partials/links.php') ?>
 </head>
 
 <body>
-    <?php require('../login/login_nav.php') ?>
-
     <?php
-    require('../../connection/connect.php');
-
+    require('../../config/db_connect.php');
+    require('./partials/forgot_password_ui_nav.php');
     $password = $passwordErr = '';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -41,7 +21,7 @@
 
 
         // Check if the token is valid
-        $stmt = $conn->prepare("SELECT email FROM password_reset WHERE token = ? AND expiration_time > NOW()");
+        $stmt = $conn->prepare("SELECT email FROM password_reset_table WHERE token = ? AND expiration_time > NOW()");
         $stmt->bind_param("s", $token);
         $stmt->execute();
         $stmt->bind_result($email);
@@ -57,7 +37,7 @@
             $stmt->close();
 
             // Remove the used token from the password_reset table
-            $stmt = $conn->prepare("DELETE FROM password_reset WHERE token = ?");
+            $stmt = $conn->prepare("DELETE FROM password_reset_table WHERE token = ?");
             $stmt->bind_param("s", $token);
             $stmt->execute();
             $stmt->close();
@@ -81,25 +61,20 @@
     }
     ?>
     <!-- Your HTML form for the new password input -->
-    <div class="container form_container">
+    <div class="main">
+        <div class="container form_container">
+            <h1 class="text-center login_text">Reset Password</h1>
+            <form action="http://localhost/teal-residences/user/auth/forgot_password/reset_password_ui.php?token=<?php echo $_GET['token']; ?>" method="POST">
+                <div class="mb-1">
 
-        <h1 class="text-center login_text">Reset Password</h1>
-        <form action="http://localhost/teal-residences/user/auth/forgot_password/reset_password_ui.php?token=<?php echo $_GET['token']; ?>" method="POST">
-            <div class="mb-1">
-
-                <label for="exampleFormControlInput1" class="form-label mb-0">New Password</label>
-                <input type="password" class="form-control shadow-none" id="exampleFormControlInput1" name="new_password">
-            </div>
-
-
-
-            <button type="submit" class="btn btn-primary btn_login mt-2">Send</button>
-        </form>
-
-
-
-
+                    <label for="exampleFormControlInput1" class="form-label mb-0">New Password</label>
+                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput1" name="new_password">
+                </div>
+                <button type="submit" class="btn btn-primary btn_login mt-2">Send</button>
+            </form>
+        </div>
     </div>
+
 </body>
 
 </html>

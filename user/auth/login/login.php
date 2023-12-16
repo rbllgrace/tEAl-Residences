@@ -4,9 +4,6 @@ if (isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true) {
     header("Location: http://localhost/teal-residences/admin_panel/dashboard.php");
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,40 +11,15 @@ if (isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEAL Login</title>
-
-    <!-- bootstrap 5 cdn -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!--  -->
-
-    <!-- vanilla css -->
-    <link rel="stylesheet" href="../../public/css/default.css">
-    <link rel="stylesheet" href="../../public/css/header.css">
-
-    <link rel="stylesheet" href="../login/login.css">
-    <!--  -->
-
-    <style>
-        .forgot_password {
-            display: inline-block;
-
-            font-size: .7rem;
-            text-align: right;
-            text-decoration: none;
-        }
-
-        .forgot_password:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <?php require('./partials/links.php') ?>
 
 </head>
 
 <body>
-    <?php require('../../connection/connect.php') ?>
-    <?php require('./login_nav.php') ?>
+    <?php
 
-    <?php // login.php
+    require('../../config/db_connect.php');
+    require('./partials/login_nav.php');
 
     function logFailedAttempt($email)
     {
@@ -142,39 +114,43 @@ if (isset($_SESSION['user_login']) && isset($_SESSION['user_id']) == true) {
     }
     ?>
 
-    <div class="container form_container">
+    <div class="main">
+        <div class="container form_container">
+            <?php
+            // Check if there is a logout success message
+            $logoutMessage = isset($_GET['logout']) && $_GET['logout'] == 'success' ? 'You have been successfully logged out.' : '';
+            ?>
+            <span class="error"
+                style="color: green; font-size: .9rem; position: relative; left: 12px;"><?php echo $logoutMessage; ?></span>
+            <h1 class="text-center login_text">LOGIN</h1>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <div>
+                    <label for="exampleFormControlInput1" class="form-label mb-0">Email Address</label>
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email"
+                        value="<?php echo $email ?>">
+                    <span class="error"><?php echo $emailErr; ?></span>
+                </div>
 
-        <?php
+                <div>
+                    <label for="exampleFormControlInput2" class="form-label mb-0">Password</label>
+                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput2"
+                        name="password" value="<?php echo $password ?>">
+                    <span class="error"><?php echo $passwordErr; ?></span>
 
-        // Check if there is a logout success message
-        $logoutMessage = isset($_GET['logout']) && $_GET['logout'] == 'success' ? 'You have been successfully logged out.' : '';
+                </div>
 
-        ?>
-        <span class="error" style="color: green; font-size: .9rem; position: relative; left: 52px;"><?php echo $logoutMessage; ?></span>
-        <h1 class="text-center login_text">LOGIN</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <div class="mb-1">
+                <button type="submit" class="btn btn-primary btn_login mt-2">Login</button>
+            </form>
 
-                <label for="exampleFormControlInput1" class="form-label mb-0">Email Address</label>
-                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email" value="<?php echo $email ?>">
-                <span class="error"><?php echo $emailErr; ?></span>
-            </div>
+            <a href="http://localhost/teal-residences/user/auth/forgot_password/forgot_password_ui.php"
+                class="forgot_password">Forgot Password?</a>
 
-            <div class="mb-1">
-                <label for="exampleFormControlInput2" class="form-label mb-0">Password</label>
-                <input type="password" class="form-control shadow-none" id="exampleFormControlInput2" name="password" value="<?php echo $password ?>">
-                <span class="error"><?php echo $passwordErr; ?></span>
-
-            </div>
-
-            <button type="submit" class="btn btn-primary btn_login mt-2">Login</button>
-        </form>
-
-        <a href="http://localhost/teal-residences/user/auth/forgot_password/forgot_password_ui.php" class="forgot_password">Forgot Password?</a>
-
-        <p class="dont_have">Don't have an account?</p>
-        <a href=http://localhost/teal-residences/user/auth/register/register.php class="btn btn-primary btn_register">Register</a>
+            <p class="dont_have">Don't have an account?</p>
+            <a href=http://localhost/teal-residences/user/auth/register/register.php
+                class="btn btn-primary btn_register">Register</a>
+        </div>
     </div>
+
 </body>
 
 

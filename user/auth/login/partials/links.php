@@ -6,7 +6,7 @@
  <!-- vanilla css -->
  <link rel="stylesheet" href="../../public/css/default.css">
  <link rel="stylesheet" href="../../public/css/header.css">
- <link rel="stylesheet" href="../register/css/register.css">
+ <link rel="stylesheet" href="../login/css/login.css">
  <!--  -->
 
  <!-- sweetalert2 -->

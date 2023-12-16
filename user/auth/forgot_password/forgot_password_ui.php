@@ -5,46 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
-
-    <!-- bootstrap 5 cdn -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!--  -->
-
-    <!-- vanilla css -->
-    <link rel="stylesheet" href="../../public/css/default.css">
-    <link rel="stylesheet" href="../../public/css/header.css">
-
-    <link rel="stylesheet" href="../login/login.css">
-    <!--  -->
-
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
-    <!--  -->
-
-
-
-    <style>
-        .forgot_password {
-            display: inline-block;
-
-            font-size: .7rem;
-            text-align: right;
-            text-decoration: none;
-        }
-
-        .forgot_password:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <?php require('./partials/links.php') ?>
 </head>
 
 <body>
-    <?php require('../../connection/connect.php') ?>
-    <?php require('../login/login_nav.php') ?>
+
+    <?php require('../../config/db_connect.php'); ?>
+    <?php require('./partials/forgot_password_ui_nav.php') ?>
 
     <?php
 
@@ -62,12 +29,9 @@
 
         $reset_link = "http://localhost/teal-residences/user/auth/forgot_password/reset_password_ui.php?token=$token";
 
-
         require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\PHPMailer.php';
         require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\SMTP.php';
         require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\Exception.php';
-
-
 
         $mail = new PHPMailer\PHPMailer\PHPMailer();
 
@@ -97,8 +61,6 @@
             // echo 'Error: ' . $mail->ErrorInfo;
         }
     }
-
-
 
     // Function to sanitize input data
     function test_input($data)
@@ -132,7 +94,7 @@
                 $token = generateUniqueToken();
 
                 // Store the token in the database along with the user's email
-                $stmt = $conn->prepare("INSERT INTO password_reset (email, token, expiration_time) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 1 HOUR))");
+                $stmt = $conn->prepare("INSERT INTO password_reset_table (email, token, expiration_time) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 1 HOUR))");
                 $stmt->bind_param("ss", $email, $token);
                 $stmt->execute();
                 $stmt->close();
@@ -157,25 +119,19 @@
 
     ?>
 
-    <div class="container form_container">
+    <div class="main">
+        <div class="container form_container">
+            <h1 class="text-center login_text">Forgot Password</h1>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <div class="mb-1">
 
-        <h1 class="text-center login_text">Forgot Password</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <div class="mb-1">
-
-                <label for="exampleFormControlInput1" class="form-label mb-0">Email Address</label>
-                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email" value="<?php echo $email ?>">
-                <span class="error"><?php echo $emailErr; ?></span>
-            </div>
-
-
-
-            <button type="submit" class="btn btn-primary btn_login mt-2">Send</button>
-        </form>
-
-
-
-
+                    <label for="exampleFormControlInput1" class="form-label mb-0">Email Address</label>
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email" value="<?php echo $email ?>">
+                    <span class="error"><?php echo $emailErr; ?></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn_login mt-2">Forgot</button>
+            </form>
+        </div>
     </div>
 </body>
 

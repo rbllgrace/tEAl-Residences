@@ -431,4 +431,10 @@ if (isset($_POST['remove_reservation_val'])) {
     echo $res;
 }
 
+if (isset($_POST['clear_text_general'])) {
+    $q = "UPDATE `credentials_table` SET `site_title` = NULL, `who_we_are` = NULL";
+    $res = delete_single_table($q);
+    echo $res;
+}
+
 // -------------------------- delete methods end --------------------------

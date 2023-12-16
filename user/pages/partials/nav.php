@@ -1,4 +1,5 @@
-<?php require('/xampp/htdocs/tEAl-Residences/user/connection/connect.php');
+<?php
+require('/xampp/htdocs/tEAl-Residences/user/config/db_connect.php');
 $sql = "SELECT * FROM credentials_table";
 $result = $conn->query($sql);
 ?>

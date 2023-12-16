@@ -167,3 +167,28 @@ function selectAll($query, $values = [], $types = '')
 
     return $result;
 }
+
+function delete_single_table($query, $values = null, $types = null)
+{
+    // Assuming you have a database connection
+    $connection = mysqli_connect("localhost", "root", "", "hotel_db");
+
+    if (!$connection) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // If you are using prepared statements
+    if ($values !== null && $types !== null) {
+        $stmt = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($stmt, $types, ...$values);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        // For non-prepared statements
+        $result = mysqli_query($connection, $query);
+    }
+
+    mysqli_close($connection);
+
+    return $result ? "Query executed successfully" : "Error: " . mysqli_error($connection);
+}

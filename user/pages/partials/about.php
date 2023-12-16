@@ -1,4 +1,4 @@
-<?php require('/xampp/htdocs/tEAl-Residences/user/connection/connect.php');
+<?php require('/xampp/htdocs/tEAl-Residences/user/config/db_connect.php');
 $why_choose_us_q = "SELECT * FROM why_choose_us_table";
 $credential_q = "SELECT * FROM credentials_table";
 

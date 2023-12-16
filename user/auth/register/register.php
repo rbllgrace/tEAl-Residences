@@ -10,7 +10,6 @@
 
 <body>
     <?php
-
     require('../../config/db_connect.php');
     require('./partials/register_nav.php');
 

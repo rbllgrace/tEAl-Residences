@@ -1,10 +1,10 @@
 <?php require('/xampp/htdocs/tEAl-Residences/user/connection/connect.php');
-$sql = "SELECT * FROM why_choose_us_table";
-$sql2 = "SELECT * FROM credentials_table";
+$why_choose_us_q = "SELECT * FROM why_choose_us_table";
+$credential_q = "SELECT * FROM credentials_table";
 
 
-$result = $conn->query($sql);
-$result2 = $conn->query($sql2);
+$result = $conn->query($why_choose_us_q);
+$credential_result = $conn->query($credential_q);
 ?>
 
 <!--  About -->
@@ -16,18 +16,14 @@ $result2 = $conn->query($sql2);
 
         <p style="font-size: .8rem; text-align: center;">
             <?php
-            if ($result2->num_rows > 0) {
-                if ($row = $result2->fetch_assoc()) {
+            if ($credential_result->num_rows > 0) {
+                if ($row = $credential_result->fetch_assoc()) {
                     echo $row["who_we_are"];
                 }
             }
             ?></p>
     </div>
-
     <div class="why_choose_us" style="margin-inline: 5%">
-
-
-
         <h5 class="mb-2">Why Choose Us</h5>
         <div class="row">
 
@@ -47,9 +43,6 @@ $result2 = $conn->query($sql2);
                 }
             }
             ?>
-
-
-
         </div>
     </div>
     <!--  -->

@@ -5,32 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resend Verification</title>
-
-    <!-- bootstrap 5 cdn -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!--  -->
-
-    <!-- vanilla css -->
-    <link rel="stylesheet" href="../../public/css/default.css">
-    <link rel="stylesheet" href="../../public/css/header.css">
-
-    <link rel="stylesheet" href="./login.css">
-    <!--  -->
-
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
-    <!--  -->
+    <?php require('./partials/links.php') ?>
 </head>
 
 <body>
-    <?php require('../../connection/connect.php') ?>
-    <?php require('./login_nav.php') ?>
-
     <?php
+    require('../../config/db_connect.php');
+    require('./partials/login_nav.php');
     $email = $emailErr = '';
 
     // Function to sanitize input data
@@ -153,24 +134,25 @@
     }
 
     ?>
+    <div class="main">
+        <div class="container form_container">
+            <h1 class="text-center login_text">LOGIN</h1>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <div class="mb-1">
+                    <label for="exampleFormControlInput1" class="form-label mb-0">Email Address</label>
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email"
+                        value="<?php echo $email ?>">
+                    <span class="error"><?php echo $emailErr; ?></span>
+                </div>
+                <button type="submit" class="btn btn-primary btn_login mt-2">Verify Email</button>
+            </form>
 
-    <div class="container form_container">
-        <h1 class="text-center login_text">LOGIN</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <div class="mb-1">
-
-                <label for="exampleFormControlInput1" class="form-label mb-0">Email Address</label>
-                <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="email" value="<?php echo $email ?>">
-                <span class="error"><?php echo $emailErr; ?></span>
-
-            </div>
-
-            <button type="submit" class="btn btn-primary btn_login mt-2">Verify Email</button>
-        </form>
-
-        <p class="dont_have">Already Verified?</p>
-        <a href=http://localhost/teal-residences/user/auth/login/login.php class="btn btn-primary btn_register">Login</a>
+            <p class="dont_have mt-2">Already Verified?</p>
+            <a href=http://localhost/teal-residences/user/auth/login/login.php
+                class="btn btn-primary btn_register">Login</a>
+        </div>
     </div>
+
 </body>
 
 </html>

@@ -1,27 +1,9 @@
-/* .navbar {
-  position: sticky;
-  top: 0;
-
-  z-index: 10;
-} */
-
-/* .navbar.sticky {
-  position: sticky;
-  top: 0;
-  left: 0;
-} */
-
 nav .ul_width {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-/* nav .navbar-brand {
-  width: auto;
-  text-align: center;
-} */
 
 nav .btn_reservation {
   width: 150px;

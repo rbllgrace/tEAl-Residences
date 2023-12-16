@@ -1,36 +1,53 @@
-.form_container {
-  border: 1px solid #008080;
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.main {
+  height: 100vh;
+
+  display: grid;
+  place-content: center;
+}
+
+.main .form_container {
   width: 300px;
-
-  /* padding-inline: 20%; */
-  /* padding-top: 100px; */
-
-  margin-top: 100px;
   padding: 25px;
+  border-radius: 5px;
+
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(59, 38, 38, 0.3) 0px 3px 7px -3px;
+
   border-radius: 5px;
 }
 
-.form-label {
+.main .form_container .form-label {
   color: #008080;
-  font-weight: 0;
-  font-size: 0.7rem;
+  font-weight: 500;
+  font-size: 0.6rem;
+  position: relative;
+  top: 4px;
 }
 
-.form-control {
+.main .form_container .form-control {
   font-size: 0.8rem;
 }
 
-.btn_login {
+.main .form_container .btn_login {
   width: 100%;
   background: #008080;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  padding: 5px;
+  border: 1px solid #008080;
+  margin-top: 8px;
 }
 
-.btn_login:hover {
+.main .form_container .btn_login:hover {
   background: #0e9c9c;
 }
 
-.btn_register {
+.main .form_container .btn_register {
   background: transparent;
   width: 100%;
   font-size: 0.9rem;
@@ -38,42 +55,42 @@
   border: 1px solid #008080;
 }
 
-.btn_register:hover {
+.main .form_container .btn_register:hover {
   background: #008080;
 }
 
-.btn_register:active {
+.main .form_container .btn_register:active {
   background: #008080 !important;
 }
 
-.btn_register:focus {
+.main .form_container .btn_register:focus {
   background: #008080;
 }
 
-.btn_login:active {
+.main .form_container .btn_login:active {
   background: #008080 !important;
 }
 
-.btn_login:focus {
+.main .form_container .btn_login:focus {
   background: #008080;
 }
 
-.dont_have {
+.main .form_container .dont_have {
   font-size: 0.7rem;
   margin: 0;
   margin-top: 20px;
 }
 
-.login_text {
+.main .form_container .login_text {
   font-weight: 600;
   color: #008080;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
-.error {
+.main .form_container .error {
   color: red;
   font-size: 0.6rem;
   position: relative;
-  top: -3px;
-  left: 4px;
+  top: -7px;
+  left: 1px;
 }

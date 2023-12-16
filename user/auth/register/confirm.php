@@ -1,13 +1,9 @@
 <?php
-
-// confirm.php
-
 // Include necessary files and configurations
 require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\PHPMailer.php';
 require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\SMTP.php';
 require 'C:\xampp\htdocs\tEAl-Residences\user\libraries\PHPMailer\src\Exception.php';
 require('../../config/db_connect.php');
-
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     // Retrieve the confirmation code from the URL parameter

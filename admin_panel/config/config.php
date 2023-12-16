@@ -145,6 +145,25 @@ function selectAllIn($table)
 }
 // -------------------------------------------------------
 
-function upload_image($img, $folder)
+function selectAll($query, $values = [], $types = '')
 {
+    $conn = new mysqli("localhost", "root", "", "hotel_db");
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $stmt = $conn->prepare($query);
+
+    if (!empty($values) && $stmt) {
+        $stmt->bind_param($types, ...$values);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $stmt->close();
+    $conn->close();
+
+    return $result;
 }

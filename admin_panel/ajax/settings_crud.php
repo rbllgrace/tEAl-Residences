@@ -2,6 +2,7 @@
 require('/xampp/htdocs/tEAl-Residences/admin_panel/config/config.php');
 admin_login();
 
+// get methods
 if (isset($_POST['get_general'])) {
     $q = "SELECT * FROM `credentials_table` WHERE `id` =?";
     $values = [1];
@@ -11,38 +12,6 @@ if (isset($_POST['get_general'])) {
     echo $json_data;
 }
 
-if (isset($_POST['update_general'])) {
-    $frm_data = filteration($_POST);
-    $q = "UPDATE `credentials_table` SET `site_title` =?, `who_we_are` =? WHERE `id` =?";
-    $values = [$frm_data['site_title'], $frm_data['site_about'], 1];
-    $res = update($q, $values, 'ssi');
-    echo $res;
-}
-
-function selectAll($query, $values = [], $types = '')
-{
-    $conn = new mysqli("localhost", "root", "", "hotel_db");
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $stmt = $conn->prepare($query);
-
-    if (!empty($values) && $stmt) {
-        $stmt->bind_param($types, ...$values);
-    }
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $stmt->close();
-    $conn->close();
-
-    return $result;
-}
-
-
 if (isset($_POST['get_contacts'])) {
     $q = "SELECT * FROM `contact_us_table`";
     $values = [];  // No specific ID value to bind
@@ -50,6 +19,212 @@ if (isset($_POST['get_contacts'])) {
     $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
     $json_data = json_encode($data);
     echo $json_data;
+}
+
+if (isset($_POST['get_facilities'])) {
+    $q = "SELECT * FROM `facilities_table`";
+    $values = [];  // No specific ID value to bind
+    $res = selectAll($q, $values, '');
+    $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    $json_data = json_encode($data);
+    echo $json_data;
+}
+
+if (isset($_POST['get_why_choose_us'])) {
+    $res = selectAllIn('why_choose_us_table');
+    $countThis = 0;
+    while ($row = mysqli_fetch_assoc($res)) {
+        $countThis++;
+
+        echo '<h6 class="card-subtitle text-body-secondary mt-3">Why Choose Us #' . $countThis . ' </h6>
+        
+        <button type="button" onclick="remove_why_choose_us(' . $row['id'] . ')" class="btn btn-primary btn_delete shadow-none"><i class="bi bi-trash"></i></button>
+        <p class="card-text"><span class="fw-bold">Title: </span>' . $row['title'] . '</p>
+        <p class="card-text" id="phone' . $countThis . '"><span class="fw-bold">Description: </span>' . $row['description'] . '</p>';
+    }
+}
+
+if (isset($_POST['get_why_choose_us_inp'])) {
+    $res = selectAllIn('why_choose_us_table');
+    $countThis = 0;
+    $inputNames = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+        $countThis++;
+        $inputNames[] = 'why_choose_us_' . $countThis . '.value';
+        echo '<div class="mb-1"> 
+        <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Why Choose Us #' . $countThis . '</label>
+        <br><span style="font-size: .7rem;">Title</span>
+        <input type="text" class="form-control shadow-none contact_us" id="exampleFormControlInput3" name="why_choose_us_' . $countThis . '" required value="' . $row['title'] . '">
+
+        <span style="font-size: .7rem;">Description</span>
+        <input type="text" class="form-control shadow-none contact_us" id="exampleFormControlInput3"  required value="' . $row['description'] . '">
+
+        <!-- icon -->
+        <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
+        <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
+            icon.</a>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">' . $row['icon'] . '</span>
+            <input type="text" class="form-control shadow-none contact_us why_choose_us_icon' . $countThis . '_inp" id="exampleFormControlInput3" name="why_choose_us_icon_' . $countThis . '" aria-describedby="basic-addon1">
+            <!-- icon -->
+        </div>
+    </div> <hr>';
+    }
+
+    echo ' <div class="modal-footer">
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn_edit shadow-none" onclick="update_why_choose_us(' . implode(', ', $inputNames) . ')">Save</button>
+    </div>
+</div>';
+}
+
+if (isset($_POST['get_rooms'])) {
+    $res = selectAllIn('rooms');
+    $countThis = 0;
+    while ($row = mysqli_fetch_assoc($res)) {
+        echo '<tr>
+        <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
+        <td>' . $row['room_title'] . '</td>
+        <td class="room_description_text">' . $row['room_description'] . '</td>
+        <td>' . $row['room_max_person'] . '</td>
+        <td>' . $row['per_night'] . '</td>
+        <td style="display: none;">' . $row['room_id'] . '</td>
+
+        <td class="actions">
+            <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
+            <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
+        </td>
+    </tr>';
+    }
+}
+
+if (isset($_POST['get_users'])) {
+    $res = selectAllIn('user_table');
+    while ($row = mysqli_fetch_assoc($res)) {
+        echo '<tr>
+        <td>' . $row['user_id'] . '</td>
+        <td>' . $row['name'] . '</td>
+        <td>' . $row['email'] . '</td>
+        <td>' . $row['is_verified'] . '</td>
+        <td>' . $row['created_at'] . '</td>
+        <td>
+            <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+            <button class="btn btn-primary shadow-none btn_del">Delete</button>
+        </td>
+    </tr>';
+    }
+}
+
+if (isset($_POST['get_room_by_id'])) {
+    $frm_data = filteration($_POST);
+
+    // Assuming you have a valid database connection
+    $mysqli = new mysqli("localhost", "root", "", "hotel_db");
+
+    // Check the connection
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+
+    // Perform the SQL query to fetch data based on the ID
+    $query = "SELECT * FROM `rooms` WHERE `room_id` = ?";
+    $statement = $mysqli->prepare($query);
+    $statement->bind_param("i", $frm_data['get_room_by_id']); // Assuming 'id' is an integer; adjust the type accordingly
+    $statement->execute();
+
+    // Get the result
+    $result = $statement->get_result();
+
+    // Check if any rows were returned
+    if ($result->num_rows > 0) {
+        // Fetch data as an associative array
+        $row = $result->fetch_assoc();
+
+        $values = [$row['room_picture'], $row['room_title'], $row['room_description'], $row['room_max_person'], $row['per_night']];
+
+        $q = "INSERT INTO `ready_to_reserve_table`(`room_picture`, `room_title`, `room_desc`, `room_max`, `per_night`) VALUES (?,?,?,?,?) ";
+
+        $res = insert($q, $values, 'sssss');
+        echo $res;
+    } else {
+        echo "No record found with ID: " . $frm_data['get_room_by_id'];
+    }
+
+    // Close the statement and connection
+    $statement->close();
+    $mysqli->close();
+}
+
+if (isset($_POST['get_rooms_to_serve'])) {
+    $res = selectAllIn('ready_to_reserve_table');
+    while ($row = mysqli_fetch_assoc($res)) {
+        echo '<tr>
+        <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
+        <td>' . $row['room_title'] . '</td>
+        <td class="room_description_text">' . $row['room_desc'] . '</td>
+        <td>' . $row['room_max'] . '</td>
+        <td>' . $row['per_night'] . '</td>
+
+        <td class="actions">
+            <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_reservation(' . $row['id'] . ')"><i class="bi bi-trash"></i></button>
+            
+        </td>
+    </tr>';
+    }
+}
+
+if (isset($_POST['get_total'])) {
+    $res = selectAllIn('ready_to_reserve_table');
+    $values = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+        // echo (int)$row['per_night'];
+        $values[] =  (int)$row['per_night'];
+    }
+    $sum = array_sum($values);
+    echo $sum;
+}
+
+if (isset($_POST['get_users_inp'])) {
+    $res = selectAllIn('user_table');
+    $countThis = 0;
+    // $inputNames = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+
+        // $countThis++;
+        // $inputNames[] = 'why_choose_us_' . $countThis . '.value';
+        echo '<label style="font-size: .7rem; font-weight: bold;">Name</label>
+        <input type="text" class="shadow-none form-control name_class" value="' . $row['name'] . '">
+        <label style="font-size: .7rem; font-weight: bold;">Email</label>
+        <input type="text" class="shadow-none form-control email_class" value="' . $row['email'] . '">
+        <label style="font-size: .7rem; font-weight: bold;">Is Verified</label>
+        <input type="text" class="shadow-none form-control is_verified_class" value="' . $row['is_verified'] . '"><hr>';
+
+        echo '<input type="hidden" name="user_id" value="' . $row['user_id'] . '">';
+        break;
+    }
+
+    echo ' <div class="modal-footer">
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn_edit shadow-none">Save</button>
+    </div>
+</div>';
+}
+
+
+
+
+// -------------------------- get methods end --------------------------
+
+
+
+
+// update methods
+if (isset($_POST['update_general'])) {
+    $frm_data = filteration($_POST);
+    $q = "UPDATE `credentials_table` SET `site_title` =?, `who_we_are` =? WHERE `id` =?";
+    $values = [$frm_data['site_title'], $frm_data['site_about'], 1];
+    $res = update($q, $values, 'ssi');
+    echo $res;
 }
 
 if (isset($_POST['update_contact'])) {
@@ -73,15 +248,6 @@ if (isset($_POST['update_contact'])) {
     echo $res3;
     echo $res4;
     echo $res5;
-}
-
-if (isset($_POST['get_facilities'])) {
-    $q = "SELECT * FROM `facilities_table`";
-    $values = [];  // No specific ID value to bind
-    $res = selectAll($q, $values, '');
-    $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
-    $json_data = json_encode($data);
-    echo $json_data;
 }
 
 
@@ -140,66 +306,36 @@ if (isset($_POST['update_facilities'])) {
     echo $icon_res7;
 }
 
-if (isset($_POST['get_why_choose_us'])) {
-    $res = selectAllIn('why_choose_us_table');
-    $countThis = 0;
-    while ($row = mysqli_fetch_assoc($res)) {
-        $countThis++;
-
-        echo '<h6 class="card-subtitle text-body-secondary mt-3">Why Choose Us #' . $countThis . ' </h6>
-        
-        <button type="button" onclick="remove_why_choose_us(' . $row['id'] . ')" class="btn btn-primary btn_delete shadow-none"><i class="bi bi-trash"></i></button>
-        <p class="card-text"><span class="fw-bold">Title: </span>' . $row['title'] . '</p>
-        <p class="card-text" id="phone' . $countThis . '"><span class="fw-bold">Description: </span>' . $row['description'] . '</p>';
-    }
-}
-
-
-if (isset($_POST['remove_why_choose_us'])) {
+if (isset($_POST['edit_room'])) {
     $frm_data = filteration($_POST);
-    $values = [$frm_data['remove_why_choose_us']];
-    $q = "DELETE FROM `why_choose_us_table` WHERE `id` =?";
+    // Assuming 'room_picture', 'room_title', 'room_description', 'room_max_person', and 'per_night' are the column names
+    $values = [
+        $frm_data['class_file'],
+        $frm_data['class_title'],
+        $frm_data['class_description'],
+        $frm_data['class_max'],
+        $frm_data['class_night'],
+        $frm_data['edit_room'] // Assuming 'edit_room' contains the room_id
+    ];
 
-    $res = delete($q, $values, 'i');
+    $q = "UPDATE `rooms` SET 
+        `room_picture` = ?, 
+        `room_title` = ?, 
+        `room_description` = ?, 
+        `room_max_person` = ?, 
+        `per_night` = ? 
+        WHERE `room_id` = ?";
+
+    $res = update($q, $values, 'sssssi'); // Adjust the 'sssssi' based on the data types of your columns
     echo $res;
 }
 
 
-if (isset($_POST['get_why_choose_us_inp'])) {
-    $res = selectAllIn('why_choose_us_table');
-    $countThis = 0;
-    $inputNames = [];
-    while ($row = mysqli_fetch_assoc($res)) {
-        $countThis++;
-        $inputNames[] = 'why_choose_us_' . $countThis . '.value';
-        echo '<div class="mb-1"> 
-        <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Why Choose Us #' . $countThis . '</label>
-        <br><span style="font-size: .7rem;">Title</span>
-        <input type="text" class="form-control shadow-none contact_us" id="exampleFormControlInput3" name="why_choose_us_' . $countThis . '" required value="' . $row['title'] . '">
-
-        <span style="font-size: .7rem;">Description</span>
-        <input type="text" class="form-control shadow-none contact_us" id="exampleFormControlInput3"  required value="' . $row['description'] . '">
-
-        <!-- icon -->
-        <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
-        <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
-            icon.</a>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">' . $row['icon'] . '</span>
-            <input type="text" class="form-control shadow-none contact_us why_choose_us_icon' . $countThis . '_inp" id="exampleFormControlInput3" name="why_choose_us_icon_' . $countThis . '" aria-describedby="basic-addon1">
-            <!-- icon -->
-        </div>
-    </div> <hr>';
-    }
-
-    echo ' <div class="modal-footer">
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn_edit shadow-none" onclick="update_why_choose_us(' . implode(', ', $inputNames) . ')">Save</button>
-    </div>
-</div>';
-}
+// -------------------------- update methods end --------------------------
 
 
+
+// create methods
 if (isset($_POST['add_why_choose_us'])) {
     $frm_data = filteration_without_special_chars($_POST);
     $values = [$frm_data['title_val'], $frm_data['des_val'], $frm_data['icon_val']];
@@ -213,37 +349,6 @@ if (isset($_POST['add_why_choose_us'])) {
     }
 }
 
-
-if (isset($_POST['get_rooms'])) {
-    $res = selectAllIn('rooms');
-    $countThis = 0;
-    while ($row = mysqli_fetch_assoc($res)) {
-        echo '<tr>
-        <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
-        <td>' . $row['room_title'] . '</td>
-        <td class="room_description_text">' . $row['room_description'] . '</td>
-        <td>' . $row['room_max_person'] . '</td>
-        <td>' . $row['per_night'] . '</td>
-        <td style="display: none;">' . $row['room_id'] . '</td>
-
-        <td class="actions">
-            <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
-            <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
-        </td>
-    </tr>';
-    }
-}
-
-
-// if (isset($_POST['add_room'])) {
-//     $frm_data = filteration($_POST);
-//     $values = [$frm_data['picture'], $frm_data['title'], $frm_data['description'], $frm_data['max'],  $frm_data['per_night']];
-
-//     $q = "INSERT INTO `rooms` (`room_picture`, `room_title`, `room_description`, `room_max_person`, `per_night`) VALUES (?,?,?,?,?) ";
-
-//     $res = insert($q, $values, 'sssss');
-//     echo $res;
-// }
 
 if (isset($_POST['add_room'])) {
     // $frm_data = filteration($_POST);
@@ -294,6 +399,22 @@ if (isset($_POST['add_room'])) {
     $conn->close();
 }
 
+
+
+// -------------------------- create methods end --------------------------
+
+
+
+// delete methods
+if (isset($_POST['remove_why_choose_us'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['remove_why_choose_us']];
+    $q = "DELETE FROM `why_choose_us_table` WHERE `id` =?";
+
+    $res = delete($q, $values, 'i');
+    echo $res;
+}
+
 if (isset($_POST['remove_room_val'])) {
     $frm_data = filteration($_POST);
     $values = [$frm_data['remove_room_val']];
@@ -301,136 +422,6 @@ if (isset($_POST['remove_room_val'])) {
     $res = delete($q, $values, 'i');
     echo $res;
 }
-
-if (isset($_POST['edit_room'])) {
-    $frm_data = filteration($_POST);
-    // Assuming 'room_picture', 'room_title', 'room_description', 'room_max_person', and 'per_night' are the column names
-    $values = [
-        $frm_data['class_file'],
-        $frm_data['class_title'],
-        $frm_data['class_description'],
-        $frm_data['class_max'],
-        $frm_data['class_night'],
-        $frm_data['edit_room'] // Assuming 'edit_room' contains the room_id
-    ];
-
-    $q = "UPDATE `rooms` SET 
-        `room_picture` = ?, 
-        `room_title` = ?, 
-        `room_description` = ?, 
-        `room_max_person` = ?, 
-        `per_night` = ? 
-        WHERE `room_id` = ?";
-
-    $res = update($q, $values, 'sssssi'); // Adjust the 'sssssi' based on the data types of your columns
-    echo $res;
-}
-
-
-if (isset($_POST['get_users'])) {
-    $res = selectAllIn('user_table');
-    while ($row = mysqli_fetch_assoc($res)) {
-        echo '<tr>
-        <td>' . $row['user_id'] . '</td>
-        <td>' . $row['name'] . '</td>
-        <td>' . $row['email'] . '</td>
-        <td>' . $row['is_verified'] . '</td>
-        <td>' . $row['created_at'] . '</td>
-        <td>
-            <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-            <button class="btn btn-primary shadow-none btn_del">Delete</button>
-        </td>
-    </tr>';
-    }
-}
-
-// if (isset($_POST['get_users_inp'])) {
-//     $res = selectAllIn('user_table');
-//     while ($row = mysqli_fetch_assoc($res)) {
-//         echo '<tr>
-//         <td>' . $row['user_id'] . '</td>
-//         <td>' . $row['name'] . '</td>
-//         <td>' . $row['email'] . '</td>
-//         <td>' . $row['is_verified'] . '</td>
-//         <td>' . $row['created_at'] . '</td>
-//         <td>
-//             <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-//             <button class="btn btn-primary shadow-none btn_del">Delete</button>
-//         </td>
-//     </tr>';
-//     }
-// }
-
-
-
-
-// ------------------- user ------------------------
-
-
-
-// settings_crud.php
-
-
-if (isset($_POST['get_room_by_id'])) {
-    $frm_data = filteration($_POST);
-
-    // Assuming you have a valid database connection
-    $mysqli = new mysqli("localhost", "root", "", "hotel_db");
-
-    // Check the connection
-    if ($mysqli->connect_error) {
-        die("Connection failed: " . $mysqli->connect_error);
-    }
-
-    // Perform the SQL query to fetch data based on the ID
-    $query = "SELECT * FROM `rooms` WHERE `room_id` = ?";
-    $statement = $mysqli->prepare($query);
-    $statement->bind_param("i", $frm_data['get_room_by_id']); // Assuming 'id' is an integer; adjust the type accordingly
-    $statement->execute();
-
-    // Get the result
-    $result = $statement->get_result();
-
-    // Check if any rows were returned
-    if ($result->num_rows > 0) {
-        // Fetch data as an associative array
-        $row = $result->fetch_assoc();
-
-        $values = [$row['room_picture'], $row['room_title'], $row['room_description'], $row['room_max_person'], $row['per_night']];
-
-        $q = "INSERT INTO `ready_to_reserve_table`(`room_picture`, `room_title`, `room_desc`, `room_max`, `per_night`) VALUES (?,?,?,?,?) ";
-
-        $res = insert($q, $values, 'sssss');
-        echo $res;
-    } else {
-        echo "No record found with ID: " . $frm_data['get_room_by_id'];
-    }
-
-    // Close the statement and connection
-    $statement->close();
-    $mysqli->close();
-}
-
-
-
-if (isset($_POST['get_rooms_to_serve'])) {
-    $res = selectAllIn('ready_to_reserve_table');
-    while ($row = mysqli_fetch_assoc($res)) {
-        echo '<tr>
-        <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
-        <td>' . $row['room_title'] . '</td>
-        <td class="room_description_text">' . $row['room_desc'] . '</td>
-        <td>' . $row['room_max'] . '</td>
-        <td>' . $row['per_night'] . '</td>
-
-        <td class="actions">
-            <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_reservation(' . $row['id'] . ')"><i class="bi bi-trash"></i></button>
-            
-        </td>
-    </tr>';
-    }
-}
-
 
 if (isset($_POST['remove_reservation_val'])) {
     $frm_data = filteration($_POST);
@@ -440,40 +431,4 @@ if (isset($_POST['remove_reservation_val'])) {
     echo $res;
 }
 
-
-if (isset($_POST['get_total'])) {
-    $res = selectAllIn('ready_to_reserve_table');
-    $values = [];
-    while ($row = mysqli_fetch_assoc($res)) {
-        // echo (int)$row['per_night'];
-        $values[] =  (int)$row['per_night'];
-    }
-    $sum = array_sum($values);
-    echo $sum;
-}
-
-if (isset($_POST['get_users_inp'])) {
-    $res = selectAllIn('user_table');
-    $countThis = 0;
-    // $inputNames = [];
-    while ($row = mysqli_fetch_assoc($res)) {
-
-        // $countThis++;
-        // $inputNames[] = 'why_choose_us_' . $countThis . '.value';
-        echo '<label style="font-size: .7rem; font-weight: bold;">Name</label>
-        <input type="text" class="shadow-none form-control name_class" value="' . $row['name'] . '">
-        <label style="font-size: .7rem; font-weight: bold;">Email</label>
-        <input type="text" class="shadow-none form-control email_class" value="' . $row['email'] . '">
-        <label style="font-size: .7rem; font-weight: bold;">Is Verified</label>
-        <input type="text" class="shadow-none form-control is_verified_class" value="' . $row['is_verified'] . '"><hr>';
-
-        echo '<input type="hidden" name="user_id" value="' . $row['user_id'] . '">';
-        break;
-    }
-
-    echo ' <div class="modal-footer">
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn_edit shadow-none">Save</button>
-    </div>
-</div>';
-}
+// -------------------------- delete methods end --------------------------

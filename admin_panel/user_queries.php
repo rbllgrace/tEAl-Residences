@@ -9,7 +9,7 @@ admin_login();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>User Queries</title>
     <?php require('./partials/links.php') ?>
     <link rel="stylesheet" href="./public/css/common.css">
 </head>
@@ -20,7 +20,7 @@ admin_login();
 
 
 
-    <p class="center">Dashboard</p>
+    <p class="center">User Queries</p>
 
 </body>
 

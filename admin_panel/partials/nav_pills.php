@@ -17,6 +17,10 @@
         <a class="nav-link" href="http://localhost/teal-residences/admin_panel/users.php">Users</a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="http://localhost/teal-residences/admin_panel/user_queries.php">User Queries</a>
+    </li>
+
 
     <li class="nav-item">
         <a class="nav-link" href="http://localhost/teal-residences/admin_panel/facilities.php">Facilities</a>

@@ -143,6 +143,13 @@ function selectAllIn($table)
     $res = mysqli_query($con, "SELECT * FROM $table");
     return $res;
 }
+
+function selectById($table, $id, $type_of_column)
+{
+    $con = $GLOBALS['conn'];
+    $res = mysqli_query($con, "SELECT * FROM $table WHERE $type_of_column = $id");
+    return $res;
+}
 // -------------------------------------------------------
 
 function selectAll($query, $values = [], $types = '')

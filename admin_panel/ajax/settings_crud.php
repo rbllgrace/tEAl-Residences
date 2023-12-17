@@ -210,7 +210,37 @@ if (isset($_POST['get_users_inp'])) {
 </div>';
 }
 
+if (isset($_POST['get_single_contact_with_id'])) {
+    $frm_data = filteration_without_special_chars($_POST);
 
+    $res = selectById('contact_us_table', $frm_data['contact_id'], 'id');
+    $row = mysqli_fetch_assoc($res);
+
+    echo '<div class="modal-header">
+    <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
+    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+        aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <form method="POST">
+    <div class="mb-1">
+    <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
+        Icon</label> <a href="https://icons.getbootstrap.com/" target="_blank"
+        style="font-size: .6rem; position: relative; top: 2px;">select
+        icon</a>
+    <input type="text" class="form-control shadow-none icon_inp" required>
+</div>
+
+        <div class="mb-1">
+            <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
+                Content</label>
+            <input type="text" class="form-control shadow-none content_inp" value="' . $row['contact_content'] . '" required>
+        </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn_edit shadow-none" onclick="edit_contact_by_id(' . $row['id'] . ')">Update</button>
+</div>';
+}
 
 
 // -------------------------- get methods end --------------------------
@@ -330,6 +360,25 @@ if (isset($_POST['edit_room'])) {
     echo $res;
 }
 
+if (isset($_POST['update_single_contact'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['contact_id']];
+    $q = "DELETE FROM `contact_us_table` WHERE `id` =?";
+    $res = delete($q, $values, 'i');
+    echo $res;
+}
+
+if (isset($_POST['edit_contact_by_id'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+    if ($frm_data['icon_inp']) {
+        $values = [$frm_data['icon_inp'], $frm_data['content_inp'], $frm_data['contact_id']];
+        $q = "UPDATE `contact_us_table` SET `icon` =?, `contact_content` =? WHERE `id` =?";
+        $res = update($q, $values, 'ssi');
+        echo $res;
+    } else {
+        echo 'All Values Required';
+    }
+}
 
 // -------------------------- update methods end --------------------------
 
@@ -399,10 +448,17 @@ if (isset($_POST['add_room'])) {
     $conn->close();
 }
 
+if (isset($_POST['add_contact'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+    $values = [$frm_data['icon'], $frm_data['content']];
+    $q = "INSERT INTO `contact_us_table`(`icon`, `contact_content`) VALUES (?,?) ";
+    $res = insert($q, $values, 'ss');
+    echo $res;
+}
+
 
 
 // -------------------------- create methods end --------------------------
-
 
 
 // delete methods

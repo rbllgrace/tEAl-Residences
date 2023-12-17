@@ -5,11 +5,13 @@
                 <h5 class="card-title">General Settings</h5>
                 <!-- Button trigger modal -->
                 <div class="d-flex gap-1">
-                    <button type="button" class="btn btn-primary btn_edit shadow-none" data-bs-toggle="modal" data-bs-target="#editModal">
+                    <button type="button" class="btn btn-primary btn_edit shadow-none" data-bs-toggle="modal"
+                        data-bs-target="#editModal">
                         Edit
                     </button>
 
-                    <button type="button" class="btn btn-primary shadow-none btn_delete_all" onclick="clear_text_general()">
+                    <button type="button" class="btn btn-primary shadow-none btn_delete_all"
+                        onclick="clear_text_general()">
                         Clear All
                     </button>
                 </div>
@@ -32,21 +34,25 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="editModalLabel">General Settings</h1>
-                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-1">
                         <label for="exampleFormControlInput3" class="form-label fw-bold">Site Title</label>
-                        <input type="text" class="form-control shadow-none title_inp" id="exampleFormControlInput3" name="site_title" required>
+                        <input type="text" class="form-control shadow-none title_inp" id="exampleFormControlInput3"
+                            name="site_title" required>
                     </div>
 
                     <div class="mb-1">
                         <label for="exampleFormControlTextarea1" class="form-label fw-bold">About Us</label>
-                        <textarea class="form-control shadow-none about_inp" id="exampleFormControlTextarea1" rows="8" name="site_about" required></textarea>
+                        <textarea class="form-control shadow-none about_inp" id="exampleFormControlTextarea1" rows="8"
+                            name="site_about" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn_edit shadow-none" onclick="update_general(site_title.value, site_about.value)">Save</button>
+                    <button type="button" class="btn btn-primary btn_edit shadow-none"
+                        onclick="update_general(site_title.value, site_about.value)">Save</button>
                 </div>
             </div>
         </form>
@@ -54,84 +60,88 @@
 </div>
 
 <script>
-    let gen_data
+let gen_data
 
-    function get_general() {
+window.onload = function() {
+    get_general()
+}
 
-        // getting class
-        let site_title = document.querySelector('.site_title')
-        let site_about = document.querySelector('.site_about')
+function get_general() {
 
-        // modal input
-        let title_inp = document.querySelector('.title_inp');
-        let about_inp = document.querySelector('.about_inp');
+    // getting class
+    let site_title = document.querySelector('.site_title')
+    let site_about = document.querySelector('.site_about')
 
-        let xhr = new XMLHttpRequest()
-        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    // modal input
+    let title_inp = document.querySelector('.title_inp');
+    let about_inp = document.querySelector('.about_inp');
 
-        xhr.onload = function() {
-            gen_data = JSON.parse(this.responseText)
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
-            site_title.innerText = gen_data.site_title
-            site_about.innerText = gen_data.who_we_are
+    xhr.onload = function() {
+        gen_data = JSON.parse(this.responseText)
 
-            title_inp.value = gen_data.site_title
-            about_inp.value = gen_data.who_we_are
-        }
-        xhr.send('get_general')
+        site_title.innerText = gen_data.site_title
+        site_about.innerText = gen_data.who_we_are
+
+        title_inp.value = gen_data.site_title
+        about_inp.value = gen_data.who_we_are
     }
+    xhr.send('get_general')
+}
 
-    function update_general(title_inp, about_inp) {
+function update_general(title_inp, about_inp) {
 
-        let xhr = new XMLHttpRequest()
-        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
-        xhr.onload = function() {
+    xhr.onload = function() {
 
-            let my_modal = document.querySelector('.my_modal')
-            let modal = bootstrap.Modal.getInstance(my_modal)
-            modal.hide()
+        let my_modal = document.querySelector('.my_modal')
+        let modal = bootstrap.Modal.getInstance(my_modal)
+        modal.hide()
 
-            if (this.responseText == 1) {
-                alert('success', 'Changes saved!')
-                get_general()
-            } else {
-                alert('error', 'No changes made!')
+        if (this.responseText == 1) {
+            alert('success', 'Changes saved!')
+            get_general()
+        } else {
+            alert('error', 'No changes made!')
 
-            }
         }
-        xhr.send('site_title=' + title_inp + '&site_about=' + about_inp + '&update_general')
     }
+    xhr.send('site_title=' + title_inp + '&site_about=' + about_inp + '&update_general')
+}
 
-    function clear_text_general() {
+function clear_text_general() {
 
-        // let site_title = document.querySelector('.site_title')
-        // let site_about = document.querySelector('.site_about')
+    // let site_title = document.querySelector('.site_title')
+    // let site_about = document.querySelector('.site_about')
 
-        // let title_inp = document.querySelector('.title_inp');
-        // let about_inp = document.querySelector('.about_inp');
+    // let title_inp = document.querySelector('.title_inp');
+    // let about_inp = document.querySelector('.about_inp');
 
-        let xhr = new XMLHttpRequest()
-        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
-        xhr.onload = function() {
-            // gen_data = JSON.parse(this.responseText)
+    xhr.onload = function() {
+        // gen_data = JSON.parse(this.responseText)
 
-            // site_title.innerText = gen_data.site_title
-            // site_about.innerText = gen_data.who_we_are
+        // site_title.innerText = gen_data.site_title
+        // site_about.innerText = gen_data.who_we_are
 
-            // title_inp.value = gen_data.site_title
-            // about_inp.value = gen_data.who_we_are
-            // console.log(this.responseText);
+        // title_inp.value = gen_data.site_title
+        // about_inp.value = gen_data.who_we_are
+        // console.log(this.responseText);
 
-            if (this.responseText === 'Query executed successfully') {
-                get_general()
-                alert('success', 'Cleared!')
-            }
+        if (this.responseText === 'Query executed successfully') {
+            get_general()
+            alert('success', 'Cleared!')
         }
-        xhr.send('clear_text_general')
     }
+    xhr.send('clear_text_general')
+}
 </script>

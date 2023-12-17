@@ -21,14 +21,6 @@ if (isset($_POST['get_contacts'])) {
     echo $json_data;
 }
 
-if (isset($_POST['get_facilities'])) {
-    $q = "SELECT * FROM `facilities_table`";
-    $values = [];  // No specific ID value to bind
-    $res = selectAll($q, $values, '');
-    $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
-    $json_data = json_encode($data);
-    echo $json_data;
-}
 
 if (isset($_POST['get_why_choose_us'])) {
     $q = "SELECT * FROM `why_choose_us_table`";
@@ -39,6 +31,15 @@ if (isset($_POST['get_why_choose_us'])) {
     echo $json_data;
 }
 
+
+if (isset($_POST['get_facilities'])) {
+    $q = "SELECT * FROM `facilities_table`";
+    $values = [];  // No specific ID value to bind
+    $res = selectAll($q, $values, '');
+    $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    $json_data = json_encode($data);
+    echo $json_data;
+}
 
 
 
@@ -226,7 +227,7 @@ if (isset($_POST['get_single_why_choose_us_contact_with_id'])) {
                 Icon</label> <a href="https://icons.getbootstrap.com/" target="_blank"
                 style="font-size: .6rem; position: relative; top: 2px;">select
                 icon</a>
-            <input type="text" class="form-control shadow-none icon_inp_why_choose_us" required>
+            <input type="text" class="form-control shadow-none icon_inp_why_choose_us"  required>
         </div>
 
         <div class="mb-1">
@@ -246,6 +247,38 @@ if (isset($_POST['get_single_why_choose_us_contact_with_id'])) {
         </div>';
 }
 
+if (isset($_POST['get_single_facility_with_id'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+
+    $res = selectById('facilities_table', $frm_data['contact_id'], 'id');
+    $row = mysqli_fetch_assoc($res);
+
+    echo '<div class="modal-header">
+            <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+            <form method="POST">
+            <div class="mb-1">
+            <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
+                Icon</label> <a href="https://icons.getbootstrap.com/" target="_blank"
+                style="font-size: .6rem; position: relative; top: 2px;">select
+                icon</a>
+            <input type="text" class="form-control shadow-none icon_inp_fac"  required>
+        </div>
+
+        <div class="mb-1">
+            <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">
+                Title</label>
+            <input type="text" class="form-control shadow-none title_inp_fac" value="' . $row['item'] . '" required>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn_edit shadow-none" onclick="edit_facility_by_id(' . $row['id'] . ')">Update</button>
+        </div>';
+}
 
 // -------------------------- get methods end --------------------------
 
@@ -285,60 +318,6 @@ if (isset($_POST['update_contact'])) {
 }
 
 
-if (isset($_POST['update_facilities'])) {
-    $frm_data = filteration_without_special_chars($_POST);
-    $q = "UPDATE `facilities_table` SET `item` =? WHERE `id` =?";
-
-    $q2 = "UPDATE `facilities_table` SET `icon` =? WHERE `id` =?";
-
-    $values = [$frm_data['f1'], 1];
-    $values2 = [$frm_data['f2'], 2];
-    $values3 = [$frm_data['f3'], 3];
-    $values4 = [$frm_data['f4'], 4];
-    $values5 = [$frm_data['f5'], 5];
-    $values6 = [$frm_data['f6'], 6];
-    $values7 = [$frm_data['f7'], 7];
-
-    $icon_value = [$frm_data['icon1'], 1];
-    $icon_value2 = [$frm_data['icon2'], 2];
-    $icon_value3 = [$frm_data['icon3'], 3];
-    $icon_value4 = [$frm_data['icon4'], 4];
-    $icon_value5 = [$frm_data['icon5'], 5];
-    $icon_value6 = [$frm_data['icon6'], 6];
-    $icon_value7 = [$frm_data['icon7'], 7];
-
-    $res = update($q, $values, 'si');
-    $res2 = update($q, $values2, 'si');
-    $res3 = update($q, $values3, 'si');
-    $res4 = update($q, $values4, 'si');
-    $res5 = update($q, $values5, 'si');
-    $res6 = update($q, $values6, 'si');
-    $res7 = update($q, $values7, 'si');
-
-    $icon_res = update($q2, $icon_value, 'si');
-    $icon_res2 = update($q2, $icon_value2, 'si');
-    $icon_res3 = update($q2, $icon_value3, 'si');
-    $icon_res4 = update($q2, $icon_value4, 'si');
-    $icon_res5 = update($q2, $icon_value5, 'si');
-    $icon_res6 = update($q2, $icon_value6, 'si');
-    $icon_res7 = update($q2, $icon_value7, 'si');
-
-    echo $res;
-    echo $res2;
-    echo $res3;
-    echo $res4;
-    echo $res5;
-    echo $res6;
-    echo $res7;
-
-    echo $icon_res;
-    echo $icon_res2;
-    echo $icon_res3;
-    echo $icon_res4;
-    echo $icon_res5;
-    echo $icon_res6;
-    echo $icon_res7;
-}
 
 if (isset($_POST['edit_room'])) {
     $frm_data = filteration($_POST);
@@ -384,6 +363,18 @@ if (isset($_POST['edit_why_choose_by_id'])) {
         $values = [$frm_data['icon_inp_why'], $frm_data['title_inp'], $frm_data['description_inp'], $frm_data['id']];
         $q = "UPDATE `why_choose_us_table` SET `icon` =?, `title` =?, `description` =? WHERE `id` =?";
         $res = update($q, $values, 'sssi');
+        echo $res;
+    } else {
+        echo 'All fields is required';
+    }
+}
+
+if (isset($_POST['edit_facility_by_id'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+    if ($frm_data['icon_inp_why'] && $frm_data['title_inp']) {
+        $values = [$frm_data['icon_inp_why'], $frm_data['title_inp'], $frm_data['id']];
+        $q = "UPDATE `facilities_table` SET `icon` =?, `item` =? WHERE `id` =?";
+        $res = update($q, $values, 'ssi');
         echo $res;
     } else {
         echo 'All fields is required';
@@ -462,6 +453,14 @@ if (isset($_POST['add_why_choose_us'])) {
     echo $res;
 }
 
+if (isset($_POST['add_facility'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+    $values = [$frm_data['icon_why'], $frm_data['title_why']];
+    $q = "INSERT INTO `facilities_table`(`icon`, `item`) VALUES (?,?) ";
+    $res = insert($q, $values, 'ss');
+    echo $res;
+}
+
 
 // -------------------------- create methods end --------------------------
 
@@ -504,6 +503,15 @@ if (isset($_POST['delete_single_why_choose_us'])) {
     $values = [$frm_data['contact_id']];
 
     $q = "DELETE FROM `why_choose_us_table` WHERE `id` =?";
+    $res = delete($q, $values, 'i');
+    echo $res;
+}
+
+if (isset($_POST['delete_single_facility'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['contact_id']];
+
+    $q = "DELETE FROM `facilities_table` WHERE `id` =?";
     $res = delete($q, $values, 'i');
     echo $res;
 }

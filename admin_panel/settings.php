@@ -23,27 +23,27 @@ admin_login();
     <?php require('./partials/settings_partials/why_choose_us_settings.php'); ?>
 
     <script>
-        function alert(type, msg) {
+    function alert(type, msg) {
 
-            let base_class = (type == 'success') ? 'alert-success' : 'alert-danger'
-            let element = document.createElement('div')
-            element.innerHTML = `<div class="alert ${base_class} alert-dismissible fade show custom_alert" role="alert">
+        let base_class = (type == 'success') ? 'alert-success' : 'alert-danger'
+        let element = document.createElement('div')
+        element.innerHTML = `<div class="alert ${base_class} alert-dismissible fade show custom_alert" role="alert">
             ${msg}
         <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>`
-            document.body.append(element)
+        document.body.append(element)
 
-            // Use setTimeout to remove the alert after the specified duration
-            setTimeout(function() {
-                element.remove();
-            }, 3000);
-        }
+        // Use setTimeout to remove the alert after the specified duration
+        setTimeout(function() {
+            element.remove();
+        }, 3000);
+    }
 
-        window.onload = function() {
-            get_general()
-            get_contacts()
-            get_why_choose_us()
-        }
+    window.onload = function() {
+        get_general()
+        get_contacts()
+        get_why_choose_us()
+    }
     </script>
 </body>
 

@@ -139,7 +139,8 @@
 }
 
 .title_inp,
-.about_inp {
+.about_inp,
+.loc_inp {
   font-size: 0.8rem;
 }
 

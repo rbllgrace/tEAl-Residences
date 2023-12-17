@@ -287,10 +287,10 @@ if (isset($_POST['get_single_facility_with_id'])) {
 
 // update methods
 if (isset($_POST['update_general'])) {
-    $frm_data = filteration($_POST);
-    $q = "UPDATE `credentials_table` SET `site_title` =?, `who_we_are` =? WHERE `id` =?";
-    $values = [$frm_data['site_title'], $frm_data['site_about'], 1];
-    $res = update($q, $values, 'ssi');
+    $frm_data = filteration_without_special_chars($_POST);
+    $q = "UPDATE `credentials_table` SET `site_title` =?, `who_we_are` =?, `location` =? WHERE `id` =?";
+    $values = [$frm_data['site_title'], $frm_data['site_about'], $frm_data['loc_inp'], 1];
+    $res = update($q, $values, 'sssi');
     echo $res;
 }
 

@@ -43,7 +43,6 @@ admin_login();
             get_general()
             get_contacts()
             get_why_choose_us()
-            get_why_choose_us_inp()
         }
     </script>
 </body>

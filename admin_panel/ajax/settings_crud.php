@@ -31,52 +31,17 @@ if (isset($_POST['get_facilities'])) {
 }
 
 if (isset($_POST['get_why_choose_us'])) {
-    $res = selectAllIn('why_choose_us_table');
-    $countThis = 0;
-    while ($row = mysqli_fetch_assoc($res)) {
-        $countThis++;
-
-        echo '<h6 class="card-subtitle text-body-secondary mt-3">Why Choose Us #' . $countThis . ' </h6>
-        
-        <button type="button" onclick="remove_why_choose_us(' . $row['id'] . ')" class="btn btn-primary btn_delete shadow-none"><i class="bi bi-trash"></i></button>
-        <p class="card-text"><span class="fw-bold">Title: </span>' . $row['title'] . '</p>
-        <p class="card-text" id="phone' . $countThis . '"><span class="fw-bold">Description: </span>' . $row['description'] . '</p>';
-    }
+    $q = "SELECT * FROM `why_choose_us_table`";
+    $values = [];  // No specific ID value to bind
+    $res = selectAll($q, $values, '');
+    $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    $json_data = json_encode($data);
+    echo $json_data;
 }
 
-if (isset($_POST['get_why_choose_us_inp'])) {
-    $res = selectAllIn('why_choose_us_table');
-    $countThis = 0;
-    $inputNames = [];
-    while ($row = mysqli_fetch_assoc($res)) {
-        $countThis++;
-        $inputNames[] = 'why_choose_us_' . $countThis . '.value';
-        echo '<div class="mb-1"> 
-        <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Why Choose Us #' . $countThis . '</label>
-        <br><span style="font-size: .7rem;">Title</span>
-        <input type="text" class="form-control shadow-none contact_us" id="exampleFormControlInput3" name="why_choose_us_' . $countThis . '" required value="' . $row['title'] . '">
 
-        <span style="font-size: .7rem;">Description</span>
-        <input type="text" class="form-control shadow-none contact_us" id="exampleFormControlInput3"  required value="' . $row['description'] . '">
 
-        <!-- icon -->
-        <label for="exampleFormControlInput3" class="form-label fw-bold f-title">Icon</label>
-        <a href="https://icons.getbootstrap.com/" target="_blank" style="font-size: .6rem;">select
-            icon.</a>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">' . $row['icon'] . '</span>
-            <input type="text" class="form-control shadow-none contact_us why_choose_us_icon' . $countThis . '_inp" id="exampleFormControlInput3" name="why_choose_us_icon_' . $countThis . '" aria-describedby="basic-addon1">
-            <!-- icon -->
-        </div>
-    </div> <hr>';
-    }
 
-    echo ' <div class="modal-footer">
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn_edit shadow-none" onclick="update_why_choose_us(' . implode(', ', $inputNames) . ')">Save</button>
-    </div>
-</div>';
-}
 
 if (isset($_POST['get_rooms'])) {
     $res = selectAllIn('rooms');
@@ -242,6 +207,45 @@ if (isset($_POST['get_single_contact_with_id'])) {
 </div>';
 }
 
+if (isset($_POST['get_single_why_choose_us_contact_with_id'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+
+    $res = selectById('why_choose_us_table', $frm_data['contact_id'], 'id');
+    $row = mysqli_fetch_assoc($res);
+
+    echo '<div class="modal-header">
+            <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+            <form method="POST">
+            <div class="mb-1">
+            <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
+                Icon</label> <a href="https://icons.getbootstrap.com/" target="_blank"
+                style="font-size: .6rem; position: relative; top: 2px;">select
+                icon</a>
+            <input type="text" class="form-control shadow-none icon_inp_why_choose_us" required>
+        </div>
+
+        <div class="mb-1">
+            <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">
+                Title</label>
+            <input type="text" class="form-control shadow-none title_inp_why_choose_us" value="' . $row['title'] . '" required>
+        </div>
+
+        <div class="mb-1">
+            <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Description</label>
+            <input type="text" class="form-control shadow-none description_inp_why_choose_us" value="' . $row['description'] . '" required>
+        </div>
+        
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn_edit shadow-none" onclick="edit_why_choose_by_id(' . $row['id'] . ')">Update</button>
+        </div>';
+}
+
 
 // -------------------------- get methods end --------------------------
 
@@ -360,23 +364,29 @@ if (isset($_POST['edit_room'])) {
     echo $res;
 }
 
-if (isset($_POST['update_single_contact'])) {
-    $frm_data = filteration($_POST);
-    $values = [$frm_data['contact_id']];
-    $q = "DELETE FROM `contact_us_table` WHERE `id` =?";
-    $res = delete($q, $values, 'i');
-    echo $res;
-}
+
 
 if (isset($_POST['edit_contact_by_id'])) {
     $frm_data = filteration_without_special_chars($_POST);
-    if ($frm_data['icon_inp']) {
+    if ($frm_data['icon_inp'] && $frm_data['content_inp']) {
         $values = [$frm_data['icon_inp'], $frm_data['content_inp'], $frm_data['contact_id']];
         $q = "UPDATE `contact_us_table` SET `icon` =?, `contact_content` =? WHERE `id` =?";
         $res = update($q, $values, 'ssi');
         echo $res;
     } else {
-        echo 'All Values Required';
+        echo 'All fields is required';
+    }
+}
+
+if (isset($_POST['edit_why_choose_by_id'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+    if ($frm_data['icon_inp_why'] &&  $frm_data['title_inp'] && $frm_data['description_inp']) {
+        $values = [$frm_data['icon_inp_why'], $frm_data['title_inp'], $frm_data['description_inp'], $frm_data['id']];
+        $q = "UPDATE `why_choose_us_table` SET `icon` =?, `title` =?, `description` =? WHERE `id` =?";
+        $res = update($q, $values, 'sssi');
+        echo $res;
+    } else {
+        echo 'All fields is required';
     }
 }
 
@@ -384,19 +394,7 @@ if (isset($_POST['edit_contact_by_id'])) {
 
 
 
-// create methods
-if (isset($_POST['add_why_choose_us'])) {
-    $frm_data = filteration_without_special_chars($_POST);
-    $values = [$frm_data['title_val'], $frm_data['des_val'], $frm_data['icon_val']];
-    if (!($frm_data['title_val']) && !($frm_data['des_val']) && !($frm_data['icon_val'])) {
-        return 0;
-    } else {
-        $q = "INSERT INTO `why_choose_us_table`(`icon`, `title`, `description`) VALUES (?,?,?) ";
 
-        $res = insert($q, $values, 'sss');
-        echo $res;
-    }
-}
 
 
 if (isset($_POST['add_room'])) {
@@ -456,20 +454,20 @@ if (isset($_POST['add_contact'])) {
     echo $res;
 }
 
+if (isset($_POST['add_why_choose_us'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+    $values = [$frm_data['icon_why'], $frm_data['title_why'], $frm_data['description_why']];
+    $q = "INSERT INTO `why_choose_us_table`(`icon`, `title`, `description`) VALUES (?,?,?) ";
+    $res = insert($q, $values, 'sss');
+    echo $res;
+}
 
 
 // -------------------------- create methods end --------------------------
 
 
 // delete methods
-if (isset($_POST['remove_why_choose_us'])) {
-    $frm_data = filteration($_POST);
-    $values = [$frm_data['remove_why_choose_us']];
-    $q = "DELETE FROM `why_choose_us_table` WHERE `id` =?";
 
-    $res = delete($q, $values, 'i');
-    echo $res;
-}
 
 if (isset($_POST['remove_room_val'])) {
     $frm_data = filteration($_POST);
@@ -490,6 +488,23 @@ if (isset($_POST['remove_reservation_val'])) {
 if (isset($_POST['clear_text_general'])) {
     $q = "UPDATE `credentials_table` SET `site_title` = NULL, `who_we_are` = NULL";
     $res = delete_single_table($q);
+    echo $res;
+}
+
+if (isset($_POST['delete_single_contact'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['contact_id']];
+    $q = "DELETE FROM `contact_us_table` WHERE `id` =?";
+    $res = delete($q, $values, 'i');
+    echo $res;
+}
+
+if (isset($_POST['delete_single_why_choose_us'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['contact_id']];
+
+    $q = "DELETE FROM `why_choose_us_table` WHERE `id` =?";
+    $res = delete($q, $values, 'i');
     echo $res;
 }
 

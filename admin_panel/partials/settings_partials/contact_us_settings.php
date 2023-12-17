@@ -8,8 +8,6 @@
                     <button type="button" class="btn btn-primary btn_add shadow-none" data-bs-toggle="modal" data-bs-target="#contactAboutUsModal">
                         Add Contact
                     </button>
-
-
                 </div>
             </div>
             <div class="body_to_get_data mt-2">
@@ -67,7 +65,6 @@
 </div>
 
 <script>
-    let contacts_data
     const body_to_get_data = document.querySelector('.body_to_get_data');
 
     function get_contacts() {
@@ -89,7 +86,7 @@
                     <div class="text-end">
                         <button type="button" class="btn btn-primary btn_edit shadow-none" onclick="get_single_contact_with_id(${data[i].id})" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop"><i class="bi bi-pencil-square"></i></button>
-                        <button type="button" class="btn btn-primary btn_delete shadow-none" onclick="update_single_contact(${data[i].id})"><i class="bi bi-trash"></i></button>
+                        <button type="button" class="btn btn-primary btn_delete shadow-none" onclick="delete_single_contact(${data[i].id})"><i class="bi bi-trash"></i></button>
                     </div>
                 </div>
                 <br>
@@ -130,7 +127,7 @@
         xhr.send('content=' + content.value + '&icon=' + icon.value + '&add_contact')
     })
 
-    function update_single_contact(contact_id) {
+    function delete_single_contact(contact_id) {
         let xhr = new XMLHttpRequest()
         xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -146,7 +143,7 @@
             }
         }
 
-        xhr.send('contact_id=' + contact_id + '&update_single_contact')
+        xhr.send('contact_id=' + contact_id + '&delete_single_contact')
     }
 
     const modal_content_customized = document.querySelector('.modal_content_customized');

@@ -39,9 +39,10 @@
 }
 
 .center {
-  margin-left: 20vw;
+  margin-left: 278px;
   margin-top: 5%;
   padding-right: 25px;
+  margin-top: 82px !important;
 }
 
 .gen_and_edit {

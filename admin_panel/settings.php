@@ -12,6 +12,7 @@ admin_login();
     <title>Admin Dashboard</title>
     <?php require('./partials/links.php') ?>
     <link rel="stylesheet" href="./public/css/common.css">
+
 </head>
 
 <body>

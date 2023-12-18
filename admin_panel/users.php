@@ -2,7 +2,6 @@
 admin_login();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,69 +11,12 @@ admin_login();
     <title>Admin Dashboard</title>
     <?php require('./partials/links.php') ?>
     <link rel="stylesheet" href="./public/css/common.css">
-    <style>
-        th {
-            font-size: 0.8rem;
-            text-align: center;
-        }
-
-        td {
-            font-size: 0.8rem;
-            text-align: center;
-
-            vertical-align: middle;
-        }
-
-        .btn_edit {
-            padding: 2px 10px;
-        }
-
-        .room_description_text {
-            font-size: 0.7rem;
-            width: 300px;
-        }
-
-        input {
-            font-size: 0.7rem !important;
-        }
-
-        .black_search {
-            background: black;
-            color: white;
-            border: 1px solid black;
-
-            font-size: .8rem;
-        }
-
-        .black_search:hover {
-            background: transparent;
-            border: 1px solid black;
-            color: black;
-
-        }
-
-        .btn_del {
-            background: red;
-            border-color: red;
-            font-size: 0.8rem;
-            margin: 0;
-            padding: 0;
-            padding: 2px 10px;
-        }
-
-        .btn_del:hover {
-            background: transparent;
-            border-color: red;
-            color: black;
-        }
-    </style>
-
+    <link rel="stylesheet" href="./public/css/users.css">
 </head>
 
 <body>
     <?php require('./partials/header.php'); ?>
     <?php require('./partials/nav_pills.php'); ?>
-
 
     <div class="center">
         <div class="top d-flex justify-content-between align-items-center">
@@ -84,8 +26,6 @@ admin_login();
                 <button onclick="searchUsers()" class="btn btn-primary shadow-none black_search">Search</button>
             </div>
         </div>
-
-
         <table class="table">
             <thead>
                 <tr>
@@ -96,112 +36,167 @@ admin_login();
                     <th>Created At</th>
                     <th>Action</th>
                 </tr>
-
             </thead>
             <tbody class="table_body">
 
-                <!-- Example row, you can add more rows dynamically -->
             </tbody>
         </table>
-        <!-- <h1 class="to_place text-center"></h1> -->
-        <!-- Add this HTML element where you want to display the "User Not Found" message -->
         <div id="notFoundMessage" style="display: none; color: red;" class="text-center">User Not Found</div>
     </div>
 
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <!-- Edit User Modal -->
+    <div class="modal fade modal_add_user" id="editUserModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editModalLabel">Edit User</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="editUserModalLabel">Edit User</h1>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-                <div class="modal-body modal_body_inp">
-
+                <div class="modal-body modal_content_edit_user_container">
                 </div>
 
             </div>
         </div>
     </div>
 
-
     <script>
-        window.onload = function() {
-            get_users()
-            get_users_inp()
+    window.onload = function() {
+        get_users()
+    }
+
+    function alert(type, msg) {
+
+        let base_class = (type == 'success') ? 'alert-success' : 'alert-danger'
+        let element = document.createElement('div')
+        element.innerHTML = `<div class="alert ${base_class} alert-dismissible fade show custom_alert" role="alert">
+${msg}
+<button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>`
+        document.body.append(element)
+
+        // Use setTimeout to remove the alert after the specified duration
+        setTimeout(function() {
+            element.remove();
+        }, 3000);
+    }
+
+    function validateInput(input) {
+        var value = parseFloat(input.value);
+
+        if (isNaN(value) || value < -1) {
+            input.value = 0;
+        } else if (value === 0) {
+            input.value = 0;
+        } else if (value > 1) {
+            input.value = 1;
+        }
+    }
+
+    function get_users() {
+
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onload = function() {
+            const table_body = document.querySelector('.table_body');
+            table_body.innerHTML = this.responseText
+        }
+        xhr.send('get_users')
+    }
+
+    const modal_content_edit_user_container = document.querySelector('.modal_content_edit_user_container');
+
+    function get_single_user_with_id(user_id) {
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onload = function() {
+
+            modal_content_edit_user_container.innerHTML = this.responseText
         }
 
-        function get_users() {
+        xhr.send('user_id=' + user_id + '&get_single_user_with_id')
+    }
 
-            let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    function edit_user_by_id(user_id) {
+        const name_inp_user = document.querySelector('.name_inp_user');
+        const is_verified_inp_user = document.querySelector('.is_verified_inp_user');
 
-            xhr.onload = function() {
-                const table_body = document.querySelector('.table_body');
-                table_body.innerHTML = this.responseText
-            }
-            xhr.send('get_users')
-        }
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
-        function get_users_inp() {
+        xhr.onload = function() {
 
-            let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            let my_modal = document.querySelector('.modal_add_user')
+            let modal = bootstrap.Modal.getInstance(my_modal)
+            modal.hide()
 
-            xhr.onload = function() {
-                const table_body = document.querySelector('.modal_body_inp');
-                table_body.innerHTML = this.responseText
-            }
-            xhr.send('get_users_inp')
-        }
-
-
-        function searchUsers() {
-
-            let input = document.getElementById('userSearchInput').value.toLowerCase();
-            let rows = document.querySelectorAll('.table_body tr');
-
-            let userFound = false;
-
-
-            rows.forEach(function(row) {
-                let name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                if (name.includes(input)) {
-                    row.style.display = '';
-                    userFound = true;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-            // Display the "User Not Found" message if no user is found
-            let notFoundMessageElement = document.getElementById('notFoundMessage');
-            if (!userFound) {
-                notFoundMessageElement.style.display = 'block';
+            if (this.responseText == 1) {
+                alert('success', 'User Updated!')
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
             } else {
-                notFoundMessageElement.style.display = 'none';
+                alert('error', 'No Changes Made!')
             }
         }
 
-        const name_class = document.querySelector('.name_class');
-        const email_class = document.querySelector('.email_class');
-        const is_verified_class = document.querySelector('.is_verified_class');
+        xhr.send('name_inp_user=' + name_inp_user.value + '&is_verified_inp_user=' + is_verified_inp_user.value +
+            '&user_id=' + user_id +
+            '&edit_user_by_id')
 
-        function edit_user(id) {
 
-            let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    }
 
-            xhr.onload = function() {
-                // const table_body = document.querySelector('.table_body');
-                // table_body.innerHTML = this.responseText
-                console.log(this.responseText);
+    function delete_single_user(user_id) {
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onload = function() {
+            if (this.responseText == 1) {
+                alert('success', 'Removed!')
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            } else {
+                alert('error', 'Something went wrong!')
             }
-            xhr.send('edit_user_id=' + id + '&name_class=' + name_class.value + '&email_class=' + email_class.value +
-                '&is_verified_class=' + is_verified_class.value)
         }
+
+        xhr.send('user_id=' + user_id + '&delete_single_user')
+    }
+
+
+    function searchUsers() {
+
+        let input = document.getElementById('userSearchInput').value.toLowerCase();
+        let rows = document.querySelectorAll('.table_body tr');
+
+        let userFound = false;
+
+        rows.forEach(function(row) {
+            let name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            if (name.includes(input)) {
+                row.style.display = '';
+                userFound = true;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        let notFoundMessageElement = document.getElementById('notFoundMessage');
+        if (!userFound) {
+            notFoundMessageElement.style.display = 'block';
+        } else {
+            notFoundMessageElement.style.display = 'none';
+        }
+    }
     </script>
 
 

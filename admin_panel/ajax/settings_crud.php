@@ -44,6 +44,8 @@ if (isset($_POST['get_facilities'])) {
 
 
 
+
+
 if (isset($_POST['get_rooms'])) {
     $res = selectAllIn('rooms');
     $countThis = 0;
@@ -71,13 +73,17 @@ if (isset($_POST['get_users'])) {
         <td>' . $row['user_id'] . '</td>
         <td>' . $row['name'] . '</td>
         <td>' . $row['email'] . '</td>
-        <td>' . $row['is_verified'] . '</td>
+        
+        <td class="fw-bold" style="color: ' . ($row['is_verified'] == 1 ? 'green' : 'red') . ';">'
+            . ($row['is_verified'] == 1 ? '<i class="bi bi-check-circle-fill"></i>  Verified' : '<i class="bi bi-file-excel-fill"></i>  Not Verified') . '</td>
+
         <td>' . $row['created_at'] . '</td>
         <td>
-            <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-            <button class="btn btn-primary shadow-none btn_del">Delete</button>
+            <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editUserModal"
+                onclick="get_single_user_with_id(' . $row['user_id'] . ')">Edit</button>
+            <button class="btn btn-primary shadow-none btn_del" onclick="delete_single_user(' . $row['user_id'] . ')">Delete</button>
         </td>
-    </tr>';
+        </tr>';
     }
 }
 
@@ -106,9 +112,13 @@ if (isset($_POST['get_room_by_id'])) {
         // Fetch data as an associative array
         $row = $result->fetch_assoc();
 
-        $values = [$row['room_picture'], $row['room_title'], $row['room_description'], $row['room_max_person'], $row['per_night']];
+        $values = [
+            $row['room_picture'], $row['room_title'], $row['room_description'], $row['room_max_person'],
+            $row['per_night']
+        ];
 
-        $q = "INSERT INTO `ready_to_reserve_table`(`room_picture`, `room_title`, `room_desc`, `room_max`, `per_night`) VALUES (?,?,?,?,?) ";
+        $q = "INSERT INTO `ready_to_reserve_table`(`room_picture`, `room_title`, `room_desc`, `room_max`, `per_night`) VALUES
+(?,?,?,?,?) ";
 
         $res = insert($q, $values, 'sssss');
         echo $res;
@@ -125,17 +135,19 @@ if (isset($_POST['get_rooms_to_serve'])) {
     $res = selectAllIn('ready_to_reserve_table');
     while ($row = mysqli_fetch_assoc($res)) {
         echo '<tr>
-        <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
-        <td>' . $row['room_title'] . '</td>
-        <td class="room_description_text">' . $row['room_desc'] . '</td>
-        <td>' . $row['room_max'] . '</td>
-        <td>' . $row['per_night'] . '</td>
+    <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture"
+            width="150"></td>
+    <td>' . $row['room_title'] . '</td>
+    <td class="room_description_text">' . $row['room_desc'] . '</td>
+    <td>' . $row['room_max'] . '</td>
+    <td>' . $row['per_night'] . '</td>
 
-        <td class="actions">
-            <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_reservation(' . $row['id'] . ')"><i class="bi bi-trash"></i></button>
-            
-        </td>
-    </tr>';
+    <td class="actions">
+        <button type="button" class="btn btn-primary shadow-none btn_delete"
+            onclick="remove_reservation(' . $row['id'] . ')"><i class="bi bi-trash"></i></button>
+
+    </td>
+</tr>';
     }
 }
 
@@ -144,37 +156,13 @@ if (isset($_POST['get_total'])) {
     $values = [];
     while ($row = mysqli_fetch_assoc($res)) {
         // echo (int)$row['per_night'];
-        $values[] =  (int)$row['per_night'];
+        $values[] = (int)$row['per_night'];
     }
     $sum = array_sum($values);
     echo $sum;
 }
 
-if (isset($_POST['get_users_inp'])) {
-    $res = selectAllIn('user_table');
-    $countThis = 0;
-    // $inputNames = [];
-    while ($row = mysqli_fetch_assoc($res)) {
 
-        // $countThis++;
-        // $inputNames[] = 'why_choose_us_' . $countThis . '.value';
-        echo '<label style="font-size: .7rem; font-weight: bold;">Name</label>
-        <input type="text" class="shadow-none form-control name_class" value="' . $row['name'] . '">
-        <label style="font-size: .7rem; font-weight: bold;">Email</label>
-        <input type="text" class="shadow-none form-control email_class" value="' . $row['email'] . '">
-        <label style="font-size: .7rem; font-weight: bold;">Is Verified</label>
-        <input type="text" class="shadow-none form-control is_verified_class" value="' . $row['is_verified'] . '"><hr>';
-
-        echo '<input type="hidden" name="user_id" value="' . $row['user_id'] . '">';
-        break;
-    }
-
-    echo ' <div class="modal-footer">
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn_edit shadow-none">Save</button>
-    </div>
-</div>';
-}
 
 if (isset($_POST['get_single_contact_with_id'])) {
     $frm_data = filteration_without_special_chars($_POST);
@@ -184,27 +172,28 @@ if (isset($_POST['get_single_contact_with_id'])) {
 
     echo '<div class="modal-header">
     <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
-    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
-        aria-label="Close"></button>
+    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
     <form method="POST">
-    <div class="mb-1">
-    <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
-        Icon</label> <a href="https://icons.getbootstrap.com/" target="_blank"
-        style="font-size: .6rem; position: relative; top: 2px;">select
-        icon</a>
-    <input type="text" class="form-control shadow-none icon_inp" required>
-</div>
+        <div class="mb-1">
+            <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
+                Icon</label> <a href="https://icons.getbootstrap.com/" target="_blank"
+                style="font-size: .6rem; position: relative; top: 2px;">select
+                icon</a>
+            <input type="text" class="form-control shadow-none icon_inp" required>
+        </div>
 
         <div class="mb-1">
             <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
                 Content</label>
-            <input type="text" class="form-control shadow-none content_inp" value="' . $row['contact_content'] . '" required>
+            <input type="text" class="form-control shadow-none content_inp" value="' . $row['contact_content'] . '"
+                required>
         </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary btn_edit shadow-none" onclick="edit_contact_by_id(' . $row['id'] . ')">Update</button>
+    <button type="button" class="btn btn-primary btn_edit shadow-none"
+        onclick="edit_contact_by_id(' . $row['id'] . ')">Update</button>
 </div>';
 }
 
@@ -215,36 +204,68 @@ if (isset($_POST['get_single_why_choose_us_contact_with_id'])) {
     $row = mysqli_fetch_assoc($res);
 
     echo '<div class="modal-header">
-            <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
-            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-        </div>
-        
-        <div class="modal-body">
-            <form method="POST">
-            <div class="mb-1">
+    <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
+    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+    <form method="POST">
+        <div class="mb-1">
             <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
                 Icon</label> <a href="https://icons.getbootstrap.com/" target="_blank"
                 style="font-size: .6rem; position: relative; top: 2px;">select
                 icon</a>
-            <input type="text" class="form-control shadow-none icon_inp_why_choose_us"  required>
+            <input type="text" class="form-control shadow-none icon_inp_why_choose_us" required>
         </div>
 
         <div class="mb-1">
             <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">
                 Title</label>
-            <input type="text" class="form-control shadow-none title_inp_why_choose_us" value="' . $row['title'] . '" required>
+            <input type="text" class="form-control shadow-none title_inp_why_choose_us" value="' . $row['title'] . '"
+                required>
         </div>
 
         <div class="mb-1">
             <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Description</label>
-            <input type="text" class="form-control shadow-none description_inp_why_choose_us" value="' . $row['description'] . '" required>
+            <input type="text" class="form-control shadow-none description_inp_why_choose_us"
+                value="' . $row['description'] . '" required>
         </div>
-        
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn_edit shadow-none" onclick="edit_why_choose_by_id(' . $row['id'] . ')">Update</button>
-        </div>';
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn_edit shadow-none"
+        onclick="edit_why_choose_by_id(' . $row['id'] . ')">Update</button>
+</div>';
+}
+
+if (isset($_POST['get_single_user_with_id'])) {
+    $frm_data = filteration_without_special_chars($_POST);
+
+    $res = selectById('user_table', $frm_data['user_id'], 'user_id');
+    $row = mysqli_fetch_assoc($res);
+
+    echo '
+
+<form method="POST">
+
+    <div class="mb-1">
+        <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">
+            Name</label>
+        <input type="text" class="form-control shadow-none name_inp_user" value="' . $row['name'] . '"
+            required>
+    </div>
+
+    <div class="mb-1">
+        <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">
+            Is Verified</label>
+        <input type="number" class="form-control shadow-none is_verified_inp_user" min="0" max="1" step="1" oninput="validateInput(this)" value="' . $row['is_verified'] . '"
+            required>
+    </div>
+</form>
+
+<div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn_edit shadow-none" onclick="edit_user_by_id(' . $row['user_id'] . ')">Update</button>
+                </div></form>';
 }
 
 if (isset($_POST['get_single_facility_with_id'])) {
@@ -254,19 +275,18 @@ if (isset($_POST['get_single_facility_with_id'])) {
     $row = mysqli_fetch_assoc($res);
 
     echo '<div class="modal-header">
-            <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
-            <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-        </div>
-        
-        <div class="modal-body">
-            <form method="POST">
-            <div class="mb-1">
+    <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
+    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+    <form method="POST">
+        <div class="mb-1">
             <label style="font-size: .7rem; font-weight: 500; position: relative; top: 3px;">Contact
                 Icon</label> <a href="https://icons.getbootstrap.com/" target="_blank"
                 style="font-size: .6rem; position: relative; top: 2px;">select
                 icon</a>
-            <input type="text" class="form-control shadow-none icon_inp_fac"  required>
+            <input type="text" class="form-control shadow-none icon_inp_fac" required>
         </div>
 
         <div class="mb-1">
@@ -274,10 +294,11 @@ if (isset($_POST['get_single_facility_with_id'])) {
                 Title</label>
             <input type="text" class="form-control shadow-none title_inp_fac" value="' . $row['item'] . '" required>
         </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn_edit shadow-none" onclick="edit_facility_by_id(' . $row['id'] . ')">Update</button>
-        </div>';
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn_edit shadow-none"
+        onclick="edit_facility_by_id(' . $row['id'] . ')">Update</button>
+</div>';
 }
 
 // -------------------------- get methods end --------------------------
@@ -331,13 +352,13 @@ if (isset($_POST['edit_room'])) {
         $frm_data['edit_room'] // Assuming 'edit_room' contains the room_id
     ];
 
-    $q = "UPDATE `rooms` SET 
-        `room_picture` = ?, 
-        `room_title` = ?, 
-        `room_description` = ?, 
-        `room_max_person` = ?, 
-        `per_night` = ? 
-        WHERE `room_id` = ?";
+    $q = "UPDATE `rooms` SET
+`room_picture` = ?,
+`room_title` = ?,
+`room_description` = ?,
+`room_max_person` = ?,
+`per_night` = ?
+WHERE `room_id` = ?";
 
     $res = update($q, $values, 'sssssi'); // Adjust the 'sssssi' based on the data types of your columns
     echo $res;
@@ -359,7 +380,7 @@ if (isset($_POST['edit_contact_by_id'])) {
 
 if (isset($_POST['edit_why_choose_by_id'])) {
     $frm_data = filteration_without_special_chars($_POST);
-    if ($frm_data['icon_inp_why'] &&  $frm_data['title_inp'] && $frm_data['description_inp']) {
+    if ($frm_data['icon_inp_why'] && $frm_data['title_inp'] && $frm_data['description_inp']) {
         $values = [$frm_data['icon_inp_why'], $frm_data['title_inp'], $frm_data['description_inp'], $frm_data['id']];
         $q = "UPDATE `why_choose_us_table` SET `icon` =?, `title` =?, `description` =? WHERE `id` =?";
         $res = update($q, $values, 'sssi');
@@ -367,6 +388,14 @@ if (isset($_POST['edit_why_choose_by_id'])) {
     } else {
         echo 'All fields is required';
     }
+}
+
+if (isset($_POST['edit_user_by_id'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['name_inp_user'], $frm_data['is_verified_inp_user'], $frm_data['user_id']];
+    $q = "UPDATE `user_table` SET `name` =?, `is_verified` =? WHERE `user_id` =?";
+    $res = update($q, $values, 'ssi');
+    echo $res;
 }
 
 if (isset($_POST['edit_facility_by_id'])) {
@@ -421,7 +450,8 @@ if (isset($_POST['add_room'])) {
             move_uploaded_file($fileTmpName, $destination);
 
             // Insert into database with the file path
-            $sql = "INSERT INTO rooms (room_title, room_description, room_max_person, per_night, room_picture) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO rooms (room_title, room_description, room_max_person, per_night, room_picture) VALUES (?, ?, ?, ?,
+?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sssss", $title, $description, $max, $per_night, $fileName);
             $stmt->execute();
@@ -485,7 +515,7 @@ if (isset($_POST['remove_reservation_val'])) {
 }
 
 if (isset($_POST['clear_text_general'])) {
-    $q = "UPDATE `credentials_table` SET `site_title` = NULL, `who_we_are` = NULL";
+    $q = "UPDATE `credentials_table` SET `site_title` = NULL, `who_we_are` = NULL, `location` = NULL";
     $res = delete_single_table($q);
     echo $res;
 }
@@ -503,6 +533,15 @@ if (isset($_POST['delete_single_why_choose_us'])) {
     $values = [$frm_data['contact_id']];
 
     $q = "DELETE FROM `why_choose_us_table` WHERE `id` =?";
+    $res = delete($q, $values, 'i');
+    echo $res;
+}
+
+if (isset($_POST['delete_single_user'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['user_id']];
+
+    $q = "DELETE FROM `user_table` WHERE `user_id` =?";
     $res = delete($q, $values, 'i');
     echo $res;
 }

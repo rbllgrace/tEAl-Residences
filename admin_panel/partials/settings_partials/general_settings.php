@@ -127,26 +127,11 @@ function update_general(title_inp, about_inp, loc_inp) {
 }
 
 function clear_text_general() {
-
-    // let site_title = document.querySelector('.site_title')
-    // let site_about = document.querySelector('.site_about')
-
-    // let title_inp = document.querySelector('.title_inp');
-    // let about_inp = document.querySelector('.about_inp');
-
     let xhr = new XMLHttpRequest()
     xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
     xhr.onload = function() {
-        // gen_data = JSON.parse(this.responseText)
-
-        // site_title.innerText = gen_data.site_title
-        // site_about.innerText = gen_data.who_we_are
-
-        // title_inp.value = gen_data.site_title
-        // about_inp.value = gen_data.who_we_are
-        // console.log(this.responseText);
 
         if (this.responseText === 'Query executed successfully') {
             get_general()

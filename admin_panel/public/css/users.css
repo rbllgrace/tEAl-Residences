@@ -1,0 +1,53 @@
+th {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+td {
+  font-size: 0.8rem;
+  text-align: center;
+
+  vertical-align: middle;
+}
+
+.btn_edit {
+  padding: 2px 10px;
+}
+
+.room_description_text {
+  font-size: 0.7rem;
+  width: 300px;
+}
+
+input {
+  font-size: 0.7rem !important;
+}
+
+.black_search {
+  background: black;
+  color: white;
+  border: 1px solid black;
+
+  font-size: 0.8rem;
+}
+
+.black_search:hover {
+  background: transparent;
+  border: 1px solid black;
+  color: black;
+}
+
+.btn_del {
+  background: red;
+  border-color: red;
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+  padding: 2px 10px;
+}
+
+.btn_del:hover {
+  background: transparent;
+  border-color: red;
+  color: black;
+}

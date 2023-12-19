@@ -61,7 +61,7 @@ if (isset($_POST['get_facilities'])) {
 //         <td class="actions">
 //         <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
 //             <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
-            
+
 //         </td>
 //     </tr>';
 //     }
@@ -410,6 +410,13 @@ if (isset($_POST['edit_facility_by_id'])) {
         echo 'All fields is required';
     }
 }
+
+if (isset($_POST['update_rooms_created_at'])) {
+    // Update a row in your table
+    $sql = "UPDATE your_table_name SET some_column = 'new_value' WHERE id = 1";
+    $result = $conn->query($sql);
+}
+
 
 // -------------------------- update methods end --------------------------
 

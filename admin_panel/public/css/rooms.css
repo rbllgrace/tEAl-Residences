@@ -1,4 +1,13 @@
-/* th {
+.actions {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  height: 113px;
+}
+
+th {
   font-size: 0.8rem;
   text-align: center;
 }
@@ -16,9 +25,9 @@ td {
 
 .room_description_text {
   font-size: 0.7rem;
-  width: 300px;
+  width: 250px;
 }
 
 input {
   font-size: 0.7rem !important;
-} */
+}

@@ -1,5 +1,22 @@
 <?php require('./config/config.php');
 admin_login();
+
+// Database connection parameters
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "hotel_db";
+
+// Create a connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$con = $GLOBALS['conn'];
+$res = mysqli_query($con, "SELECT * FROM `rooms`");
 ?>
 
 
@@ -9,10 +26,77 @@ admin_login();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Rooms</title>
     <?php require('./partials/links.php') ?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/rooms.css">
+
+    <!-- data tables -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js">
+    </script>
+    <!--  -->
+
+    <style>
+    table.dataTable>thead>tr>th,
+    table.dataTable>thead>tr>td {
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        text-align: center;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        float: right;
+        text-align: right;
+        font-size: 0.8rem;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        border: 1px solid #aaa;
+        border-radius: 3px;
+        background-color: transparent;
+        color: inherit;
+        margin-left: 11px;
+    }
+
+    .dataTables_wrapper .dataTables_filter input:focus-visible {
+        outline: none;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 1rem;
+        font-size: .8rem;
+    }
+
+    .dataTables_wrapper .dataTables_length select {
+        border-radius: 3px;
+        padding: 5px;
+        background-color: transparent;
+        color: inherit;
+        padding: 0px;
+        font-size: .7rem;
+        cursor: pointer;
+    }
+
+    .dataTables_wrapper .dataTables_info {
+        clear: both;
+        float: left;
+        padding-top: .755em;
+        font-size: .8rem;
+        margin-bottom: 1rem;
+    }
+
+    .dataTables_wrapper .dataTables_paginate {
+        float: right;
+        text-align: right;
+        padding-top: .755em;
+        font-size: .8rem;
+        margin-bottom: 1rem;
+    }
+    </style>
+
 
 </head>
 
@@ -27,7 +111,8 @@ admin_login();
             <button class="btn btn-primary btn_add shadow-none" data-bs-toggle="modal"
                 data-bs-target="#addRoomModal">Add Room</button>
         </div>
-        <table class="table">
+
+        <table class="table display" id="data_table_2" style="width:100%">
 
             <thead>
                 <tr>
@@ -39,8 +124,25 @@ admin_login();
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody class="table_body">
-                <!-- Example row, you can add more rows dynamically -->
+            <tbody>
+                <?php
+                while ($row = mysqli_fetch_assoc($res)) {
+                    echo '<tr>
+                <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
+                <td>' . $row['room_title'] . '</td>
+                <td class="room_description_text">' . $row['room_description'] . '</td>
+                <td>' . $row['room_max_person'] . '</td>
+                <td>' . $row['per_night'] . '</td>
+                <td style="display: none;">' . $row['room_id'] . '</td>
+        
+                <td class="actions">
+                <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
+                    
+                </td>
+            </tr>';
+                }
+                ?>
             </tbody>
         </table>
     </div>
@@ -121,20 +223,43 @@ admin_login();
             </form>
         </div>
     </div>
+
     <script>
-    function get_rooms() {
+    $(document).ready(function() {
+        $('#data_table_2').DataTable({
+            paging: true,
+            pageLength: 10,
+            ordering: true,
+            order: [
+                [1, 'asc']
+            ],
+            searching: true,
+            responsive: true,
+            scrollX: false,
+            scrollY: '350px',
+            language: {
+                search: "Search Any Details:",
+                paginate: {
+                    next: '>',
+                    previous: '<'
+                }
+            }
+        });
+    });
 
-        let xhr = new XMLHttpRequest()
-        xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    // function get_rooms() {
 
-        xhr.onload = function() {
-            const table_body = document.querySelector('.table_body');
-            table_body.innerHTML = this.responseText
-            // console.log(this.responseText);
-        }
-        xhr.send('get_rooms')
-    }
+    //     let xhr = new XMLHttpRequest()
+    //     xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
+    //     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+    //     xhr.onload = function() {
+    //         const table_body = document.querySelector('.table_body');
+    //         table_body.innerHTML = this.responseText
+    //         // console.log(this.responseText);
+    //     }
+    //     xhr.send('get_rooms')
+    // }
 
 
 
@@ -241,7 +366,10 @@ admin_login();
 
             if (this.responseText == 1) {
                 alert('success', 'Added successfully!')
-                get_rooms()
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
             } else {
                 alert('error', this.responseText)
 
@@ -260,7 +388,10 @@ admin_login();
 
             if (this.responseText == 1) {
                 alert('success', 'Removed!')
-                get_rooms()
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
 
             } else {
                 alert('error', 'Someting went wrong!')
@@ -298,7 +429,10 @@ admin_login();
 
             if (this.responseText == 1) {
                 alert('success', 'Changes saved!')
-                get_rooms()
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
 
             } else {
                 alert('error', 'No Changes Made!')
@@ -313,9 +447,9 @@ admin_login();
 
 
 
-    window.onload = function() {
-        get_rooms()
-    }
+    // window.onload = function() {
+    //     get_rooms()
+    // }
     </script>
 </body>
 

@@ -46,26 +46,26 @@ if (isset($_POST['get_facilities'])) {
 
 
 
-if (isset($_POST['get_rooms'])) {
-    $res = selectAllIn('rooms');
-    $countThis = 0;
-    while ($row = mysqli_fetch_assoc($res)) {
-        echo '<tr>
-        <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
-        <td>' . $row['room_title'] . '</td>
-        <td class="room_description_text">' . $row['room_description'] . '</td>
-        <td>' . $row['room_max_person'] . '</td>
-        <td>' . $row['per_night'] . '</td>
-        <td style="display: none;">' . $row['room_id'] . '</td>
+// if (isset($_POST['get_rooms'])) {
+//     $res = selectAllIn('rooms');
+//     $countThis = 0;
+//     while ($row = mysqli_fetch_assoc($res)) {
+//         echo '<tr>
+//         <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
+//         <td>' . $row['room_title'] . '</td>
+//         <td class="room_description_text">' . $row['room_description'] . '</td>
+//         <td>' . $row['room_max_person'] . '</td>
+//         <td>' . $row['per_night'] . '</td>
+//         <td style="display: none;">' . $row['room_id'] . '</td>
 
-        <td class="actions">
-        <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
-            <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
+//         <td class="actions">
+//         <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
+//             <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
             
-        </td>
-    </tr>';
-    }
-}
+//         </td>
+//     </tr>';
+//     }
+// }
 
 // if (isset($_POST['get_users'])) {
 //     $res = selectAllIn('user_table');

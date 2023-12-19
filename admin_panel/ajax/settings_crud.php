@@ -59,8 +59,9 @@ if (isset($_POST['get_rooms'])) {
         <td style="display: none;">' . $row['room_id'] . '</td>
 
         <td class="actions">
+        <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
             <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
-            <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
+            
         </td>
     </tr>';
     }
@@ -73,7 +74,7 @@ if (isset($_POST['get_rooms'])) {
 //         <td>' . $row['user_id'] . '</td>
 //         <td>' . $row['name'] . '</td>
 //         <td>' . $row['email'] . '</td>
-        
+
 //         <td class="fw-bold" style="color: ' . ($row['is_verified'] == 1 ? 'green' : 'red') . ';">'
 //             . ($row['is_verified'] == 1 ? '<i class="bi bi-check-circle-fill"></i>  Verified' : '<i class="bi bi-file-excel-fill"></i>  Not Verified') . '</td>
 

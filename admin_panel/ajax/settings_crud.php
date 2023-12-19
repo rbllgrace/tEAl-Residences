@@ -66,26 +66,26 @@ if (isset($_POST['get_rooms'])) {
     }
 }
 
-if (isset($_POST['get_users'])) {
-    $res = selectAllIn('user_table');
-    while ($row = mysqli_fetch_assoc($res)) {
-        echo '<tr>
-        <td>' . $row['user_id'] . '</td>
-        <td>' . $row['name'] . '</td>
-        <td>' . $row['email'] . '</td>
+// if (isset($_POST['get_users'])) {
+//     $res = selectAllIn('user_table');
+//     while ($row = mysqli_fetch_assoc($res)) {
+//         echo '<tr>
+//         <td>' . $row['user_id'] . '</td>
+//         <td>' . $row['name'] . '</td>
+//         <td>' . $row['email'] . '</td>
         
-        <td class="fw-bold" style="color: ' . ($row['is_verified'] == 1 ? 'green' : 'red') . ';">'
-            . ($row['is_verified'] == 1 ? '<i class="bi bi-check-circle-fill"></i>  Verified' : '<i class="bi bi-file-excel-fill"></i>  Not Verified') . '</td>
+//         <td class="fw-bold" style="color: ' . ($row['is_verified'] == 1 ? 'green' : 'red') . ';">'
+//             . ($row['is_verified'] == 1 ? '<i class="bi bi-check-circle-fill"></i>  Verified' : '<i class="bi bi-file-excel-fill"></i>  Not Verified') . '</td>
 
-        <td>' . $row['created_at'] . '</td>
-        <td>
-            <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editUserModal"
-                onclick="get_single_user_with_id(' . $row['user_id'] . ')">Edit</button>
-            <button class="btn btn-primary shadow-none btn_del" onclick="delete_single_user(' . $row['user_id'] . ')">Delete</button>
-        </td>
-        </tr>';
-    }
-}
+//         <td>' . $row['created_at'] . '</td>
+//         <td>
+//             <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editUserModal"
+//                 onclick="get_single_user_with_id(' . $row['user_id'] . ')">Edit</button>
+//             <button class="btn btn-primary shadow-none btn_del" onclick="delete_single_user(' . $row['user_id'] . ')">Delete</button>
+//         </td>
+//         </tr>';
+//     }
+// }
 
 if (isset($_POST['get_room_by_id'])) {
     $frm_data = filteration($_POST);

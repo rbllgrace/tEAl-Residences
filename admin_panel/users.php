@@ -1,5 +1,23 @@
 <?php require('./config/config.php');
 admin_login();
+
+// Database connection parameters
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "hotel_db";
+
+// Create a connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$con = $GLOBALS['conn'];
+$res = mysqli_query($con, "SELECT * FROM `user_table`");
+
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +30,72 @@ admin_login();
     <?php require('./partials/links.php') ?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/users.css">
+
+    <!-- data tables -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js">
+    </script>
+    <!--  -->
+
+    <style>
+        table.dataTable>thead>tr>th,
+        table.dataTable>thead>tr>td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            background-color: transparent;
+            color: inherit;
+            margin-left: 11px;
+        }
+
+        .dataTables_wrapper .dataTables_filter input:focus-visible {
+            outline: none;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: .8rem;
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            border-radius: 3px;
+            padding: 5px;
+            background-color: transparent;
+            color: inherit;
+            padding: 0px;
+            font-size: .7rem;
+            cursor: pointer;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            clear: both;
+            float: left;
+            padding-top: .755em;
+            font-size: .8rem;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            float: right;
+            text-align: right;
+            padding-top: .755em;
+            font-size: .8rem;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -19,14 +103,8 @@ admin_login();
     <?php require('./partials/nav_pills.php'); ?>
 
     <div class="center">
-        <div class="top d-flex justify-content-between align-items-center">
-            <h1>Users</h1>
-            <div class="search-container d-flex gap-1">
-                <input type="text" id="userSearchInput" class="form-control shadow-none" placeholder="Search...">
-                <button onclick="searchUsers()" class="btn btn-primary shadow-none black_search">Search</button>
-            </div>
-        </div>
-        <table class="table">
+        <h1 class="mb-4">Users</h1>
+        <table class="table display" id="data_table" style="width:100%">
             <thead>
                 <tr>
                     <th>User Id</th>
@@ -37,11 +115,28 @@ admin_login();
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody class="table_body">
-
+            <tbody>
+                <?php
+                while ($row = mysqli_fetch_assoc($res)) {
+                    echo '<tr>
+                    <td>' . $row['user_id'] . '</td>
+                    <td>' . $row['name'] . '</td>
+                    <td>' . $row['email'] . '</td>
+                    
+                    <td class="fw-bold" style="color: ' . ($row['is_verified'] == 1 ? 'green' : 'red') . ';">'
+                        . ($row['is_verified'] == 1 ? '<i class="bi bi-check-circle-fill"></i>  Verified' : '<i class="bi bi-file-excel-fill"></i>  Not Verified') . '</td>
+            
+                    <td>' . $row['created_at'] . '</td>
+                    <td>
+                        <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editUserModal"
+                            onclick="get_single_user_with_id(' . $row['user_id'] . ')">Edit</button>
+                        <button class="btn btn-primary shadow-none btn_del" onclick="delete_single_user(' . $row['user_id'] . ')">Delete</button>
+                    </td>
+                    </tr>';
+                }
+                ?>
             </tbody>
         </table>
-        <div id="notFoundMessage" style="display: none; color: red;" class="text-center">User Not Found!</div>
     </div>
 
     <!-- Edit User Modal -->
@@ -60,9 +155,28 @@ admin_login();
     </div>
 
     <script>
-        window.onload = function() {
-            get_users()
-        }
+        $(document).ready(function() {
+
+            $('#data_table').DataTable({
+                paging: true, // Enable pagination
+                pageLength: 10, // Set the number of rows per page
+                ordering: true, // Enable sorting
+                order: [
+                    [1, 'asc']
+                ], // Sort by the second column in ascending order
+                searching: true, // Enable search
+                responsive: true, // Enable responsive mode
+                scrollX: false, // Disable horizontal scrolling
+                scrollY: '350px', // Set a fixed height for vertical scrolling
+                language: {
+                    search: "Search Any Details:",
+                    paginate: {
+                        next: '>',
+                        previous: '<'
+                    }
+                }
+            });
+        });
 
         function alert(type, msg) {
 
@@ -92,18 +206,6 @@ ${msg}
             }
         }
 
-        function get_users() {
-
-            let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-
-            xhr.onload = function() {
-                const table_body = document.querySelector('.table_body');
-                table_body.innerHTML = this.responseText
-            }
-            xhr.send('get_users')
-        }
 
         const modal_content_edit_user_container = document.querySelector('.modal_content_edit_user_container');
 
@@ -171,30 +273,30 @@ ${msg}
         }
 
 
-        function searchUsers() {
+        // function searchUsers() {
 
-            let input = document.getElementById('userSearchInput').value.toLowerCase();
-            let rows = document.querySelectorAll('.table_body tr');
+        //     let input = document.getElementById('userSearchInput').value.toLowerCase();
+        //     let rows = document.querySelectorAll('.table_body tr');
 
-            let userFound = false;
+        //     let userFound = false;
 
-            rows.forEach(function(row) {
-                let name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                if (name.includes(input)) {
-                    row.style.display = '';
-                    userFound = true;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
+        //     rows.forEach(function(row) {
+        //         let name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+        //         if (name.includes(input)) {
+        //             row.style.display = '';
+        //             userFound = true;
+        //         } else {
+        //             row.style.display = 'none';
+        //         }
+        //     });
 
-            let notFoundMessageElement = document.getElementById('notFoundMessage');
-            if (!userFound) {
-                notFoundMessageElement.style.display = 'block';
-            } else {
-                notFoundMessageElement.style.display = 'none';
-            }
-        }
+        //     let notFoundMessageElement = document.getElementById('notFoundMessage');
+        //     if (!userFound) {
+        //         notFoundMessageElement.style.display = 'block';
+        //     } else {
+        //         notFoundMessageElement.style.display = 'none';
+        //     }
+        // }
     </script>
 
 

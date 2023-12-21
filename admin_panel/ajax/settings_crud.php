@@ -413,8 +413,10 @@ if (isset($_POST['edit_facility_by_id'])) {
 
 if (isset($_POST['update_rooms_created_at'])) {
     // Update a row in your table
-    $sql = "UPDATE your_table_name SET some_column = 'new_value' WHERE id = 1";
+    $sql = "UPDATE rooms SET some_column = 'new_value' WHERE id = 1";
     $result = $conn->query($sql);
+
+    // code this
 }
 
 

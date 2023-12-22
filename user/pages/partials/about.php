@@ -2,7 +2,6 @@
 $why_choose_us_q = "SELECT * FROM why_choose_us_table";
 $credential_q = "SELECT * FROM credentials_table";
 
-
 $result = $conn->query($why_choose_us_q);
 $credential_result = $conn->query($credential_q);
 ?>

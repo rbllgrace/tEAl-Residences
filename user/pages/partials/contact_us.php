@@ -10,50 +10,6 @@ $result = $conn->query($sql);
 <link rel="stylesheet" href="sweetalert2.min.css">
 <!--  -->
 
-<style>
-    form {
-        padding: 30px;
-    }
-
-    .form-label {
-        margin-bottom: 0;
-        font-size: .7rem;
-    }
-
-
-    .form-control {
-        font-size: .8rem;
-    }
-
-    .btn_submit {
-        background: #008080;
-        border-color: #008080;
-
-        font-size: .8rem;
-        width: 30%;
-
-        margin-top: 5px;
-    }
-
-    .btn_submit:hover {
-        background: #0e9c9c;
-        border-color: #008080;
-    }
-
-    .error {
-        color: red;
-        font-size: .6rem;
-        position: relative;
-        top: -18px;
-    }
-
-    .error2 {
-        color: red;
-        font-size: .6rem;
-        position: relative;
-    }
-</style>
-
 <?php
 
 $name_err = $email_err = $subject_err = $message_err =  "";
@@ -173,7 +129,7 @@ $conn->close();
 
 
 <!--  Contact Us -->
-<div class="container" id="contact-us" data-aos="fade-up">
+<div class="container contact_us_container" id="contact-us" data-aos="fade-up">
     <h1 class="text-center mt-5 mb-5">Contact Us</h1>
 
     <div class="contacts_container container">

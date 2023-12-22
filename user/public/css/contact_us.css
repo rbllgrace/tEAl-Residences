@@ -1,0 +1,40 @@
+.contact_us_container form {
+  padding: 30px;
+}
+
+.contact_us_container .form-label {
+  margin-bottom: 0;
+  font-size: 0.7rem;
+}
+
+.contact_us_container .form-control {
+  font-size: 0.8rem;
+}
+
+.contact_us_container .btn_submit {
+  background: #008080;
+  border-color: #008080;
+
+  font-size: 0.8rem;
+  width: 30%;
+
+  margin-top: 5px;
+}
+
+.contact_us_container .btn_submit:hover {
+  background: #0e9c9c;
+  border-color: #008080;
+}
+
+.contact_us_container .error {
+  color: red;
+  font-size: 0.6rem;
+  position: relative;
+  top: -18px;
+}
+
+.contact_us_container .error2 {
+  color: red;
+  font-size: 0.6rem;
+  position: relative;
+}

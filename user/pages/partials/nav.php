@@ -4,34 +4,8 @@ $sql = "SELECT * FROM credentials_table";
 $result = $conn->query($sql);
 ?>
 
-<style>
-    .btn_logout {
-        color: #008080;
-        border-color: #008080;
-        font-size: .8rem;
-    }
-
-    .btn_logout:hover {
-        background: #008080;
-        border-color: #008080;
-    }
-
-    .my_booking {
-        font-size: .7rem !important;
-        width: 150px;
-    }
-
-    nav .booking_logout_container .my_bookings {
-        width: auto;
-        width: 105px;
-    }
-</style>
-
-
-
-
 <!-- navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav" data-aos="fade-up">
+<nav class="navbar navbar_container navbar-expand-lg navbar-light bg-light" id="nav" data-aos="fade-up">
     <div class="container-fluid">
         <!-- title -->
         </p>

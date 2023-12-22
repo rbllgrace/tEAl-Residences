@@ -2,7 +2,6 @@
 require('/xampp/htdocs/tEAl-Residences/user/config/db_connect.php');
 $sql2 = "SELECT * FROM credentials_table";
 $result2 = $conn->query($sql2);
-
 ?>
 
 <!--  Location -->

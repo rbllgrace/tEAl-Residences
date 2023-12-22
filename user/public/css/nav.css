@@ -1,0 +1,20 @@
+.navbar_container .btn_logout {
+  color: #008080;
+  border-color: #008080;
+  font-size: 0.8rem;
+}
+
+.navbar_container .btn_logout:hover {
+  background: #008080;
+  border-color: #008080;
+}
+
+.navbar_container .my_booking {
+  font-size: 0.7rem !important;
+  width: 150px;
+}
+
+.navbar_container .booking_logout_container .my_bookings {
+  width: auto;
+  width: 105px;
+}

@@ -1,43 +1,10 @@
 <?php require('/xampp/htdocs/tEAl-Residences/user/config/db_connect.php');
 $sql = "SELECT * FROM rooms";
 $result = $conn->query($sql);
-
-// require('/xampp/htdocs/tEAl-Residences/admin_panel/config/config.php');
-// require('/xampp/htdocs/tEAl-Residences/admin_panel/ajax/settings_crud.php');
 ?>
 
-<style>
-    img {
-        max-height: 300px;
-        width: 100%;
-    }
-
-    .custom_alert {
-        position: fixed;
-        /* top: 75px; */
-        /* right: 50px; */
-        top: 30px;
-        right: 41%;
-        font-size: 0.8rem;
-        font-weight: bold;
-        z-index: 1;
-        height: 31px;
-        display: flex;
-        align-items: center;
-    }
-
-    .alert-dismissible .btn-close {
-        position: absolute;
-        top: -9px;
-        right: 3px;
-        z-index: 2;
-        padding: 1.25rem 1rem;
-        font-size: 0.7rem;
-    }
-</style>
-
 <!-- our room -->
-<div class="our_room container" id="rooms">
+<div class="our_room our_room_container container" id="rooms">
     <h1 class="text-center mt-5 mb-5 our_room_header">Our
         Rooms</h1>
 

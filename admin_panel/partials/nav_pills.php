@@ -1,12 +1,10 @@
 <ul class="nav nav-pills flex-column">
-
     <li class="nav-item">
         <h4 class="text-left"> <a class="nav-link" aria-current="page" href="#">Admin Panel</a></h4>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" aria-current="page"
-            href="http://localhost/teal-residences/admin_panel/dashboard.php">Dashboard</a>
+        <a class="nav-link" aria-current="page" href="http://localhost/teal-residences/admin_panel/dashboard.php">Dashboard</a>
     </li>
 
     <li class="nav-item">

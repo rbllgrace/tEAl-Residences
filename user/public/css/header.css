@@ -9,6 +9,7 @@ nav .btn_reservation {
   width: 150px;
   background-color: #008080;
   color: white;
+  border: none;
 }
 
 nav .btn_reservation:hover {
@@ -42,8 +43,12 @@ nav .btn_reservation {
 }
 
 nav .nav-link {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 300;
+}
+
+nav .nav-link:hover {
+  color: #008080 !important;
 }
 
 .fixed {

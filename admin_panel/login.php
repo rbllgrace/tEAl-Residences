@@ -64,22 +64,18 @@ if (isset($_SESSION['admin_login']) && isset($_SESSION['admin_login']) == true) 
             <form method="POST">
                 <div>
                     <label for="exampleFormControlInput1" class="form-label mb-0">Admin Name</label>
-                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name"
-                        value="<?php echo $name ?>">
+                    <input type="text" class="form-control shadow-none" id="exampleFormControlInput1" name="name" value="<?php echo $name ?>">
                     <span class="error"><?php echo $nameErr; ?></span>
                 </div>
                 <div>
                     <label for="exampleFormControlInput2" class="form-label mb-0">Password</label>
-                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput2"
-                        name="password" value="<?php echo $password ?>">
+                    <input type="password" class="form-control shadow-none" id="exampleFormControlInput2" name="password" value="<?php echo $password ?>">
                     <span class="error"><?php echo $passwordErr; ?></span>
                 </div>
                 <button type="submit" class="btn btn-primary btn_login mt-2 shadow-none" name="login">Login</button>
             </form>
         </div>
     </div>
-
 </body>
-
 
 </html>

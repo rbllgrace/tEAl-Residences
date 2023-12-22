@@ -3,7 +3,6 @@
         <div class="card-body">
             <div class="gen_and_edit">
                 <h5 class="card-title">Why Choose Us Settings</h5>
-                <!-- Button trigger modal -->
                 <div class="d-flex gap-1 mb-1">
                     <button type="button" class="btn btn-primary btn_add shadow-none" data-bs-toggle="modal" data-bs-target="#addContentModal">
                         Add Content
@@ -18,9 +17,7 @@
     </div>
 </div>
 
-
-
-<!-- Edit Why Choose Modal -->
+<!-- ======================== Edit Why Choose Modal ======================== -->
 <div class="modal fade modal_edit_why_choose_us" id="editWhyChooseUs" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editWhyChooseUsLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal_content_edit_inp_container">
@@ -30,7 +27,7 @@
 </div>
 
 
-<!-- Add Content Modal -->
+<!-- ======================== Add Content Modal ======================== -->
 <div class="modal fade modal_add_content" id="addContentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addContentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="" id="form_add_why_choose_us">
@@ -69,8 +66,16 @@
 </div>
 
 <script>
+    // ======================== Variables ========================
     const body_to_get_data_why_choose_us = document.querySelector('.body_to_get_data_why_choose_us');
+    const modal_content_edit_inp_container = document.querySelector('.modal_content_edit_inp_container');
+    const icon_why = document.querySelector('.icon_why');
+    const title_why = document.querySelector('.title_why');
+    const description_why = document.querySelector('.description_why');
 
+    const form_add_why_choose_us = document.getElementById('form_add_why_choose_us')
+
+    // ======================== Get Why Choose Us Contact ========================
     function get_why_choose_us() {
         let xhr = new XMLHttpRequest()
         xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -114,8 +119,7 @@
         xhr.send('get_why_choose_us')
     }
 
-    const modal_content_edit_inp_container = document.querySelector('.modal_content_edit_inp_container');
-
+    // ======================== Get Single Why Choose Us Contact ========================
     function get_single_why_choose_us_contact_with_id(contact_id) {
         let xhr = new XMLHttpRequest()
         xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -129,6 +133,7 @@
         xhr.send('contact_id=' + contact_id + '&get_single_why_choose_us_contact_with_id')
     }
 
+    // ======================== Update Single Why Choose Us Contact By ID ========================
     function edit_why_choose_by_id(id) {
         const icon_inp_why = document.querySelector('.icon_inp_why_choose_us');
         const title_inp = document.querySelector('.title_inp_why_choose_us');
@@ -161,11 +166,7 @@
 
     }
 
-    const icon_why = document.querySelector('.icon_why');
-    const title_why = document.querySelector('.title_why');
-    const description_why = document.querySelector('.description_why');
-
-    const form_add_why_choose_us = document.getElementById('form_add_why_choose_us')
+    // ======================== Create Single Why Choose Us Contact========================
     form_add_why_choose_us.addEventListener('submit', (e) => {
         e.preventDefault()
 
@@ -193,6 +194,7 @@
             description_why.value + '&add_why_choose_us')
     })
 
+    // ======================== Ddelete Single Why Choose Us Contact By ID ========================
     function delete_single_why_choose_us(contact_id) {
         let xhr = new XMLHttpRequest()
         xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)

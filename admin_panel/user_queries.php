@@ -18,8 +18,6 @@ admin_login();
     <?php require('./partials/header.php'); ?>
     <?php require('./partials/nav_pills.php'); ?>
 
-
-
     <p class="center">User Queries</p>
 
 </body>

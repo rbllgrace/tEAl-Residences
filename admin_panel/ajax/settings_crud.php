@@ -2,7 +2,7 @@
 require('/xampp/htdocs/tEAl-Residences/admin_panel/config/config.php');
 admin_login();
 
-// get methods
+// ======================== Get Methods ========================
 if (isset($_POST['get_general'])) {
     $q = "SELECT * FROM `credentials_table` WHERE `id` =?";
     $values = [1];
@@ -41,53 +41,6 @@ if (isset($_POST['get_facilities'])) {
     echo $json_data;
 }
 
-
-
-
-
-
-// if (isset($_POST['get_rooms'])) {
-//     $res = selectAllIn('rooms');
-//     $countThis = 0;
-//     while ($row = mysqli_fetch_assoc($res)) {
-//         echo '<tr>
-//         <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
-//         <td>' . $row['room_title'] . '</td>
-//         <td class="room_description_text">' . $row['room_description'] . '</td>
-//         <td>' . $row['room_max_person'] . '</td>
-//         <td>' . $row['per_night'] . '</td>
-//         <td style="display: none;">' . $row['room_id'] . '</td>
-
-//         <td class="actions">
-//         <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
-//             <button type="button" class="btn btn-primary shadow-none btn_delete" onclick="remove_room(' . $row['room_id'] . ')"><i class="bi bi-trash"></i></button>
-
-//         </td>
-//     </tr>';
-//     }
-// }
-
-// if (isset($_POST['get_users'])) {
-//     $res = selectAllIn('user_table');
-//     while ($row = mysqli_fetch_assoc($res)) {
-//         echo '<tr>
-//         <td>' . $row['user_id'] . '</td>
-//         <td>' . $row['name'] . '</td>
-//         <td>' . $row['email'] . '</td>
-
-//         <td class="fw-bold" style="color: ' . ($row['is_verified'] == 1 ? 'green' : 'red') . ';">'
-//             . ($row['is_verified'] == 1 ? '<i class="bi bi-check-circle-fill"></i>  Verified' : '<i class="bi bi-file-excel-fill"></i>  Not Verified') . '</td>
-
-//         <td>' . $row['created_at'] . '</td>
-//         <td>
-//             <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editUserModal"
-//                 onclick="get_single_user_with_id(' . $row['user_id'] . ')">Edit</button>
-//             <button class="btn btn-primary shadow-none btn_del" onclick="delete_single_user(' . $row['user_id'] . ')">Delete</button>
-//         </td>
-//         </tr>';
-//     }
-// }
-
 if (isset($_POST['get_room_by_id'])) {
     $frm_data = filteration($_POST);
 
@@ -118,8 +71,7 @@ if (isset($_POST['get_room_by_id'])) {
             $row['per_night']
         ];
 
-        $q = "INSERT INTO `ready_to_reserve_table`(`room_picture`, `room_title`, `room_desc`, `room_max`, `per_night`) VALUES
-(?,?,?,?,?) ";
+        $q = "INSERT INTO `ready_to_reserve_table`(`room_picture`, `room_title`, `room_desc`, `room_max`, `per_night`) VALUES (?,?,?,?,?) ";
 
         $res = insert($q, $values, 'sssss');
         echo $res;
@@ -147,8 +99,7 @@ if (isset($_POST['get_rooms_to_serve'])) {
         <button type="button" class="btn btn-primary shadow-none btn_delete"
             onclick="remove_reservation(' . $row['id'] . ')"><i class="bi bi-trash"></i></button>
 
-    </td>
-</tr>';
+    </td> </tr>';
     }
 }
 
@@ -163,8 +114,6 @@ if (isset($_POST['get_total'])) {
     echo $sum;
 }
 
-
-
 if (isset($_POST['get_single_contact_with_id'])) {
     $frm_data = filteration_without_special_chars($_POST);
 
@@ -173,8 +122,7 @@ if (isset($_POST['get_single_contact_with_id'])) {
 
     echo '<div class="modal-header">
     <h1 class="modal-title fs-5" id="contactAboutUsModalLabel">Edit Contact</h1>
-    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
+    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button> </div>
 <div class="modal-body">
     <form method="POST">
         <div class="mb-1">
@@ -302,12 +250,9 @@ if (isset($_POST['get_single_facility_with_id'])) {
 </div>';
 }
 
-// -------------------------- get methods end --------------------------
+// ======================== Get Methods End ========================
 
-
-
-
-// update methods
+// ======================== Update Methods ========================
 if (isset($_POST['update_general'])) {
     $frm_data = filteration_without_special_chars($_POST);
     $q = "UPDATE `credentials_table` SET `site_title` =?, `who_we_are` =?, `location` =? WHERE `id` =?";
@@ -339,8 +284,6 @@ if (isset($_POST['update_contact'])) {
     echo $res5;
 }
 
-
-
 if (isset($_POST['edit_room'])) {
     $frm_data = filteration($_POST);
     // Assuming 'room_picture', 'room_title', 'room_description', 'room_max_person', and 'per_night' are the column names
@@ -364,8 +307,6 @@ WHERE `room_id` = ?";
     $res = update($q, $values, 'sssssi'); // Adjust the 'sssssi' based on the data types of your columns
     echo $res;
 }
-
-
 
 if (isset($_POST['edit_contact_by_id'])) {
     $frm_data = filteration_without_special_chars($_POST);
@@ -416,20 +357,15 @@ if (isset($_POST['update_rooms_created_at'])) {
     $sql = "UPDATE rooms SET some_column = 'new_value' WHERE id = 1";
     $result = $conn->query($sql);
 
-    // code this
+    // code this bugged
 }
 
-
-// -------------------------- update methods end --------------------------
-
+// ======================== Update Methods End ========================
 
 
-
-
+// ======================== Create Methods ========================
 
 if (isset($_POST['add_room'])) {
-    // $frm_data = filteration($_POST);
-    // upload_image($_FILES['picture'], ROOM_IMAGES_FOLDER);
 
     $title = $_POST["title"];
     $description = $_POST["description"];
@@ -501,13 +437,11 @@ if (isset($_POST['add_facility'])) {
     echo $res;
 }
 
-
-// -------------------------- create methods end --------------------------
-
-
-// delete methods
+// ======================== Create Methods End ========================
 
 
+
+// ======================== Delete Methods ========================
 if (isset($_POST['remove_room_val'])) {
     $frm_data = filteration($_POST);
     $values = [$frm_data['remove_room_val']];
@@ -564,5 +498,4 @@ if (isset($_POST['delete_single_facility'])) {
     $res = delete($q, $values, 'i');
     echo $res;
 }
-
-// -------------------------- delete methods end --------------------------
+// ======================== Delete Methods End ========================

@@ -38,7 +38,7 @@ admin_login();
         </div>
     </div>
 
-    <!-- Edit Why Choose Modal -->
+    <!-- ======================== Edit Why Choose Modal ======================== -->
     <div class="modal fade modal_edit_why_choose_us" id="edit_facility" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="edit_facilityLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content modal_content_edit_inp_container">
@@ -47,7 +47,8 @@ admin_login();
         </div>
     </div>
 
-    <!-- Modal -->
+
+    <!-- ======================== Add Why Choose Modal ======================== -->
     <div class="modal fade modal_add_facility" id="facitlitiesAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="facitlitiesAddModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form action="" id="form_add_facility">
@@ -78,10 +79,14 @@ admin_login();
         </div>
     </div>
 
-
     <script>
         const body_to_get_data_facilities = document.querySelector('.body_to_get_data_facilities');
+        const form_add_facility = document.getElementById('form_add_facility')
+        const icon_why = document.querySelector('.icon_why');
+        const title_why = document.querySelector('.title_why');
+        const modal_content_edit_inp_container = document.querySelector('.modal_content_edit_inp_container');
 
+        // ======================== Get All Facilities ========================
         function get_facilities() {
             let xhr = new XMLHttpRequest()
             xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -120,14 +125,11 @@ admin_login();
             xhr.send('get_facilities')
         }
 
+        // ======================== Alert ========================
         function alert(type, msg) {
-
             let base_class = (type == 'success') ? 'alert-success' : 'alert-danger'
             let element = document.createElement('div')
-            element.innerHTML = `<div class="alert ${base_class} alert-dismissible fade show custom_alert" role="alert">
-    ${msg}
-<button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>`
+            element.innerHTML = `<div class="alert ${base_class} alert-dismissible fade show custom_alert" role="alert"> ${msg} <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button> </div>`
             document.body.append(element)
 
             // Use setTimeout to remove the alert after the specified duration
@@ -136,10 +138,7 @@ admin_login();
             }, 3000);
         }
 
-        const form_add_facility = document.getElementById('form_add_facility')
-        const icon_why = document.querySelector('.icon_why');
-        const title_why = document.querySelector('.title_why');
-
+        // ======================== Add Single Facility ========================
         form_add_facility.addEventListener('submit', (e) => {
             e.preventDefault()
 
@@ -166,6 +165,8 @@ admin_login();
             xhr.send('icon_why=' + icon_why.value + '&title_why=' + title_why.value + '&add_facility')
         })
 
+
+        // ======================== Delete Single Facility ========================
         function delete_single_facility(contact_id) {
             let xhr = new XMLHttpRequest()
             xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -184,9 +185,8 @@ admin_login();
 
             xhr.send('contact_id=' + contact_id + '&delete_single_facility')
         }
-        const modal_content_edit_inp_container = document.querySelector('.modal_content_edit_inp_container');
 
-
+        // ======================== Get Single Facility ========================
         function get_single_facility_with_id(contact_id) {
             let xhr = new XMLHttpRequest()
             xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -200,6 +200,7 @@ admin_login();
             xhr.send('contact_id=' + contact_id + '&get_single_facility_with_id')
         }
 
+        // ======================== Update Single Facility ========================
         function edit_facility_by_id(id) {
             const icon_inp_why = document.querySelector('.icon_inp_fac');
             const title_inp = document.querySelector('.title_inp_fac');
@@ -229,7 +230,6 @@ admin_login();
                 '&edit_facility_by_id')
 
         }
-
 
         window.onload = function() {
             get_facilities()

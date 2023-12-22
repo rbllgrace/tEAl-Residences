@@ -38,107 +38,13 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
     </script>
     <!--  -->
 
-    <style>
-        table.dataTable>thead>tr>th,
-        table.dataTable>thead>tr>td {
-            padding: 10px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .dataTables_wrapper .dataTables_filter {
-            float: right;
-            text-align: right;
-            font-size: 0.8rem;
-        }
-
-        .dataTables_wrapper .dataTables_filter input {
-            border: 1px solid #aaa;
-            border-radius: 3px;
-            background-color: transparent;
-            color: inherit;
-            margin-left: 11px;
-        }
-
-        .dataTables_wrapper .dataTables_filter input:focus-visible {
-            outline: none;
-        }
-
-        label {
-            display: inline-block;
-            margin-bottom: 1rem;
-            font-size: .8rem;
-        }
-
-        .dataTables_wrapper .dataTables_length select {
-            border-radius: 3px;
-            padding: 5px;
-            background-color: transparent;
-            color: inherit;
-            padding: 0px;
-            font-size: .7rem;
-            cursor: pointer;
-        }
-
-        .dataTables_wrapper .dataTables_info {
-            clear: both;
-            float: left;
-            padding-top: .755em;
-            font-size: .8rem;
-            margin-bottom: 1rem;
-        }
-
-        .dataTables_wrapper .dataTables_paginate {
-            float: right;
-            text-align: right;
-            padding-top: .755em;
-            font-size: .8rem;
-            margin-bottom: 1rem;
-        }
-
-        .actions {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-            vertical-align: middle;
-            height: 113px;
-            justify-content: center;
-
-        }
-
-        th {
-            font-size: 0.8rem;
-            text-align: center;
-        }
-
-        td {
-            font-size: 0.8rem;
-            text-align: center;
-
-            vertical-align: middle;
-        }
-
-        .btn_edit {
-            padding: 2px 10px;
-        }
-
-        .room_description_text {
-            font-size: 0.7rem;
-            width: 300px;
-        }
-
-        input {
-            font-size: 0.7rem !important;
-        }
-    </style>
-
-
+    <!-- data tables css -->
+    <link rel="stylesheet" href="./public/css/data_tables.css">
 </head>
 
 <body>
     <?php require('./partials/header.php'); ?>
     <?php require('./partials/nav_pills.php'); ?>
-
 
     <div class="center">
         <div class="top d-flex justify-content-between align-items-center">
@@ -162,8 +68,6 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             </thead>
             <tbody>
                 <?php
-
-
 
                 while ($row = mysqli_fetch_assoc($res)) {
 
@@ -199,8 +103,6 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             </tbody>
         </table>
     </div>
-
-
 
     <!-- Add Room Modal -->
     <div class="modal fade my_modal_add_room" data-bs-backdrop="static" data-bs-keyboard="false" id="addRoomModal" tabindex="-1" aria-labelledby="addRoomModalLabel" aria-hidden="true">
@@ -271,6 +173,9 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
     </div>
 
     <script>
+        // ======================== Variables ========================
+        const modal_form_add = document.getElementById('modal_form_add');
+
         $(document).ready(function() {
 
             $('#data_table').DataTable({
@@ -293,22 +198,8 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
                 }
             });
         });
-        // function get_rooms() {
 
-        //     let xhr = new XMLHttpRequest()
-        //     xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
-        //     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-
-        //     xhr.onload = function() {
-        //         const table_body = document.querySelector('.table_body');
-        //         table_body.innerHTML = this.responseText
-        //         // console.log(this.responseText);
-        //     }
-        //     xhr.send('get_rooms')
-        // }
-
-
-
+        // ======================== Show Modal ========================
         function show_modal(button) {
             // Fetch data from the row
             const row = button.closest('tr');
@@ -375,6 +266,7 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             add_room(picture, title, description, max, night)
         })
 
+        // ======================== Alert ========================
         function alert(type, msg) {
 
             let base_class = (type == 'success') ? 'alert-success' : 'alert-danger'
@@ -391,6 +283,7 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             }, 2000);
         }
 
+        // ======================== Add Room ========================
         function add_room(picture, title, description, max, per_night) {
 
             let data = new FormData()
@@ -425,6 +318,7 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
 
         }
 
+        // ======================== Remove Room ========================
         function remove_room(val) {
             let xhr = new XMLHttpRequest()
             xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -447,12 +341,13 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             xhr.send('remove_room_val=' + val)
         }
 
-        const modal_form_add = document.getElementById('modal_form_add');
+        // ======================== Add Room ========================
         modal_form_add.addEventListener('submit', (e) => {
             e.preventDefault()
         })
 
 
+        // ======================== Update Room ========================
         function edit_room(val) {
             let class_file = document.querySelector('.class_file');
             const class_title = document.querySelector('.class_title');
@@ -490,12 +385,6 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
                 class_description.value + '&class_max=' + class_max.value + '&class_night=' + class_night.value +
                 '&edit_room=' + val)
         }
-
-
-
-        // window.onload = function() {
-        //     get_rooms()
-        // }
     </script>
 </body>
 

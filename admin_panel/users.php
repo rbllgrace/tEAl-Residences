@@ -17,7 +17,6 @@ if ($conn->connect_error) {
 
 $con = $GLOBALS['conn'];
 $res = mysqli_query($con, "SELECT * FROM `user_table`");
-
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +29,7 @@ $res = mysqli_query($con, "SELECT * FROM `user_table`");
     <?php require('./partials/links.php') ?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/users.css">
+    <link rel="stylesheet" href="./public/css/data_tables.css">
 
     <!-- data tables -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -37,66 +37,6 @@ $res = mysqli_query($con, "SELECT * FROM `user_table`");
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js">
     </script>
     <!--  -->
-
-    <style>
-        table.dataTable>thead>tr>th,
-        table.dataTable>thead>tr>td {
-            padding: 10px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .dataTables_wrapper .dataTables_filter {
-            float: right;
-            text-align: right;
-            font-size: 0.8rem;
-        }
-
-        .dataTables_wrapper .dataTables_filter input {
-            border: 1px solid #aaa;
-            border-radius: 3px;
-            background-color: transparent;
-            color: inherit;
-            margin-left: 11px;
-        }
-
-        .dataTables_wrapper .dataTables_filter input:focus-visible {
-            outline: none;
-        }
-
-        label {
-            display: inline-block;
-            margin-bottom: 1rem;
-            font-size: .8rem;
-        }
-
-        .dataTables_wrapper .dataTables_length select {
-            border-radius: 3px;
-            padding: 5px;
-            background-color: transparent;
-            color: inherit;
-            padding: 0px;
-            font-size: .7rem;
-            cursor: pointer;
-        }
-
-        .dataTables_wrapper .dataTables_info {
-            clear: both;
-            float: left;
-            padding-top: .755em;
-            font-size: .8rem;
-            margin-bottom: 1rem;
-        }
-
-        .dataTables_wrapper .dataTables_paginate {
-            float: right;
-            text-align: right;
-            padding-top: .755em;
-            font-size: .8rem;
-            margin-bottom: 1rem;
-        }
-    </style>
-
 
 </head>
 

@@ -3,7 +3,6 @@
         <div class="card-body">
             <div class="gen_and_edit">
                 <h5 class="card-title">Contact Us Settings</h5>
-                <!-- Button trigger modal -->
                 <div class="d-flex gap-1 mb-1">
                     <button type="button" class="btn btn-primary btn_add shadow-none" data-bs-toggle="modal" data-bs-target="#contactAboutUsModal">
                         Add Contact
@@ -18,7 +17,7 @@
     </div>
 </div>
 
-<!-- Contact Us Modal -->
+<!-- ======================== Contact Us Modal ======================== -->
 <div class="modal fade my_modal_add_contact" data-bs-backdrop="static" data-bs-keyboard="false" id="contactAboutUsModal" tabindex="-1" aria-labelledby="contactAboutUsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="" id="form_add_contact">
@@ -46,16 +45,12 @@
                     <button type="submit" class="btn btn-primary btn_edit shadow-none">Add
                         Contact</button>
                 </div>
+            </div>
         </form>
-
     </div>
-    </form>
-</div>
 </div>
 
-
-
-<!-- Edit Contact Modal -->
+<!-- ======================== Edit Contact Modal ======================== -->
 <div class="modal fade my_modal_edit_contact" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal_content_customized">
@@ -65,8 +60,14 @@
 </div>
 
 <script>
+    // ======================== Variables ========================
     const body_to_get_data = document.querySelector('.body_to_get_data');
+    const content = document.querySelector('.content');
+    const icon = document.querySelector('.icon');
+    const form_add_contact = document.getElementById('form_add_contact')
+    const modal_content_customized = document.querySelector('.modal_content_customized');
 
+    // ======================== Get All Contacts ========================
     function get_contacts() {
         let xhr = new XMLHttpRequest()
         xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -96,11 +97,7 @@
         xhr.send('get_contacts')
     }
 
-
-    const content = document.querySelector('.content');
-    const icon = document.querySelector('.icon');
-
-    const form_add_contact = document.getElementById('form_add_contact')
+    // ======================== Add Single Contact ========================
     form_add_contact.addEventListener('submit', (e) => {
         e.preventDefault()
 
@@ -127,6 +124,7 @@
         xhr.send('content=' + content.value + '&icon=' + icon.value + '&add_contact')
     })
 
+    // ======================== Delete Single Contact ========================
     function delete_single_contact(contact_id) {
         let xhr = new XMLHttpRequest()
         xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -146,8 +144,7 @@
         xhr.send('contact_id=' + contact_id + '&delete_single_contact')
     }
 
-    const modal_content_customized = document.querySelector('.modal_content_customized');
-
+    // ======================== Get Single Contact ========================
     function get_single_contact_with_id(contact_id) {
         let xhr = new XMLHttpRequest()
         xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
@@ -161,8 +158,7 @@
         xhr.send('contact_id=' + contact_id + '&get_single_contact_with_id')
     }
 
-
-
+    // ======================== Update Single Contact ========================
     function edit_contact_by_id(contact_id) {
         const icon_inp = document.querySelector('.icon_inp');
         const content_inp = document.querySelector('.content_inp');

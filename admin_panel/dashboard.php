@@ -2,7 +2,6 @@
 admin_login();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 

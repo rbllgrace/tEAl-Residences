@@ -3,6 +3,7 @@ table.dataTable > thead > tr > td {
   padding: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   text-align: center;
+  font-size: 0.7rem;
 }
 
 .dataTables_wrapper .dataTables_filter {
@@ -64,27 +65,31 @@ label {
   justify-content: center;
 }
 
-th {
-  font-size: 0.8rem;
-  text-align: center;
-}
-
 td {
-  font-size: 0.8rem;
   text-align: center;
 
   vertical-align: middle;
 }
 
 .btn_edit {
-  padding: 2px 10px;
+  padding: 2px 5px;
 }
 
 .room_description_text {
-  font-size: 0.7rem;
-  width: 300px;
+  font-size: 0.6rem;
+  width: 240px;
 }
 
 input {
   font-size: 0.7rem !important;
+}
+
+.small {
+  width: 90px;
+  font-size: 0.6rem;
+}
+
+.date {
+  font-size: 0.5rem;
+  font-weight: bold;
 }

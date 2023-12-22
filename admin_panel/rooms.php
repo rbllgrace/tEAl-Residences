@@ -87,10 +87,10 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
                 <td><img src="http://localhost/teal-residences/user/public/images/' . $row['room_picture'] . '" alt="Room Picture" width="150"></td>
                 <td>' . $row['room_title'] . '</td>
                 <td class="room_description_text">' . $row['room_description'] . '</td>
-                <td>' . $row['room_max_person'] . '</td>
-                <td>' . $row['per_night'] . '</td>
-                <td>' . $simpleDateTimeCreatedAt . '</td>
-                <td>' . $simpleDateTime . '</td>
+                <td class="small">' . $row['room_max_person'] . '</td>
+                <td class="small">' . $row['per_night'] . '</td>
+                <td class="date">' . $simpleDateTimeCreatedAt . '</td>
+                <td class="date">' . $simpleDateTime . '</td>
         
                 <td class="actions">
                 <button type="button" class="btn btn-primary shadow-none btn_edit" onclick="show_modal(this)"><i class="bi bi-pencil-square"></i></button>
@@ -208,7 +208,7 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             let imgElement = new DOMParser().parseFromString(row.cells[0].innerHTML, 'text/html').body.firstChild;
             let imgSrc = imgElement.src;
 
-            const id = row.cells[5].innerHTML
+            const id = row.cells[3].innerHTML
 
             const roomPicture = row.cells[0].innerHTML;
             const roomTitle = row.cells[1].innerHTML;
@@ -355,8 +355,6 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             const class_description = document.querySelector('.class_description');
             const class_max = document.querySelector('.class_max');
             const class_night = document.querySelector('.class_night');
-
-
 
             let xhr = new XMLHttpRequest()
             xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)

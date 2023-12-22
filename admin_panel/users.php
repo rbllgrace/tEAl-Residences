@@ -71,8 +71,8 @@ $res = mysqli_query($con, "SELECT * FROM `user_table`");
                     <td>' . $row['created_at'] . '</td>
                     <td>
                         <button class="btn btn-primary shadow-none btn_edit" data-bs-toggle="modal" data-bs-target="#editUserModal"
-                            onclick="get_single_user_with_id(' . $row['user_id'] . ')">Edit</button>
-                        <button class="btn btn-primary shadow-none btn_del" onclick="delete_single_user(' . $row['user_id'] . ')">Delete</button>
+                            onclick="get_single_user_with_id(' . $row['user_id'] . ')"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn btn-primary shadow-none btn_del" onclick="delete_single_user(' . $row['user_id'] . ')"><i class="bi bi-trash"></i></button>
                     </td>
                     </tr>';
                 }

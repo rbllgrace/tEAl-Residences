@@ -24,7 +24,7 @@
 }
 
 .nav-pills {
-  width: 250px;
+  width: 200px;
   text-align: center;
 
   position: fixed;
@@ -34,15 +34,23 @@
   border-top: 1px solid white;
 }
 
+.nav-pills .nav_title {
+  font-size: 1.2rem;
+}
+
+.nav-pills .nav_item {
+  font-size: 0.8rem;
+}
+
 .nav-pills .nav-link {
   color: white;
 }
 
 .center {
-  margin-left: 278px;
+  margin-left: 215px;
   margin-top: 5%;
   padding-right: 25px;
-  margin-top: 82px !important;
+  margin-top: 60px;
 }
 
 .gen_and_edit {
@@ -85,7 +93,7 @@
   background: #11151c;
   border-color: #11151c;
   font-size: 0.8rem;
-  padding: 2px 10px;
+  padding: 2px 7px;
 }
 
 .btn_edit:hover {
@@ -100,7 +108,7 @@
   font-size: 0.8rem;
   margin: 0;
   padding: 0;
-  padding: 2px 10px;
+  padding: 2px 7px;
 
   /* position: absolute;
   right: 0.8rem; */

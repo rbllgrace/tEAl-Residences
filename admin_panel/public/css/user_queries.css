@@ -1,0 +1,23 @@
+table.dataTable > thead > tr > th,
+table.dataTable > thead > tr > td {
+  text-align: center;
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+label {
+  display: inline-block;
+  font-size: 0.8rem;
+}
+
+.dataTables_wrapper .dataTables_info {
+  font-size: 0.8rem;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  font-size: 0.8rem;
+}

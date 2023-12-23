@@ -498,4 +498,19 @@ if (isset($_POST['delete_single_facility'])) {
     $res = delete($q, $values, 'i');
     echo $res;
 }
+
+if (isset($_POST['remove_single_user_query_id'])) {
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['remove_single_user_query_id']];
+    $q = "DELETE FROM `user_queries_table` WHERE `id` =?";
+    $res = delete($q, $values, 'i');
+    echo $res;
+}
+
+if (isset($_POST['clear_all_queries'])) {
+    $q = "DELETE FROM user_queries_table";
+    $res = delete_single_table($q);
+    echo $res;
+}
+
 // ======================== Delete Methods End ========================

@@ -19,7 +19,6 @@ $con = $GLOBALS['conn'];
 $res = mysqli_query($con, "SELECT * FROM `rooms`");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +27,8 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rooms</title>
     <?php require('./partials/links.php') ?>
-    <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/rooms.css">
+    <link rel="stylesheet" href="./public/css/common.css">
 
     <!-- data tables -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -118,26 +117,40 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
                         <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold;">Picture</p>
                         <input required class="form-control form-control-sm shadow-none picture" type="file" accept="image/*">
 
-                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Title
-                        </p>
+                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Title</p>
                         <input required type="text" class="form-control shadow-none title" name="room_title_inp">
 
-                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room
-                            Description </p>
-                        <input required type="text" class="form-control shadow-none description" name="room_description_inp">
+                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Description </p>
+                        <!-- <input required type="text" class="form-control shadow-none description" name="room_description_inp"> -->
+                        <textarea style="font-size: .8rem;" class="form-control description shadow-none" id="exampleFormControlTextarea1" rows="5" required name="room_description_inp"></textarea>
 
-                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Max
-                            Person </p>
+                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Max Person </p>
                         <input required type="text" class="form-control shadow-none max" name="room_max_person_inp">
 
-                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Price
-                            per
-                            Night</p>
-
+                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Price per Night</p>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">₱</span>
                             <input required type="text" class="form-control shadow-none night" aria-describedby="basic-addon1" name="room_per_night_inp">
                         </div>
+
+                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Facilities</p>
+                        <?php
+                        $res = mysqli_query($con, "SELECT * FROM `facilities_table`");
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            echo '
+                                <div class="checkbox_container d-flex align-items-center">
+                                    <div class="form-check d-flex gap-1">
+                                        <input class="form-check-input shadow-none" value="' . $row['item'] . '" name="facilities" type="checkbox" id="check' . $row['id'] . '" role="button">
+                                        <label style="margin-bottom: 0px;" class="form-check-label" for="check' . $row['id'] . '" role="button">
+                                            ' . $row['item'] . '
+                                        </label>
+                                    </div>
+                                </div>
+                            ';
+                        }
+                        ?>
+
+
                         <!--  -->
                     </div>
                     <div class="modal-footer">
@@ -162,11 +175,6 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
                     <div class="modal-body modal-body-edit">
 
                     </div>
-                    <!-- <div class="modal-footer">
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn_edit shadow-none">Save</button>
-                        </div>
-                    </div> -->
                 </div>
             </form>
         </div>
@@ -219,36 +227,36 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             // Populate the modal with data
             const modalBody = document.querySelector('.modal-body-edit');
             modalBody.innerHTML = `
-        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold;">Picture</p>
-            <div>${roomPicture}</div>
-            <div><input class="form-control form-control-sm shadow-none mt-1 class_file"  type="file" accept="image/*" value="qwe" required></div>
+                    <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold;">Picture</p>
+                        <div>${roomPicture}</div>
+                        <div><input class="form-control form-control-sm shadow-none mt-1 class_file"  type="file" accept="image/*" value="qwe" required></div>
 
-            <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Picture File</p>
-            <div><input  type="text" class="form-control shadow-none class_img_file" value="${imgSrc}"></div>
-            
-        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Title</p>
-            <div><input  type="text" class="form-control shadow-none class_title" value="${roomTitle}"></div>
-            
-        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Description</p>
-            <div><input  type="text" class="form-control shadow-none class_description" value="${roomDescription}"></div>
+                        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Picture File</p>
+                        <div><input  type="text" class="form-control shadow-none class_img_file" value="${imgSrc}"></div>
+                        
+                    <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Title</p>
+                        <div><input  type="text" class="form-control shadow-none class_title" value="${roomTitle}"></div>
+                        
+                    <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Description</p>
+                        <div><input  type="text" class="form-control shadow-none class_description" value="${roomDescription}"></div>
 
-        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Max Person</p>
-            <div><input  type="text" class="form-control shadow-none class_max" value="${roomMaxPerson}"></div>
+                    <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Max Person</p>
+                        <div><input  type="text" class="form-control shadow-none class_max" value="${roomMaxPerson}"></div>
 
-        <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Price per Night</p>
+                    <p style="font-size: .7rem; margin-bottom: 0; font-weight: bold; margin-top: 1rem;">Room Price per Night</p>
 
 
-            <div class="input-group">
-  <span class="input-group-text" id="basic-addon1">₱</span>
-  <input type="text" class="form-control shadow-none class_night" aria-describedby="basic-addon1" value="${roomPricePerNight}">
-</div>
-        `;
+                        <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">₱</span>
+                    <input type="text" class="form-control shadow-none class_night" aria-describedby="basic-addon1" value="${roomPricePerNight}">
+                    </div>
+                `;
 
             modalBody.innerHTML += ` <div class="modal-footer">
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn_edit shadow-none" onclick="edit_room(${id})">Save</button>
-                        </div>
-                    </div>`;
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary btn_edit shadow-none" onclick="edit_room(${id})">Save</button>
+                            </div>
+                        </div>`;
 
             // Show the modal
             const editModal = new bootstrap.Modal(document.getElementById('editModal'));
@@ -256,6 +264,8 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
         }
 
         const form_add_room = document.getElementById('form_add_room');
+
+
         form_add_room.addEventListener('submit', (e) => {
             e.preventDefault()
             const picture = document.querySelector('.picture');
@@ -272,9 +282,9 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             let base_class = (type == 'success') ? 'alert-success' : 'alert-danger'
             let element = document.createElement('div')
             element.innerHTML = `<div class="alert ${base_class} alert-dismissible fade show custom_alert" role="alert">
-          ${msg}
-      <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>`
+                ${msg}
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>`
             document.body.append(element)
 
             // Use setTimeout to remove the alert after the specified duration
@@ -294,25 +304,35 @@ $res = mysqli_query($con, "SELECT * FROM `rooms`");
             data.append('per_night', per_night)
             data.append('add_room', '')
 
+            let facilities = []
+            form_add_room.elements['facilities'].forEach(el => {
+                if (el.checked) {
+                    facilities.push(el.value)
+                }
+            });
+
+            data.append('facilities', JSON.stringify(facilities))
+
 
             let xhr = new XMLHttpRequest()
             xhr.open('POST', 'http://localhost/teal-residences/admin_panel/ajax/settings_crud.php', true)
 
             xhr.onload = function() {
-                let my_modal = document.querySelector('.my_modal_add_room')
-                let modal = bootstrap.Modal.getInstance(my_modal)
-                modal.hide()
+                console.log(this.responseText);
+                // let my_modal = document.querySelector('.my_modal_add_room')
+                // let modal = bootstrap.Modal.getInstance(my_modal)
+                // modal.hide()
 
-                if (this.responseText == 1) {
-                    alert('success', 'Added successfully!')
+                // if (this.responseText == 1) {
+                //     alert('success', 'Added successfully!')
 
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 500);
-                } else {
-                    alert('error', this.responseText)
+                //     setTimeout(() => {
+                //         window.location.reload();
+                //     }, 500);
+                // } else {
+                //     alert('error', this.responseText)
 
-                }
+                // }
             }
             xhr.send(data)
 

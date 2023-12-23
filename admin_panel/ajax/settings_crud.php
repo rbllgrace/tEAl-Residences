@@ -367,50 +367,54 @@ if (isset($_POST['edit_facility_by_id'])) {
 
 if (isset($_POST['add_room'])) {
 
-    $title = $_POST["title"];
-    $description = $_POST["description"];
-    $max = $_POST["max"];
-    $per_night = $_POST["per_night"];
+    // $facilities = $_POST['facilities'];
+    $facilities = filteration(json_decode($_POST['facilities']));
+    print_r($facilities);
 
-    $file = $_FILES["picture"];
+    //     $title = $_POST["title"];
+    //     $description = $_POST["description"];
+    //     $max = $_POST["max"];
+    //     $per_night = $_POST["per_night"];
 
-    // File properties
-    $fileName = $file["name"];
-    $fileTmpName = $file["tmp_name"];
-    $fileSize = $file["size"];
-    $fileError = $file["error"];
+    //     $file = $_FILES["picture"];
 
-    // File extension
-    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    //     // File properties
+    //     $fileName = $file["name"];
+    //     $fileTmpName = $file["tmp_name"];
+    //     $fileSize = $file["size"];
+    //     $fileError = $file["error"];
 
-    // Allowed file types
-    $allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+    //     // File extension
+    //     $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-    if (in_array($fileExt, $allowedExtensions)) {
-        if ($fileError === 0) {
-            // Specify the directory where you want to save the uploaded files
-            $uploadDirectory = "C:/xampp/htdocs/tEAl-Residences/user/public/images/";
+    //     // Allowed file types
+    //     $allowedExtensions = ["jpg", "jpeg", "png", "webp"];
 
-            // Move the uploaded file to the specified directory
-            $destination = $uploadDirectory . $fileName;
-            move_uploaded_file($fileTmpName, $destination);
+    //     if (in_array($fileExt, $allowedExtensions)) {
+    //         if ($fileError === 0) {
+    //             // Specify the directory where you want to save the uploaded files
+    //             $uploadDirectory = "C:/xampp/htdocs/tEAl-Residences/user/public/images/";
 
-            // Insert into database with the file path
-            $sql = "INSERT INTO rooms (room_title, room_description, room_max_person, per_night, room_picture) VALUES (?, ?, ?, ?,
-?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssss", $title, $description, $max, $per_night, $fileName);
-            $stmt->execute();
+    //             // Move the uploaded file to the specified directory
+    //             $destination = $uploadDirectory . $fileName;
+    //             move_uploaded_file($fileTmpName, $destination);
 
-            echo 1;
-        } else {
-            echo "Error uploading file.";
-        }
-    } else {
-        echo "Invalid file type. Allowed types: " . implode(", ", $allowedExtensions);
-    }
+    //             // Insert into database with the file path
+    //             $sql = "INSERT INTO rooms (room_title, room_description, room_max_person, per_night, room_picture) VALUES (?, ?, ?, ?,
+    // ?)";
+    //             $stmt = $conn->prepare($sql);
+    //             $stmt->bind_param("sssss", $title, $description, $max, $per_night, $fileName);
+    //             $stmt->execute();
 
-    $conn->close();
+    //             echo 1;
+    //         } else {
+    //             echo "Error uploading file.";
+    //         }
+    //     } else {
+    //         echo "Invalid file type. Allowed types: " . implode(", ", $allowedExtensions);
+    //     }
+
+    //     $conn->close();
 }
 
 if (isset($_POST['add_contact'])) {

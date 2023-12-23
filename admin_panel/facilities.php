@@ -18,7 +18,7 @@ admin_login();
     <?php require('./partials/header.php'); ?>
     <?php require('./partials/nav_pills.php'); ?>
 
-    <div class="center mt-3">
+    <div class="center">
         <div class="card">
             <div class="card-body">
                 <div class="gen_and_edit">

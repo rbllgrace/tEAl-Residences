@@ -43,8 +43,8 @@ function sendConfirmationEmail($userEmail, $name, $subject, $message)
     $mail->Port = 587; // Change to 465 if using 'ssl'
 
     // Sender and recipient
-    $mail->setFrom($userEmail, $subject);
-    $mail->addAddress($userEmail);
+    $mail->setFrom($userEmail, $name);
+    $mail->addAddress('noreply050623@gmail.com');
 
     // Email content
     $mail->isHTML(true);
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Show message to the user using SweetAlert2
             echo "<script>
             Swal.fire({
-                title: 'Query Sent',
+                title: 'Query Successfully Sent, Thank you!',
                 icon: 'success',
                 confirmButtonText: 'OK'
             }).then(function() {

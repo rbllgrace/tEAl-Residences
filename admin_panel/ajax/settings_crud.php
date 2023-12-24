@@ -371,7 +371,7 @@ if (isset($_POST['add_room'])) {
     $facilities = filteration(json_decode($_POST['facilities']));
     print_r($facilities);
 
-    //         $title = $_POST["title"];
+    //               $title = $_POST["title"];
     //     $description = $_POST["description"];
     //     $max = $_POST["max"];
     //     $per_night = $_POST["per_night"];
